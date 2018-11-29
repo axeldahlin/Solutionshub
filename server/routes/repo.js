@@ -9,17 +9,19 @@ router.use((req, res, next) => {
   next()
 })
 
-
-
-///////////////////////////////////////////////////
-// Route to get all countries
+// GET Route for all repos
 router.get('/', (req, res, next) => {
-  Country.find()
-    .then(countries => {
-      res.json(countries);
+  Repo.find()
+    .then(repos => {
+      res.json(repos);
     })
     .catch(err => next(err))
 });
+
+
+///////////////////////////////////////////////////
+
+
 
 // Route to add a country
 router.post('/', (req, res, next) => {

@@ -47,16 +47,6 @@ for (let i = 0; i < repos.length; i++) {
 
 console.log("repos",repos)
 
-let users = [
-  {
-    username: "alison",
-    password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
-  },
-  {
-    username: "bob",
-    password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
-  }
-]
 
 
 
