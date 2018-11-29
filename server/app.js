@@ -10,6 +10,7 @@ const path = require('path')
 const nocache = require('nocache')
 const session = require("express-session")
 const MongoStore = require('connect-mongo')(session)
+const passport = require('passport')
 
 require('./configs/database')
 
@@ -47,11 +48,38 @@ app.use(session({
 }))
 require('./passport')(app)
 
+app.get('/auth/github',
+  passport.authenticate('github'));
+ 
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
 
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
 app.use('/api/repo', require('./routes/repo'))
 app.use('/api/user', require('./routes/user'))
+
+
+
+
+app.get('/auth/github',
+  passport.authenticate('github'));
+
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {

@@ -29,6 +29,24 @@ let repos = seedRepos.map(repo => {
 })
 
 
+
+
+
+let pullRequests = []
+
+for (let i = 0; i < repos.length; i++) {
+
+  axios.get(`https://api.github.com/orgs/ironhack-labs/${repos[i].name}/pulls`)
+  .then(data => {
+    console.log('DEBUG data:', data)
+  })
+
+
+
+}
+
+console.log("repos",repos)
+
 let users = [
   {
     username: "alison",
@@ -94,10 +112,11 @@ console.log("pullRequests",pullRequests)
 
 
 
-// axios.get('https://api.github.com/orgs/ironhack-labs/repos')
-//   .then(data => {
-//     console.log('DEBUG data:', data)
-//   })
+
+
+
+
+
 
 
 
