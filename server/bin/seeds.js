@@ -4,7 +4,7 @@
 // $ node bin/seeds.js
 
 
-// const axios = require('axios');
+const axios = require('axios');
 
 
 require('dotenv').config()
@@ -28,7 +28,6 @@ let repos = seedRepos.map(repo => {
   }
 })
 
-console.log("repos",repos)
 
 let users = [
   {
@@ -43,40 +42,55 @@ let users = [
 
 
 
-User.deleteMany()
-  .then(() => {
-    return User.create(users)
-  })
-  .then(usersCreated => {
-    console.log(`${usersCreated.length} users created with the following id:`);
-    console.log(usersCreated.map(u => u._id));
-  })
-  .then(() => {
-    // Close properly the connection to Mongoose
-    mongoose.disconnect()
-  })
-  .catch(err => {
-    mongoose.disconnect()
-    throw err
-  })
+// User.deleteMany()
+//   .then(() => {
+//     return User.create(users)
+//   })
+//   .then(usersCreated => {
+//     console.log(`${usersCreated.length} users created with the following id:`);
+//     console.log(usersCreated.map(u => u._id));
+//   })
+//   .then(() => {
+//     // Close properly the connection to Mongoose
+//     mongoose.disconnect()
+//   })
+//   .catch(err => {
+//     mongoose.disconnect()
+//     throw err
+//   })
 
 
-Repo.deleteMany()
-.then(() => {
-  return Repo.create(repos)
+// Repo.deleteMany()
+// .then(() => {
+//   return Repo.create(repos)
+// })
+// .then(reposCreated => {
+//   console.log(`${reposCreated.length} repos created with the following id:`);
+//   console.log(reposCreated.map(r => r._id));
+// })
+// .then(() => {
+//   // Close properly the connection to Mongoose
+//   mongoose.disconnect()
+// })
+// .catch(err => {
+//   mongoose.disconnect()
+//   throw err
+// })
+
+
+let pullRequests = []
+
+repos.forEach(repo=>{
+  axios.get('https://api.github.com/repos/ironhack-labs/'+repo.name+'/pulls')
+    .then(pull => {
+      pullRequests.push(pull)
+    })
+    .catch(err=>{
+      console.log("error with Repos for each loop")
+    })
 })
-.then(reposCreated => {
-  console.log(`${reposCreated.length} repos created with the following id:`);
-  console.log(reposCreated.map(r => r._id));
-})
-.then(() => {
-  // Close properly the connection to Mongoose
-  mongoose.disconnect()
-})
-.catch(err => {
-  mongoose.disconnect()
-  throw err
-})
+
+console.log("pullRequests",pullRequests)
 
 
 
