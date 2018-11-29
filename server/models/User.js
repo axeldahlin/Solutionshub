@@ -3,10 +3,13 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  githubID: String,
-  password: String,
-  imageUrl: String,
+  _github: String,
+  githubName: String,
+  githubUsername: String,
+  githubBio: String,
+  githubImageUrl: String,
   githubUrl: String,
+  password: String,
   role: {type: String, enum: ["admin","student"]}
 }, {
     timestamps: {

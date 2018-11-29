@@ -1,5 +1,5 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+// const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 var GitHubStrategy = require('passport-github').Strategy;
@@ -10,8 +10,9 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:5000/auth/github/callback"
   },
   (accessToken, refreshToken, profile, cb) => {
-    User.findOne({ githubID: profile.id })
+    User.findOne({ _github: profile.id })
     .then(user => {
+      console.log("profile",profile)
       // if (err) {
       //   return cb(err);
       // }
@@ -19,11 +20,19 @@ passport.use(new GitHubStrategy({
         return cb(null, user);
       }
       const newUser = new User({
-        githubID: profile.id
+        _github: profile.id,
+        githubName: profile.displayName,
+        githubUsername: profile.username,
+        githubBio: profile._json.bio,
+        githubImageUrl: profile.photos[0].value,
+        githubUrl: profile.profileUrl
       });
+
+      console.log("newUser",newUser)
 
       newUser.save()
       .then(user => {
+        console.log("user",user)
         cb(null, newUser);
       })
     })
