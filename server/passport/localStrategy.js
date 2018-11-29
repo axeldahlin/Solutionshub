@@ -9,7 +9,7 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: "http://localhost:5000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
+  (accessToken, refreshToken, profile, cb) => {
     User.findOne({ githubID: profile.id })
     .then(user => {
       // if (err) {
@@ -28,6 +28,7 @@ passport.use(new GitHubStrategy({
       })
     })
     .catch(error => {
+      console.log('DEBUG error:', error)
       next(error)
     })
   }
