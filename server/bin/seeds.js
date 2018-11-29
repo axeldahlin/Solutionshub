@@ -3,6 +3,10 @@
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
 
+
+// const axios = require('axios');
+
+
 require('dotenv').config()
 
 const mongoose = require("mongoose");
@@ -87,3 +91,15 @@ Repo.deleteMany()
   mongoose.disconnect()
   throw err
 })
+
+
+
+// axios.get('https://api.github.com/orgs/ironhack-labs/repos')
+//   .then(data => {
+//     console.log('DEBUG data:', data)
+//   })
+
+
+
+
+
