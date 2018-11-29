@@ -3,17 +3,46 @@
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
 
+require('dotenv').config()
+
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Repo = require("../models/Repo");
 
 const bcryptSalt = 10;
 
 require('../configs/database')
 
+// const uri = "mongodb://localhost/ironhack-project-3";
+// console.log("uri",uri)
+
+// mongoose
+//   .connect(uri, { useNewUrlParser: true })
+//   .then(x => {
+//     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+//   })
+//   .catch(err => {
+//     console.error('Error connecting to mongo', err)
+//   });
+
+
+///Seed Data
+
+let seedRepos = require('./ironhack_repos.json')
+
+let repos = seedRepos.map(repo => {
+  return {
+    name: repo.name,
+    url: repo.html_url
+  }
+})
+
+console.log("repos",repos)
+
 let users = [
   {
-    username: "alice",
+    username: "alison",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
   },
   {
@@ -21,6 +50,8 @@ let users = [
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
   }
 ]
+
+
 
 User.deleteMany()
   .then(() => {
@@ -38,3 +69,21 @@ User.deleteMany()
     mongoose.disconnect()
     throw err
   })
+
+
+Repo.deleteMany()
+.then(() => {
+  return Repo.create(repos)
+})
+.then(reposCreated => {
+  console.log(`${reposCreated.length} repos created with the following id:`);
+  console.log(reposCreated.map(r => r._id));
+})
+.then(() => {
+  // Close properly the connection to Mongoose
+  mongoose.disconnect()
+})
+.catch(err => {
+  mongoose.disconnect()
+  throw err
+})
