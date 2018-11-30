@@ -4,6 +4,7 @@ const pullRequestSchema = new mongoose.Schema({
   title: {
     type: String
   },
+  pullRequestID: Number,
   url: {
     type: String,
     required: true,

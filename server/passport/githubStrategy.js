@@ -1,7 +1,5 @@
 const passport = require('passport');
-// const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 var GitHubStrategy = require('passport-github').Strategy;
  
 passport.use(new GitHubStrategy({
