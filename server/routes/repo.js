@@ -1,5 +1,6 @@
 const express = require('express');
 const Repo = require('../models/Repo')
+const PullRequest = require('../models/PullRequest')
 const axios = require('axios');
 
 const router = express.Router();
@@ -19,6 +20,17 @@ router.get('/', (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+//Fetches all pull requests for given repo and returns JSON
+router.get('/pulls/:repo', (req,res,next)=> {
+  PullRequest.find({_githubRepo: req.params.repo})
+  .then(pulls => {
+    res.json(pulls)
+  })
+  .catch(err => next(err))
+})
+
+
 
 // Fetches all repos with github api and updates database
 router.get('/repos', (req,res,next)=> {
@@ -41,25 +53,26 @@ router.get('/repos', (req,res,next)=> {
 })
 
 
-
-
-
-
-///////////////////////////////////////////////////
-
-
-
-// Route to add a country
-router.post('/', (req, res, next) => {
-  let { name, capitals, area, description } = req.body
-  Country.create({ name, capitals, area, description })
-    .then(country => {
-      res.json({
-        success: true,
-        country
-      });
+// Fetches all Pull Requests for :repo with github api and updates database
+router.get('/update-pulls/:repo', (req,res,next)=>{
+  axios.get('https://api.github.com/repos/ironhack-labs/'+req.params.repo+'/pulls' + authPath + '&per_page=100')
+  .then(response => {
+    response.data.forEach(githubPulls => {
+      PullRequest.findOneAndUpdate({pullRequestID: githubPulls.id}, {
+        pullRequestID: githubPulls.id,
+        title: githubPulls.title,
+        url: githubPulls.html_url,
+        _githubRepo: githubPulls.base.repo.id
+      }, {
+        upsert: true,
+        new: true
+      })
+      .then(pull=>console.log("DEBUG Success pull", pull))
+      .catch(err=> console.log("ERROR at forEach Pulls",err))
     })
-    .catch(err => next(err))
-});
+  })
+  .catch(err=>console.log("Error at /update-pulls/:repo", err))
+})
+
 
 module.exports = router;
