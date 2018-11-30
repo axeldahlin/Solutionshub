@@ -28,8 +28,6 @@ passport.use(new GitHubStrategy({
         githubUrl: profile.profileUrl
       });
 
-      console.log("newUser",newUser)
-
       newUser.save()
       .then(user => {
         console.log("user",user)

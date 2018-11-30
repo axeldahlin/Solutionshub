@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const repoSchema = new mongoose.Schema({
+  githubID: Number,
   name: {
     type: String,
     required: [true, 'The repo name is required'],
