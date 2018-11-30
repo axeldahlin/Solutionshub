@@ -61,7 +61,7 @@ app.get('/auth/github/callback',
 
 
 app.use('/api', require('./routes/index'))
-app.use('/api', require('./routes/auth'))
+// app.use('/api', require('./routes/auth'))
 app.use('/api/repo', require('./routes/repo'))
 app.use('/api/user', require('./routes/user'))
 
