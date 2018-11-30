@@ -8,9 +8,9 @@ const pullRequestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [String],
-  votes: Number,
-  _repo: {type: Schema.Types.ObjectId, ref: "Repo"}
+  // comments: [String],
+  // votes: Number,
+  _githubRepo: Number
 });
 
 const PullRequest = mongoose.model('PullRequest', pullRequestSchema);
