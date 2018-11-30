@@ -46,3 +46,11 @@ body {
 .Secret .result {
   font-size: 1.2em;
   color: #32c3ff; }
+
+.Repo {
+  background-color: #5776e9;
+  color: white;
+  height: 80px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 15px; }

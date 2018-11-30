@@ -73,6 +73,13 @@ export default {
       .catch(errHandler)
   },
 
+  getRepos() {
+    return service
+      .get('/repo')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
 
 
   addPicture(file) {
