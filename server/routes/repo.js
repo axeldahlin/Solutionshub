@@ -9,34 +9,38 @@ const router = express.Router();
 let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+process.env.GITHUB_CLIENT_SECRET
 
 
-router.use((req, res, next) => {
-  console.log('DEBUG routes/countries');
-  next()
-})
 
-// GET Route for all repos
+
+// Fetches all repos from database and returns JSON
 router.get('/', (req, res, next) => {
-  console.log("/ is pinged")
   Repo.find()
     .then(repos => {
-
       res.json(repos);
     })
     .catch(err => next(err))
 });
 
-
+// Fetches all repos with github api and updates database
 router.get('/repos', (req,res,next)=> {
-  console.log("/repos is pinged")
-  // axios.get(`https://api.github.com/orgs/ironhack-labs/repos?client_id=ef51dc0616f91cc5207e&client_secret=094c6f8cf74d24af7ecade6dbcc1a945d8a5ae0d`)
-  axios.get(`https://api.github.com/orgs/ironhack-labs/repos` + authPath)
+  axios.get(`https://api.github.com/orgs/ironhack-labs/repos` + authPath + '&per_page=100')
   .then(response => {
-    res.json(response.data)
+    response.data.forEach(githubRepo => {
+      Repo.findOneAndUpdate({githubID: githubRepo.id}, {
+        name: githubRepo.name,
+        githubID: githubRepo.id,
+        url: githubRepo.html_url
+      }, {
+        upsert: true,
+        new: true
+      })
+      .then(repo => console.log('DEBUG SUCCES :) repo:', repo))
+      .catch(err => console.log('DEBUG findOneAndUpdate err:', err))
+    })
   })
-  .catch(err=>{
-    console.log("error at /repos:", err)
-  })
+  .catch(err=>console.log("error at /repos:", err))
 })
+
+
 
 
 ///////////////////////////////////////////////////
