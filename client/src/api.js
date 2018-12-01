@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5001/api',
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
   withCredentials: true
 })
 
@@ -76,6 +76,14 @@ export default {
   getRepos() {
     return service
       .get('/repo')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+
+  getPulls(repo) {
+    return service
+      .get('/repo/pulls/'+repo)
       .then(res => res.data)
       .catch(errHandler)
   },
