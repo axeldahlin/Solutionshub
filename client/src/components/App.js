@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
-import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
+import Repospage from './pages/ReposPage';
+import Pullspage from './pages/PullsPage';
 import api from '../api';
+import Navbar from './Navbar'
+
+
+
 
 class App extends Component {
   constructor(props) {
@@ -20,11 +25,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar /> 
+
+   
         {/* <NavBar/> */}
         <LoginPage></LoginPage>
         <Switch>
-          <Route path="/" exact component={Home} />
-          {/* <Route path="/repos" exact component={Repos}/> */}
+    
+          <Route path="/repos" exact component={Repospage} />
+          <Route path="/pulls/:name" exact component={Pullspage} />
+
+          
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

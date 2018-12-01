@@ -43,14 +43,26 @@ body {
 .Home p {
   font-size: 1.2em; }
 
-.Secret .result {
-  font-size: 1.2em;
-  color: #32c3ff; }
+.Navbar {
+  height: 80px;
+  background: blue;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
 
 .Repo {
   background-color: #5776e9;
   color: white;
-  height: 80px;
+  height: 100px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 15px; }
+
+.Pull {
+  background-color: #5776e9;
+  color: white;
+  height: 100px;
   width: 80%;
   margin: 20px auto;
   border-radius: 15px; }
