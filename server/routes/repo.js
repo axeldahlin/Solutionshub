@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
 });
 
 //Fetches all pull requests for given repo and returns JSON
+// :repo is Github Repo ID
 router.get('/pulls/:repo', (req,res,next)=> {
   PullRequest.find({_githubRepo: req.params.repo})
   .then(pulls => {
@@ -53,7 +54,7 @@ router.get('/repos', (req,res,next)=> {
 })
 
 
-// Fetches all Pull Requests for :repo with github api and updates database
+// Fetches all Pull Requests for given :repo with github api and updates database
 router.get('/update-pulls/:repo', (req,res,next)=>{
   axios.get('https://api.github.com/repos/ironhack-labs/'+req.params.repo+'/pulls' + authPath + '&per_page=100')
   .then(response => {
@@ -73,6 +74,8 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
   })
   .catch(err=>console.log("Error at /update-pulls/:repo", err))
 })
+
+
 
 
 module.exports = router;

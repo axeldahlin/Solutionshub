@@ -81,6 +81,14 @@ export default {
   },
 
 
+  getPulls(repo) {
+    return service
+      .get('/repo/pulls/'+repo)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+
 
   addPicture(file) {
     const formData = new FormData()
