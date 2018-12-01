@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
+
 import LoginPage from './pages/LoginPage';
-import Repospage from './pages/ReposPage';
-import Pullspage from './pages/PullsPage';
+import ReposPage from './pages/ReposPage';
+import PullsPage from './pages/PullsPage';
 import api from '../api';
 import Navbar from './Navbar'
 
@@ -32,8 +33,8 @@ class App extends Component {
         <LoginPage></LoginPage>
         <Switch>
     
-          <Route path="/repos" exact component={Repospage} />
-          <Route path="/pulls/:name" exact component={Pullspage} />
+          <Route path="/repos" exact component={ReposPage} />
+          <Route path="/pulls/:name" exact component={PullsPage} />
 
           
           <Route render={() => <h2>404</h2>} />
