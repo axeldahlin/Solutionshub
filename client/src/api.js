@@ -5,6 +5,13 @@ const service = axios.create({
   withCredentials: true
 })
 
+const authService = axios.create({
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000',
+  withCredentials: true
+})
+
+
+
 const errHandler = err => {
   console.error(err)
   if (err.response && err.response.data) {
@@ -38,6 +45,18 @@ export default {
         username,
         password,
       })
+      .then(res => {
+        // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
+        localStorage.setItem('user', JSON.stringify(res.data))
+        return res.data
+      })
+      .catch(errHandler)
+  },
+
+  loginGithub(){
+    console.log("login Github called")
+    return authService
+      .get('auth/github')
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         localStorage.setItem('user', JSON.stringify(res.data))

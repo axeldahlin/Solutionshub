@@ -1,7 +1,22 @@
-// const express = require("express")
-// const passport = require('passport')
-// const router = express.Router()
-// const User = require("../models/User")
+const express = require("express")
+const passport = require('passport')
+const router = express.Router()
+const User = require("../models/User")
+
+
+
+
+
+// router.get('/githublogin',(req,res,next)=> {
+//   console.log('/githublogin called')
+//   res.redirect('auth/github')
+//     .then(response => {
+//       console.log(response)
+//     })
+//     .catch(err => {
+//       console.log("error at githublogin",err)
+//     })
+// })
 
 // Bcrypt to encrypt passwords
 // const bcrypt = require("bcrypt")

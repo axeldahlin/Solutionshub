@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import LoginPage from './pages/LoginPage';
 import api from '../api';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <NavBar/> */}
+        <LoginPage></LoginPage>
         <Switch>
           <Route path="/" exact component={Home} />
           {/* <Route path="/repos" exact component={Repos}/> */}
