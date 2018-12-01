@@ -29,7 +29,7 @@ class LoginPage extends Component {
       <h1>This is the Login Component</h1>
       <button onClick={()=>this.githubLogin()}>Login with GitHub</button>
       {/* <Link to='/auth/github'>Link to GitHub login</Link> */}
-      <a href="http://localhost:5000/auth/github">Link to GitHub login</a>
+      <a href="https://github.com/login/oauth/authorize?client_id=ef51dc0616f91cc5207e">Link to GitHub login</a>
       </div>
     )
   }

@@ -74,6 +74,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // Successful authentication, redirect home.
     res.redirect('/');
   });
