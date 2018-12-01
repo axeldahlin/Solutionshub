@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { log } from 'util';
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5001/api',
   withCredentials: true
 })
 
@@ -80,11 +81,24 @@ export default {
       .catch(errHandler)
   },
 
-
   getPulls(repo) {
+    console.log('getPulls called')
     return service
       .get('/repo/pulls/'+repo)
-      .then(res => res.data)
+      .then(res => {
+        console.log('test')
+        return res.data
+      
+      })
+      .catch(errHandler)
+  },
+
+
+  updatePulls(repo) {
+    console.log('update pulls called')
+    return service
+      .get('/repo/update-pulls/'+repo)
+      .then(res => res)
       .catch(errHandler)
   },
 

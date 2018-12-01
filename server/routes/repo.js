@@ -22,9 +22,9 @@ router.get('/', (req, res, next) => {
 });
 
 //Fetches all pull requests for given repo and returns JSON
-// :repo is Github Repo ID
+// :repo is Github Repo name
 router.get('/pulls/:repo', (req,res,next)=> {
-  PullRequest.find({_githubRepo: req.params.repo})
+  PullRequest.find({repoName: req.params.repo})
   .then(pulls => {
     res.json(pulls)
   })
@@ -46,7 +46,7 @@ router.get('/repos', (req,res,next)=> {
         upsert: true,
         new: true
       })
-      .then(repo => console.log('DEBUG SUCCES :) repo:', repo))
+      // .then(repo => console.log('DEBUG SUCCES :) repo:', repo))
       .catch(err => console.log('DEBUG findOneAndUpdate err:', err))
     })
   })
@@ -63,12 +63,13 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
         pullRequestID: githubPulls.id,
         title: githubPulls.title,
         url: githubPulls.html_url,
-        _githubRepo: githubPulls.base.repo.id
+        _githubRepo: githubPulls.base.repo.id,
+        repoName: githubPulls.base.repo.name
       }, {
         upsert: true,
         new: true
       })
-      .then(pull=>console.log("DEBUG Success pull", pull))
+      .then(pull=> res.json())
       .catch(err=> console.log("ERROR at forEach Pulls",err))
     })
   })
