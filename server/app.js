@@ -77,6 +77,8 @@ app.get('/auth/github/callback',
     console.log("/Auth/github/callback has been called")
     console.log("req.query", req.query)
     console.log("Successful login!!!", req.user)
+    console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    // Successful authentication, redirect home.
     res.redirect('/');
   });
 

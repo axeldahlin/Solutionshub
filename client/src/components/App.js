@@ -35,6 +35,7 @@ class App extends Component {
     
           <Route path="/repos" exact component={ReposPage} />
           <Route path="/pulls/:name" exact component={PullsPage} />
+          <Route path="/user/signin/callback" exact component={PullsPage} />
 
           
           <Route render={() => <h2>404</h2>} />

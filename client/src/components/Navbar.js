@@ -6,7 +6,7 @@ function Navbar (props) {
   return (
     <div className="Navbar">
 
-      <Link to="/repos">Repos Page</Link>
+      <Link to="/repos">Repos</Link>
 
       <Link to="/auth/github">Github</Link>
 
