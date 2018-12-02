@@ -58,6 +58,7 @@ router.get('/repos', (req,res,next)=> {
 
 // Fetches all Pull Requests for given :repo with github api and updates database
 router.get('/update-pulls/:repo', (req,res,next)=>{
+  console.log("update pulls called for repo: ", req.params.repo)
   axios.get('https://api.github.com/repos/ironhack-labs/'+req.params.repo+'/pulls' + authPath + '&per_page=100')
   .then(response => {
     response.data.forEach(githubPulls => {

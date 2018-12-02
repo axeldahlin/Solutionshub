@@ -10,21 +10,13 @@ passport.use(new GitHubStrategy({
   (accessToken, refreshToken, profile, cb) => {
     User.findOne({ _github: profile.id })
     .then(user => {
-      console.log("profile",profile)
       // if (err) {
       //   return cb(err);
       // }
-
-      console.log("cb",cb)
-      console.log("accessToken",accessToken)
-      // console.log("req",req)
-
       if (user) {
         return cb(null, user);
       }
-
-
-
+      
       const newUser = new User({
         _github: profile.id,
         githubName: profile.displayName,
