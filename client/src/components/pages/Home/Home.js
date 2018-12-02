@@ -9,8 +9,11 @@ import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
 // import { Button } from 'reactstrap';
 
+
+import Pull from './PullsPage/PullListItem'
+
 import RepoList from './RepoList/RepoList'
-import PullsPage from './PullsPage/PullsPage';
+import PullsPage from './PullsPage/PullsList';
 
 
 
@@ -19,6 +22,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      clickedRepo: null
 
     }
 
@@ -46,7 +50,8 @@ class Home extends Component {
         
 
         <div>
-         {this.state.clickedRepo && <PullsPage repoName={this.state.repoName}/>}
+         {this.state.clickedRepo && <PullsPage repoName={this.state.clickedRepo}/>}
+
 
         </div>
 
