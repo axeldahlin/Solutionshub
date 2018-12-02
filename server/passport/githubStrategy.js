@@ -14,9 +14,17 @@ passport.use(new GitHubStrategy({
       // if (err) {
       //   return cb(err);
       // }
+
+      console.log("cb",cb)
+      console.log("accessToken",accessToken)
+      // console.log("req",req)
+
       if (user) {
         return cb(null, user);
       }
+
+
+
       const newUser = new User({
         _github: profile.id,
         githubName: profile.displayName,

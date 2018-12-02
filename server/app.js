@@ -61,7 +61,7 @@ app.get('/auth/github/callback',
 
 
 app.use('/api', require('./routes/index'))
-// app.use('/', require('./routes/auth'))
+app.use('/api/auth', require('./routes/auth'))
 app.use('/api/repo', require('./routes/repo'))
 app.use('/api/user', require('./routes/user'))
 
@@ -72,9 +72,11 @@ app.get('/auth/github',
   passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    console.log("/Auth/github/callback has been called")
+  passport.authenticate('github', { 
+    failureRedirect: 'http://localhost:3000',
+    successRedirect: 'http://localhost:3000'
+  }),function(req, res) {
+    console.log("/auth/github/callback has been called")
     console.log("req.query", req.query)
     console.log("Successful login!!!", req.user)
     console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')

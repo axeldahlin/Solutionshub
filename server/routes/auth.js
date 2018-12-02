@@ -7,6 +7,32 @@ const User = require("../models/User")
 
 
 
+router.get('/loggedin',(req,res,next)=>{
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user);
+    return;
+  }
+  res.status(403).json({message: 'Unauthorized'})
+})
+
+
+router.get('/isloggedin', (req,res,next)=> {
+  if (req.isAuthenticated()){
+    res.json({isLoggedIn: true})
+  } else {
+    res.json({isLoggedIn: false})
+  }
+  return;
+})
+
+
+router.post('/logout', (req,res,next)=>{
+  req.logout();
+  res.status(200).json({message: "Log out successful!"})
+})
+
+
+
 // router.get('/githublogin',(req,res,next)=> {
 //   console.log('/githublogin called')
 //   res.redirect('auth/github')
@@ -116,4 +142,4 @@ const User = require("../models/User")
 //   res.json({ message: 'You are out!' })
 // })
 
-// module.exports = router
+module.exports = router

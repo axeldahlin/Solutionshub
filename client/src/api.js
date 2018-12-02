@@ -6,10 +6,6 @@ const service = axios.create({
   withCredentials: true
 })
 
-const authService = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000',
-  withCredentials: true
-})
 
 
 
@@ -40,24 +36,13 @@ export default {
       .catch(errHandler)
   },
 
+
   login(username, password) {
     return service
       .post('/login', {
         username,
         password,
       })
-      .then(res => {
-        // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
-        localStorage.setItem('user', JSON.stringify(res.data))
-        return res.data
-      })
-      .catch(errHandler)
-  },
-
-  loginGithub(){
-    console.log("login Github called")
-    return authService
-      .get('auth/github')
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         localStorage.setItem('user', JSON.stringify(res.data))
@@ -100,6 +85,53 @@ export default {
       .catch(errHandler)
   },
 
+  addPicture(file) {
+    const formData = new FormData()
+    formData.append("picture", file)
+    return service
+      .post('/endpoint/to/add/a/picture', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  ///Routes above were in boiler plate, routes below are our own
+
+  newLogout() {
+    return service
+      .post('/auth/logout')
+      .then(res => {
+        console.log(res.data)
+        return res.data
+      })
+      .catch(err=>{
+        console.log("err at newLogout()",err)
+      })
+  },
+
+  isLoggedInNew() {
+    console.log("isLoggedInNew Called")
+    return service 
+      .get('/auth/isloggedin')
+      .then(res => res.data)
+      .catch(err=>{
+        console.log("Error at isLoggedInNew",err)
+      })
+  },
+
+  userData() {
+    console.log("userData() called")
+    return service
+      .get('/auth/loggedin')
+      .then(res => res.data)
+      .catch(err=>{
+        console.log("err at userData",err)
+      })
+  },
+
   getPulls(repo) {
     console.log('getPulls called')
     return service
@@ -123,16 +155,5 @@ export default {
 
 
 
-  addPicture(file) {
-    const formData = new FormData()
-    formData.append("picture", file)
-    return service
-      .post('/endpoint/to/add/a/picture', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then(res => res.data)
-      .catch(errHandler)
-  },
+
 }
