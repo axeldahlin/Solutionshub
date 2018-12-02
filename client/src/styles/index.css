@@ -71,3 +71,8 @@ body {
   height: calc(100vh - 56px);
   border: solid red 2px;
   overflow-y: scroll; }
+
+.PullsPage {
+  height: calc(100vh - 56px);
+  width: 500px;
+  overflow-y: scroll; }

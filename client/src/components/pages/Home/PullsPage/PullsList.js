@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../../api';
-import Pull from './Pull'
+import Pull from './PullListItem'
 
 class PullsPage extends Component {
   constructor(props) {
@@ -12,10 +12,19 @@ class PullsPage extends Component {
   }
 
   componentDidMount() {
+
+    this.updatePulls()
+    
+
+  }
+
+
+  updatePulls() {
+
     const repoName = this.props.repoName
     api.getPulls(repoName)
     .then(pulls => {
-      this.setState({pulls})
+      this.setState({pulls, repoName})
     })
     .then(res => {
       api.updatePulls(repoName)
@@ -29,14 +38,30 @@ class PullsPage extends Component {
         .catch(err => console.log(err))
     })
 
-
-
-
     api.getPulls(repoName)
           .then(pulls => {
             this.setState({pulls})
           })
           .catch(err => console.log('DEBUG err:', err))
+
+  }
+
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.repoName !== prevProps.repoName) {
+
+      console.log('componentdidupdate')
+      this.updatePulls()
+    }
+  }
+
+
+
+  handleClick = (value) => {
+
+
+    this.props.click(value)
 
   }
 
@@ -56,11 +81,16 @@ class PullsPage extends Component {
               title={pull.title}
               url={pull.url}
               repoName={pull.repoName}
+              id={pull._id}
+              click={(value)=> this.handleClick(value)}
               
               
               />
 
           })}
+
+
+
 
       </div>
     );
