@@ -1,7 +1,7 @@
 
 import React, { Link, Component } from 'react';
-import api from '../../api';
-import Repo from '../../components/Repo'
+import api from '../../../api';
+
 
 
 

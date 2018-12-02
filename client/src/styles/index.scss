@@ -1,6 +1,6 @@
 // --------------------
 // Definition of variables
-$primary: #32c3ff;
+$primary: #2c3336;
 
 
 // ----------------------------------------
@@ -80,6 +80,7 @@ body {
 // --------------------
 // Style for Home component
 .Home {
+  display: flex;
   p {
     font-size: 1.2em;
   }
@@ -87,14 +88,20 @@ body {
 
 // --------------------
 
+// $primary-color: #673AB7;
+
+
+
+
+
+
+// ------------------
+
 
 .Navbar {
   height: 80px;
   background: blue;
   color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 
@@ -114,5 +121,13 @@ body {
   width: 80%;
   margin: 20px auto;
   border-radius: 15px;
+
+}
+
+.RepoList {
+  width: 500px;
+  height: calc(100vh - 56px);
+  border: solid red 2px;
+  overflow-y: scroll;
 
 }

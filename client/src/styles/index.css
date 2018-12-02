@@ -20,7 +20,7 @@ body {
     animation: App-logo-spin infinite 20s linear;
     height: 80px; }
   .App .App-header {
-    background-color: #32c3ff;
+    background-color: #2c3336;
     padding: 20px;
     color: white; }
     .App .App-header a {
@@ -40,16 +40,15 @@ body {
   to {
     transform: rotate(360deg); } }
 
-.Home p {
-  font-size: 1.2em; }
+.Home {
+  display: flex; }
+  .Home p {
+    font-size: 1.2em; }
 
 .Navbar {
   height: 80px;
   background: blue;
-  color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center; }
+  color: white; }
 
 .Repo {
   background-color: #5776e9;
@@ -66,3 +65,9 @@ body {
   width: 80%;
   margin: 20px auto;
   border-radius: 15px; }
+
+.RepoList {
+  width: 500px;
+  height: calc(100vh - 56px);
+  border: solid red 2px;
+  overflow-y: scroll; }
