@@ -127,9 +127,7 @@ export default {
     return service
       .get('/auth/loggedin')
       .then(res => res.data)
-      .catch(err=>{
-        console.log("err at userData",err)
-      })
+      .catch(err=>null)
   },
 
   getPulls(repo) {

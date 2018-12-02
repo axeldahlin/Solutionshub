@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countries: []
+      user: null,
     }
     // api.loadUser();
   }
@@ -25,10 +25,23 @@ class App extends Component {
     api.logout()
   }
 
+  componentDidMount() {
+    api.userData()
+    .then(user => {
+      this.setState({
+        user
+      })
+    })
+    .catch(err => {
+      console.log("err at App/componentDidMount",err)
+    })
+  }
+
   render() {
+    console.log("this.state.user", this.state.user)
     return (
       <div className="App">
-        <Navbar /> 
+        <Navbar user={this.state.user} /> 
 
 
 
@@ -44,7 +57,7 @@ class App extends Component {
           <Button color="primary">primary</Button>{' '} */}
 
           <Route path="/home" exact component={Home} />
-          <Route path="/" exact component={LoginPage} />
+          <Route path="/" exact component={Home} />
 
 
           
