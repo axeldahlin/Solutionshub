@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import api from '../../api';
-import Pull from '../Pull'
-
-
-
-
+import api from '../../../../api';
+import Pull from './Pull'
 
 class PullsPage extends Component {
   constructor(props) {
@@ -15,25 +11,8 @@ class PullsPage extends Component {
     }
   }
 
- 
-
   componentDidMount() {
-
-
-    const repoName = this.props.match.params.name
-
-    console.log('DEBUG this.props.params:', this.props.match.params.name)
-
-
-    // api.updatePulls(repoName)
-    // .then(_ => {
-    //   console.log('I m here')
-    //     api.getPulls(repoName)
-    //       .then(pulls => {
-    //         console.log('DEBUG pulls:', pulls)
-    //       })
-    //   })
-
+    const repoName = this.props.repoName
     api.getPulls(repoName)
     .then(pulls => {
       this.setState({pulls})
@@ -53,11 +32,11 @@ class PullsPage extends Component {
 
 
 
-    // api.getPulls(repoName)
-    //       .then(pulls => {
-    //         this.setState({pulls})
-    //       })
-    //       .catch(err => console.log('DEBUG err:', err))
+    api.getPulls(repoName)
+          .then(pulls => {
+            this.setState({pulls})
+          })
+          .catch(err => console.log('DEBUG err:', err))
 
   }
 
@@ -68,7 +47,7 @@ class PullsPage extends Component {
 
         <h1>Pulls Page</h1>
 
-        <h2>{this.props.match.params.name}</h2>
+        <h2>{this.props.repoName}</h2>
 
        
           {this.state.pulls.map((pull, index) => {
@@ -83,11 +62,6 @@ class PullsPage extends Component {
 
           })}
 
-  
-
-
-
-       
       </div>
     );
   }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage';
-import ReposPage from './pages/ReposPage';
-import PullsPage from './pages/PullsPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+
 import api from '../api';
 import Navbar from './Navbar'
+import Home from './pages/Home/Home.js'
+
+
 
 
 
@@ -28,14 +30,22 @@ class App extends Component {
       <div className="App">
         <Navbar /> 
 
+
+
+
+
    
-        {/* <NavBar/> */}
-        <LoginPage></LoginPage>
         <Switch>
-    
+{/*     
           <Route path="/repos" exact component={ReposPage} />
           <Route path="/pulls/:name" exact component={PullsPage} />
           <Route path="/user/signin/callback" exact component={PullsPage} />
+          <Button color="primary">primary</Button>{' '}
+          <Button color="primary">primary</Button>{' '} */}
+
+          <Route path="/home" exact component={Home} />
+          <Route path="/" exact component={LoginPage} />
+
 
           
           <Route render={() => <h2>404</h2>} />
