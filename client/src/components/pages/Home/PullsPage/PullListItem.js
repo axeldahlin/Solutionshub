@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
+import { log } from 'util';
 
 
 class Pull extends Component {
@@ -13,7 +14,13 @@ class Pull extends Component {
 
 
   handleClick = () => {
-    this.props.click('heyyo')
+    this.props.click(this.props.id)
+
+
+   
+
+
+
 
   }
 

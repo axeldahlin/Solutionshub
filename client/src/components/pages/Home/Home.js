@@ -40,6 +40,19 @@ class Home extends Component {
   }
 
 
+  handleClickPull = (id) => {
+
+    this.setState({clickedPullId: id})
+
+    console.log('home: '+id)
+
+
+  }
+
+
+
+
+
 
   render() {
     return (
@@ -50,7 +63,7 @@ class Home extends Component {
         
 
         <div>
-         {this.state.clickedRepo && <PullsPage repoName={this.state.clickedRepo}/>}
+         {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} repoName={this.state.clickedRepo}/>}
 
 
         </div>

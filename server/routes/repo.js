@@ -23,6 +23,22 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 });
 
+
+
+//Get one pull request
+router.get('/pull-detail/:pullId', (req,res,next)=> {
+
+  PullRequest.findById({req.params.pullId})
+  .then(pull => {
+    res.json(pull)
+  })
+  .catch(err => next(err))
+})
+
+
+
+
+
 //Fetches all pull requests for given repo and returns JSON
 // :repo is Github Repo name
 router.get('/pulls/:repo', (req,res,next)=> {

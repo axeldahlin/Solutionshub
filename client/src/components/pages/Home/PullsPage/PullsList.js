@@ -61,7 +61,7 @@ class PullsPage extends Component {
   handleClick = (value) => {
 
 
-    console.log(value)
+    this.props.click(value)
 
   }
 
@@ -81,6 +81,7 @@ class PullsPage extends Component {
               title={pull.title}
               url={pull.url}
               repoName={pull.repoName}
+              id={pull._id}
               click={(value)=> this.handleClick(value)}
               
               
