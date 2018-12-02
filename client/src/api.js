@@ -85,6 +85,13 @@ export default {
       .catch(errHandler)
   },
 
+  getPull(id) {
+    return service
+      .get('/repo/pull-detail/'+id)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   addPicture(file) {
     const formData = new FormData()
     formData.append("picture", file)

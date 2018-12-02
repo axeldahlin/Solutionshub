@@ -28,7 +28,9 @@ router.get('/', (req, res, next) => {
 //Get one pull request
 router.get('/pull-detail/:pullId', (req,res,next)=> {
 
-  PullRequest.findById({req.params.pullId})
+  const id = req.params.pullId
+
+  PullRequest.findById(id)
   .then(pull => {
     res.json(pull)
   })

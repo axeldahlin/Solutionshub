@@ -9,6 +9,11 @@ import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
 // import { Button } from 'reactstrap';
 
+import api from '../../../api'
+
+
+import PullDetail from './PullDetail'
+
 
 import Pull from './PullsPage/PullListItem'
 
@@ -42,9 +47,24 @@ class Home extends Component {
 
   handleClickPull = (id) => {
 
-    this.setState({clickedPullId: id})
+    // console.log('DEBUG id:', id)
 
-    console.log('home: '+id)
+
+
+
+
+    api.getPull(id)
+      .then(pull => {
+        this.setState({
+          clickedPull: pull,
+          clickedRepo: null
+
+        })
+        console.log(pull)
+      })
+
+
+  
 
 
   }
@@ -64,6 +84,8 @@ class Home extends Component {
 
         <div>
          {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} repoName={this.state.clickedRepo}/>}
+
+          {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}
 
 
         </div>
