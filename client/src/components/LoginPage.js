@@ -1,6 +1,6 @@
 
 import React, { Link, Component } from 'react';
-import api from '../../../api';
+import api from '../api';
 
 
 

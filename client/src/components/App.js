@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage/LoginPage';
+// import LoginPage from './LoginPage';
 
 import api from '../api';
 import Navbar from './Navbar'
-import Home from './pages/Home/Home.js'
+import Home from './Home'
 
 
 

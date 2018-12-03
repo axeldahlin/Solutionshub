@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import api from '../../../../api';
-// import Pull from './PullListItem'
+
 
 class RepoComments extends Component {
   constructor(props) {

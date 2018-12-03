@@ -9,16 +9,16 @@ import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
 // import { Button } from 'reactstrap';
 
-import api from '../../../api'
+import api from '../api'
 
 
 import PullDetail from './PullDetail'
 
 
-import Pull from './PullsPage/PullListItem'
+import Pull from './PullListItem'
 
-import RepoList from './RepoList/RepoList'
-import PullsPage from './PullsPage/PullsList';
+import RepoList from './RepoList'
+import PullsPage from './PullsList';
 
 
 

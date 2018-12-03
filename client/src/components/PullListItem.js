@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../../../api';
+import api from '../api';
 
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import { log } from 'util';
@@ -39,6 +39,7 @@ class Pull extends Component {
       <div className="Pull" >
         <p >{this.props.title}</p>
         <button onClick={()=> this.toggleVote()}>{buttonText}</button>
+        <button onClick={() => this.handleClick()}>Details</button>
         {this.state.likedByUser && <p>Liked by user!</p>}
         {/* <p>{props.repoName}</p> */}
   

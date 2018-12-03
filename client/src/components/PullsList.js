@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../../../api';
+import api from '../api';
 import Pull from './PullListItem'
 import RepoComments from './RepoComments'
 
