@@ -9,7 +9,6 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: null,
       clickedRepo: null,
       clickedPull: null
     }

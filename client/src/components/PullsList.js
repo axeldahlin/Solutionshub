@@ -50,6 +50,8 @@ class PullsPage extends Component {
       this.getComments()
     }
   }
+
+  
   handleClick = (value) => {
     this.props.click(value)
   }
