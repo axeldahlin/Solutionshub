@@ -18,6 +18,8 @@ class Pull extends Component {
   }
 
 
+ 
+
 
   toggleVote() {
     let data = {
@@ -35,6 +37,24 @@ class Pull extends Component {
       likedByUser: !this.state.likedByUser
     })
   }
+
+
+  // componentDidMount() {
+  //   console.log("PullListItem component did Mount")
+  //   let data = {
+  //     _user: this.props.user._github,
+  //     _pull: this.props.pull.pullRequestID
+  //   }
+  //   api.checkVote(data)
+  //   .then(result => {
+  //     this.setState({
+  //       likedByUser: result.state
+  //     })
+  //   })
+  //   .catch(err=> {
+  //     console.log("error at PullListItem", err)
+  //   })
+  // }
     
   
 

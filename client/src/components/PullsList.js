@@ -16,8 +16,8 @@ class PullsPage extends Component {
     this.updatePulls()
     this.getComments()
   }
-  updatePulls() {
 
+  updatePulls() {
     const repoName = this.props.repo.name
     api.getPulls(repoName)
     .then(pulls => {
