@@ -39,6 +39,7 @@ class App extends Component {
 
   render() {
     console.log("this.state.user", this.state.user)
+    let user = this.state.user
     return (
       <div className="App">
         <Navbar user={this.state.user} /> 
@@ -56,8 +57,10 @@ class App extends Component {
           <Button color="primary">primary</Button>{' '}
           <Button color="primary">primary</Button>{' '} */}
 
-          <Route path="/home" exact component={Home} />
-          <Route path="/" exact component={Home} />
+          <Route path="/home" exact render={(props) => (
+            <Home sample="sampleProp"/>)}></Route>
+      
+          <Route path="/" exact component={Home}  />
 
 
           

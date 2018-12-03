@@ -64,6 +64,14 @@ export default {
       .catch(errHandler)
   },
 
+
+  castVote(data) {
+    return service
+      .post('/pulls/vote', data)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
   postCountries(data) {
     return service
       .post('/countries', data)
@@ -113,7 +121,6 @@ export default {
   },
 
   isLoggedInNew() {
-    console.log("isLoggedInNew Called")
     return service 
       .get('/auth/isloggedin')
       .then(res => res.data)
@@ -150,7 +157,6 @@ export default {
       .then(res => res)
       .catch(errHandler)
   },
-
 
 
 

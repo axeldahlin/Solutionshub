@@ -25,15 +25,15 @@ router.get('/', (req, res, next) => {
 
 
 
-//Get one pull request
-router.get('/pull-detail/:pullId', (req,res,next)=> {
+// //Get one pull request
+// router.get('/pull-detail/:pullId', (req,res,next)=> {
 
-  PullRequest.findById({req.params.pullId})
-  .then(pull => {
-    res.json(pull)
-  })
-  .catch(err => next(err))
-})
+//   PullRequest.findById({req.params.pullId})
+//   .then(pull => {
+//     res.json(pull)
+//   })
+//   .catch(err => next(err))
+// })
 
 
 

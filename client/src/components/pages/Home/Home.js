@@ -55,8 +55,10 @@ class Home extends Component {
 
 
   render() {
+    console.log("props.user", this.props.sample)
     return (
       <div className="Home">
+  
 
         <RepoList click={(name) => this.handleClickRepo(name)}/>
 
