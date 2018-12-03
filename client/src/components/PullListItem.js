@@ -18,6 +18,8 @@ class Pull extends Component {
   }
 
 
+ 
+
 
   toggleVote() {
     let data = {
@@ -35,6 +37,37 @@ class Pull extends Component {
       likedByUser: !this.state.likedByUser
     })
   }
+
+  updateVotes() {
+    console.log("PullListItem component did Mount")
+    let data = {
+      _user: this.props.user._github,
+      _pull: this.props.pull.pullRequestID
+    }
+    api.checkVote(data)
+    .then(result => {
+
+      this.setState({
+        likedByUser: result.state
+      })
+    })
+    .catch(err=> {
+      console.log("error at PullListItem", err)
+    })
+  }
+
+
+  componentDidMount() {
+    this.updateVotes()
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.pull !== prevProps.pull) {
+      console.log('componentdidupdate')
+      this.updateVotes()
+    }
+  }
     
   
 
@@ -44,7 +77,9 @@ class Pull extends Component {
     if (this.state.likedByUser) buttonText = "Unlike"
     return (
       <div className="Pull" >
-        <p >{this.props.pull.title}</p>
+        <p >{this.props.pull.title} -- ID: {this.props.pull.pullRequestID}</p>
+        
+
         <button onClick={()=> this.toggleVote()}>{buttonText}</button>
         <button onClick={() => this.handleClick()}>Details</button>
         {this.state.likedByUser && <p>Liked by user!</p>}

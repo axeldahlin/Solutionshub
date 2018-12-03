@@ -63,6 +63,17 @@ class Home extends Component {
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
 
         <div style={{width: '100%'}}>
+
+        {/* <Switch>
+
+          <Route path="/pullslist" exact render={props => <PullsList {...props} click={(pull)=> this.handleClickPull(pull)} user={this.state.user} repo={this.state.clickedRepo}/>}/>
+
+          <Route path="/pulldetails" exact render={props => <PullDetail {...props} pull={this.state.clickedPull}/>}/>
+
+      
+        </Switch> */}
+
+
          {this.state.clickedRepo && <PullsList click={(pull)=> this.handleClickPull(pull)} user={this.props.user} repo={this.state.clickedRepo}/>}
 
           {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}

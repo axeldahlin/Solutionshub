@@ -80,7 +80,14 @@ export default {
 
   removeVote(data) {
     return service 
-      .delete('/pulls/unvote',data)
+      .post('/pulls/unvote',data)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
+  checkVote(data) {
+    return service
+      .post('/pulls/getvote',data)
       .then(res=>res.data)
       .catch(errHandler)
   },

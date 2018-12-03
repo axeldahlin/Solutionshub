@@ -57,7 +57,6 @@ class App extends Component {
           <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} />
           <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} />
 
-
           {/* <Route path="/" exact component={Home}  /> */}
 
 
