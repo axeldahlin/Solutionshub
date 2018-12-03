@@ -10,7 +10,8 @@ class Home extends Component {
     super(props)
     this.state = {
       user: null,
-      clickedRepo: null
+      clickedRepo: null,
+      clickedPull: null
     }
   }
   handleClickRepo = (repo) => {
@@ -63,7 +64,7 @@ class Home extends Component {
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
 
         <div style={{width: '100%'}}>
-         {this.state.clickedRepo && <PullsList click={(pull)=> this.handleClickPull(pull)} user={this.state.user} repo={this.state.clickedRepo}/>}
+         {this.state.clickedRepo && <PullsList click={(pull)=> this.handleClickPull(pull)} user={this.props.user} repo={this.state.clickedRepo}/>}
 
           {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}
 
