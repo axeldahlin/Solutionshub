@@ -7,7 +7,8 @@ class PullsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pulls: []
+      pulls: [],
+      comments: null
   
     }
   }
@@ -41,31 +42,46 @@ class PullsPage extends Component {
           })
           .catch(err => console.log('DEBUG err:', err))
   }
+
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.repoName !== prevProps.repoName) {
+    if (this.props.repo !== prevProps.repo) {
 
       console.log('componentdidupdate')
       this.updatePulls()
+      this.getComments()
     }
   }
+
   handleClick = (value) => {
     this.props.click(value)
   }
 
 
   getComments() {
-
-
-      // console.log('getComments', this.props.repo._id)
-
-
     api.getRepoComments(this.props.repo._id)
       .then(comments => {
         console.log('DEBUG comments:', comments)
+        this.setState({comments})
       })
-
   }
+
+
+  // componentDidMount() {
+  //   console.log("PullListItem component did Mount")
+
+  //   api.checkVote(data)
+  //   .then(result => {
+  //     this.setState({
+  //       likedByUser: result.state
+  //     })
+  //   })
+  //   .catch(err=> {
+  //     console.log("error at PullListItem", err)
+  //   })
+  // }
+
+
 
 
 
@@ -74,11 +90,14 @@ class PullsPage extends Component {
       <div className="PullsPage">
         <h1>Pulls List</h1>
         <h2>{this.props.repo.name}</h2>
-        <CommentsContainer/>
+        <CommentsContainer comments={this.state.comments}/>
+
+        
           {this.state.pulls.map((pull, index) => {
             return <Pull
               key={index} 
               user={this.props.user}
+              // likedByUser={likedByUser}
               pull={pull}
               click={(value)=> this.handleClick(value)}
               />

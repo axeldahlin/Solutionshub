@@ -147,7 +147,6 @@ export default {
     return service
       .post('/auth/logout')
       .then(res => {
-        console.log(res.data)
         return res.data
       })
       .catch(err=>{
@@ -165,7 +164,6 @@ export default {
   },
 
   userData() {
-    console.log("userData() called")
     return service
       .get('/auth/loggedin')
       .then(res => {
@@ -179,11 +177,9 @@ export default {
   },
 
   getPulls(repo) {
-    console.log('getPulls called')
     return service
       .get('/repo/pulls/'+repo)
       .then(res => {
-        console.log('test')
         return res.data
       
       })
@@ -192,7 +188,6 @@ export default {
 
 
   updatePulls(repo) {
-    console.log('update pulls called')
     return service
       .get('/repo/update-pulls/'+repo)
       .then(res => res)
