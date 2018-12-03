@@ -13,6 +13,8 @@ class Repo extends Component {
   handleClick = (repo) => {
     this.props.click(repo)
 
+    
+
   }
 
   render() {

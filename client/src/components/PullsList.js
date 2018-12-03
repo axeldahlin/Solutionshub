@@ -7,7 +7,8 @@ class PullsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pulls: []
+      pulls: [],
+      comments: null
   
     }
   }
@@ -17,7 +18,6 @@ class PullsPage extends Component {
     this.getComments()
   }
   updatePulls() {
-
     const repoName = this.props.repo.name
     api.getPulls(repoName)
     .then(pulls => {
@@ -43,10 +43,11 @@ class PullsPage extends Component {
   }
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.repoName !== prevProps.repoName) {
+    if (this.props.repo !== prevProps.repo) {
 
       console.log('componentdidupdate')
       this.updatePulls()
+      this.getComments()
     }
   }
   handleClick = (value) => {
@@ -55,17 +56,14 @@ class PullsPage extends Component {
 
 
   getComments() {
-
-
-      // console.log('getComments', this.props.repo._id)
-
-
     api.getRepoComments(this.props.repo._id)
       .then(comments => {
         console.log('DEBUG comments:', comments)
+        this.setState({comments})
       })
-
   }
+
+
 
 
 
@@ -74,7 +72,7 @@ class PullsPage extends Component {
       <div className="PullsPage">
         <h1>Pulls List</h1>
         <h2>{this.props.repo.name}</h2>
-        <CommentsContainer/>
+        <CommentsContainer comments={this.state.comments}/>
           {this.state.pulls.map((pull, index) => {
             return <Pull
               key={index} 

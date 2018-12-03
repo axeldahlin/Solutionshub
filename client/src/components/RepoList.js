@@ -3,9 +3,6 @@ import api from '../api';
 import Repo from './Repo'
 
 
-
-
-
 class RepoList extends Component {
   constructor(props) {
         super(props)

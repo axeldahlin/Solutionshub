@@ -114,7 +114,7 @@ router.post('/repo-comment', (req, res, next) => {
 
 // Get all repoComments
 router.get('/repo-comment/:id', (req,res,next)=> {
-  RepoComment.find({_id: req.params.id})
+  RepoComment.find({repo: req.params.id})
   .then(repoComments => {
     res.json(repoComments)
   })

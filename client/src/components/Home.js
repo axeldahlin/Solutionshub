@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PullDetail from './PullDetail'
 import RepoList from './RepoList'
 import PullsList from './PullsList';
+import { Route, Switch } from 'react-router-dom';
+import api from '../api'
 
 class Home extends Component {
   constructor(props) {
@@ -12,7 +14,6 @@ class Home extends Component {
     }
   }
   handleClickRepo = (repo) => {
-    console.log(repo)
     this.setState({clickedRepo: repo})
   }
 
@@ -50,7 +51,6 @@ class Home extends Component {
 
 
   render() {
-    console.log("this.state.user HOME.js", this.state.user)
     return (
       <div className="Home">
 
@@ -61,6 +61,7 @@ class Home extends Component {
           {this.state.clickedPull &&  <PullDetail user={this.state.user} pull={this.state.clickedPull}/>} */}
 
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
+
         <div style={{width: '100%'}}>
          {this.state.clickedRepo && <PullsList click={(pull)=> this.handleClickPull(pull)} user={this.state.user} repo={this.state.clickedRepo}/>}
 

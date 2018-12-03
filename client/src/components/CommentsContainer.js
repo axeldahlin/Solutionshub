@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import CommentForm from './CommentForm'
+
 
 
 class CommentsContainer extends Component {
@@ -11,17 +13,6 @@ class CommentsContainer extends Component {
 
 
 
-  getComments() {
-
-    console.log('DEBUG this.props.repoId:', this.props)
-
-
-    
-  }
-
-  componentDidMount() {
-    this.getComments()
-  }
 
 
   render() {          
@@ -29,6 +20,24 @@ class CommentsContainer extends Component {
       <div className="CommentsContainer">
 
         <h1>Comments</h1>
+        <CommentForm />
+        
+
+      
+        {this.props.comments && this.props.comments.map((comment, index) => {
+          return (
+            <div key={index}>
+              <p>Comment: {comment.comment}</p>
+              <p>User: {comment._user}</p>
+
+            </div>
+          )
+        })}
+
+      
+    
+
+        
 
 
       </div>
