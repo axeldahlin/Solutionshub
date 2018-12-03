@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
 
 class Repo extends Component {
@@ -11,20 +10,17 @@ class Repo extends Component {
   }
 
 
-  handleClick = (name) => {
-
-    this.props.click(name)
-
-    // console.log(name)
+  handleClick = (repo) => {
+    this.props.click(repo)
 
   }
 
   render() {
     return (
       <div className="Repo">
-        <p>{this.props.name}</p>
+        <p>{this.props.repo.name}</p>
         {/* <p>{this.props.url}</p> */}
-        <button onClick={() => this.handleClick(this.props.name)}>See Pulls</button>
+        <button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button>
       </div>
     )
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api';
 import Pull from './PullListItem'
-import RepoComments from './RepoComments'
+import CommentsContainer from './CommentsContainer'
 
 class PullsPage extends Component {
   constructor(props) {
@@ -13,16 +13,12 @@ class PullsPage extends Component {
   }
 
   componentDidMount() {
-
     this.updatePulls()
-    
-
+    this.getComments()
   }
-
-
   updatePulls() {
 
-    const repoName = this.props.repoName
+    const repoName = this.props.repo.name
     api.getPulls(repoName)
     .then(pulls => {
       this.setState({pulls, repoName})
@@ -44,10 +40,7 @@ class PullsPage extends Component {
             this.setState({pulls})
           })
           .catch(err => console.log('DEBUG err:', err))
-
   }
-
-
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.repoName !== prevProps.repoName) {
@@ -56,46 +49,39 @@ class PullsPage extends Component {
       this.updatePulls()
     }
   }
-
-
-
   handleClick = (value) => {
-
-
     this.props.click(value)
+  }
+
+
+  getComments() {
+
+
+      // console.log('getComments', this.props.repo._id)
+
+
+    api.getRepoComments(this.props.repo._id)
+      .then(comments => {
+        console.log('DEBUG comments:', comments)
+      })
 
   }
+
 
 
   render() {          
     return (
       <div className="PullsPage">
-
-        <h1>Pulls Page</h1>
-
-        <h2>{this.props.repoName}</h2>
-
-
-        <RepoComments />
-
-       
+        <h1>Pulls List</h1>
+        <h2>{this.props.repo.name}</h2>
+        <CommentsContainer/>
           {this.state.pulls.map((pull, index) => {
             return <Pull
               key={index} 
-              title={pull.title}
-              url={pull.url}
-              repoName={pull.repoName}
-              id={pull._id}
-              click={(value)=> this.handleClick(value)}
-              
-              
+              pull={pull}
+              click={(pullRequest)=> this.handleClick(pullRequest)}
               />
-
           })}
-
-
-
-
       </div>
     );
   }

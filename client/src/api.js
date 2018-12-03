@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { log } from 'util';
+// import { log } from 'util';
 
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
@@ -115,7 +115,7 @@ export default {
 
   getRepoComments(id) {
     return service
-      .get('/repo-comment/', id)
+      .get('/repo/repo-comment/'+ id)
       .then(res => res.data)
       .catch(errHandler)
   },

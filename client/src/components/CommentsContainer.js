@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class RepoComments extends Component {
+class CommentsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,13 +12,21 @@ class RepoComments extends Component {
 
 
   getComments() {
+
+    console.log('DEBUG this.props.repoId:', this.props)
+
+
     
+  }
+
+  componentDidMount() {
+    this.getComments()
   }
 
 
   render() {          
     return (
-      <div className="RepoComments">
+      <div className="CommentsContainer">
 
         <h1>Comments</h1>
 
@@ -28,4 +36,4 @@ class RepoComments extends Component {
   }
 }
 
-export default RepoComments;
+export default CommentsContainer;

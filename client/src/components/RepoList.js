@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import api from '../api';
 import Repo from './Repo'
 
@@ -24,8 +23,8 @@ class RepoList extends Component {
       }
 
 
-      handleClick = (name) => {
-        this.props.click(name)
+      handleClick = (repo) => {
+        this.props.click(repo)
 
         // console.log(name)
       }
@@ -37,7 +36,7 @@ class RepoList extends Component {
 
 
         {this.state.repos.map((repo, index) => {
-          return <Repo key={index} name={repo.name} click={(name) => this.handleClick(name)} url={repo.url}/>
+          return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
 
         })}
 
