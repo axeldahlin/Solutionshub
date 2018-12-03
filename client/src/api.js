@@ -105,6 +105,13 @@ export default {
       .catch(errHandler)
   },
 
+  getRepoComments(id) {
+    return service
+      .get('/repo-comment/', id)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   ///Routes above were in boiler plate, routes below are our own
 
   newLogout() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../../api';
 import Pull from './PullListItem'
+import RepoComments from './RepoComments'
 
 class PullsPage extends Component {
   constructor(props) {
@@ -73,6 +74,9 @@ class PullsPage extends Component {
         <h1>Pulls Page</h1>
 
         <h2>{this.props.repoName}</h2>
+
+
+        <RepoComments />
 
        
           {this.state.pulls.map((pull, index) => {

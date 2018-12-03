@@ -82,7 +82,7 @@ class Home extends Component {
 
         
 
-        <div>
+        <div style={{width: '100%'}}>
          {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} repoName={this.state.clickedRepo}/>}
 
           {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}
@@ -94,17 +94,6 @@ class Home extends Component {
 
 
 
-      
-
-
-
-
-
-    
-
-   
- 
-      
       </div>
     );
   }
