@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const voteSchema = new mongoose.Schema({
-  _user: String,
-  _pull: String,
+  _user: Number,
+  _pull: Number,
 });
 
 const Vote = mongoose.model('Vote', voteSchema);

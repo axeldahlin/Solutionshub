@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
-import api from '../../../../api';
+import api from '../api';
 import Repo from './Repo'
 
 

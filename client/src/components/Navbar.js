@@ -1,8 +1,10 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Link } from 'reactstrap';
+import { NavLink as ReactRouterDomNavLink } from 'react-router-dom';
 import api from '../api';
 
-export default class MyNavbar extends React.Component {
+class MyNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -20,22 +22,22 @@ export default class MyNavbar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="primary" light>
-          <NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
+        <Navbar color="primary" light expand="md">
+          <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto">reactstrap</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
             <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink tag={ReactRouterDomNavLink} to="/components/">Components</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/home/">Home</NavLink>
+                <NavLink tag={ReactRouterDomNavLink} exact to="/home/">Home</NavLink>
               </NavItem>
               <NavItem>
-               {!this.props.user && <NavLink href="https://github.com/login/oauth/authorize?client_id=ef51dc0616f91cc5207e">Login</NavLink>}
+               {!this.props.user && <NavLink href={api.service.defaults.baseURL + "/auth/github"}>Login</NavLink>}
               </NavItem>
               <NavItem>
-                {this.props.user && <NavLink href="/home" onClick={()=>api.newLogout()}>Logout</NavLink>}
+                {this.props.user && <NavLink tag={ReactRouterDomNavLink} to="/home" onClick={this.props.onLogout}>Logout</NavLink>}
               </NavItem>
               <NavItem>
                 {this.props.user && <p>Welcome, {this.props.user.githubName}</p>}
@@ -50,6 +52,9 @@ export default class MyNavbar extends React.Component {
     );
   }
 }
+
+
+export default withRouter(MyNavbar)
 
 
 // import React, { Component } from 'react';

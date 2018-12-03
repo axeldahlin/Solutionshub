@@ -12,9 +12,9 @@ let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+
 
 
 
-//Vote
+//Vote for a user
 router.post('/vote', (req, res, next) => {
-  console.log("Vote route called!")
+  console.log("Vote route called!", req.body)
   const newVote = new Vote({
     _user: req.body._user,
     _pull: req.body._pull
@@ -24,9 +24,28 @@ router.post('/vote', (req, res, next) => {
     res.json({vote, message: "vote cast"})
   })
   .catch(err=>{
-    console.log()
+    console.log("ERROR at Vote:", err)
   })
 })
+
+
+//Unvote for a user
+router.delete('/unvote', (req,res,next)=>{
+  console.log("Delete route called! req.body",req.body)
+  Vote.findOneAndDelete({
+    _user: req.body._user,
+    _pull: req.body._pull
+  })
+  .then(deletedVote => {
+    console.log("vote deleted", deletedVote)
+    res.json({deletedVote, message: "vote deleted"})
+  })
+  .catch(err=> {
+    console.log("Error at UNVOTE", err)
+  })
+})
+
+
   // const newVote = new Vote({
   //   _user: req.body._id,
   //   _pull: req.body._pull

@@ -48,15 +48,15 @@ app.use(session({
 }))
 require('./passport')(app)
 
-app.get('/auth/github',
-  passport.authenticate('github'));
+// app.get('/auth/github',
+//   passport.authenticate('github'));
  
-app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+// app.get('/auth/github/callback', 
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
 
 
@@ -68,21 +68,21 @@ app.use('/api/user', require('./routes/user'))
 
 
 
-
-app.get('/auth/github',
+// TODO: put it in a routes file
+app.get('/api/auth/github',
   passport.authenticate('github'));
 
-app.get('/auth/github/callback', 
+app.get('/api/auth/github/callback', 
   passport.authenticate('github', { 
     failureRedirect: 'http://localhost:3000',
     successRedirect: 'http://localhost:3000'
-  }),function(req, res) {
+  }),(req, res,next) => {
     console.log("/auth/github/callback has been called")
     console.log("req.query", req.query)
     console.log("Successful login!!!", req.user)
     console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
   });
 
 

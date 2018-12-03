@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
     .then(repos => {
       res.json(repos);
     })
-    .catch(err => next(err))
+    .catch(next)
 });
 
 
@@ -33,7 +33,7 @@ router.get('/pull-detail/:pullId', (req,res,next)=> {
   .then(pull => {
     res.json(pull)
   })
-  .catch(err => next(err))
+  .catch(next)
 })
 
 
@@ -47,7 +47,7 @@ router.get('/pulls/:repo', (req,res,next)=> {
   .then(pulls => {
     res.json(pulls)
   })
-  .catch(err => next(err))
+  .catch(next)
 })
 
 
@@ -107,7 +107,7 @@ router.post('/repo-comment', (req, res, next) => {
     .then(repoComment => {
       res.json(repoComment);
     })
-    .catch(err => next(err))
+    .catch(next)
 });
 
 
@@ -118,7 +118,7 @@ router.get('/repo-comment/:id', (req,res,next)=> {
   .then(repoComments => {
     res.json(repoComments)
   })
-  .catch(err => next(err))
+  .catch(next)
 })
 
 
@@ -128,7 +128,7 @@ router.delete('/repo-comment', (req,res,next)=> {
   .then(repoComment => {
     res.json({message: 'repoMessage deleted'})
   })
-  .catch(err => next(err))
+  .catch(next)
 })
 
 

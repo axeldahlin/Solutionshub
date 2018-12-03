@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../../../api';
+import api from '../api';
 import Pull from './PullListItem'
 import RepoComments from './RepoComments'
 
@@ -82,15 +82,10 @@ class PullsPage extends Component {
           {this.state.pulls.map((pull, index) => {
             return <Pull
               key={index} 
-              title={pull.title}
-              url={pull.url}
-              repoName={pull.repoName}
-              id={pull._id}
+              user={this.props.user}
+              pull={pull}
               click={(value)=> this.handleClick(value)}
-              
-              
               />
-
           })}
 
 

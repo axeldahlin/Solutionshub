@@ -9,16 +9,16 @@ import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
 // import { Button } from 'reactstrap';
 
-import api from '../../../api'
+import api from '../api'
 
 
 import PullDetail from './PullDetail'
 
 
-import Pull from './PullsPage/PullListItem'
+import Pull from './PullListItem'
 
-import RepoList from './RepoList/RepoList'
-import PullsPage from './PullsPage/PullsList';
+import RepoList from './RepoList'
+import PullsPage from './PullsList';
 
 
 
@@ -27,32 +27,21 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      user: null,
       clickedRepo: null
-
     }
-
   }
 
 
 
   handleClickRepo = (name) => {
-
     this.setState({clickedRepo: name})
-
     console.log(name)
-
-
   }
 
 
   handleClickPull = (id) => {
-
     // console.log('DEBUG id:', id)
-
-
-
-
-
     api.getPull(id)
       .then(pull => {
         this.setState({
@@ -62,40 +51,31 @@ class Home extends Component {
         })
         console.log(pull)
       })
+  }
 
-
-  
-
-
+  componentDidMount() {
+    api.userData()
+    .then(user => {
+      this.setState({
+        user
+      })
+    })
+    .catch(err => {
+      console.log("err at App/componentDidMount",err)
+    })
   }
 
 
 
-
-
-
   render() {
-    console.log("props.user", this.props.sample)
+    console.log("this.state.user HOME.js", this.state.user)
     return (
       <div className="Home">
-  
-
         <RepoList click={(name) => this.handleClickRepo(name)}/>
-
-        
-
         <div style={{width: '100%'}}>
-         {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} repoName={this.state.clickedRepo}/>}
-
-          {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}
-
-
+         {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} user={this.state.user} repoName={this.state.clickedRepo}/>}
+          {this.state.clickedPull &&  <PullDetail user={this.state.user} pull={this.state.clickedPull}/>}
         </div>
-
-
-
-
-
       </div>
     );
   }

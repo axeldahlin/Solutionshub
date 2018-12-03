@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage/LoginPage';
+// import LoginPage from './LoginPage';
 
 import api from '../api';
 import Navbar from './Navbar'
-import Home from './pages/Home/Home.js'
+import Home from './Home'
 
 
 
@@ -16,13 +16,16 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: null,
+      user: api.syncLoadUser(),
     }
     // api.loadUser();
   }
 
-  handleLogoutClick(e) {
-    api.logout()
+  handleLogout = (e) => {
+    api.newLogout()
+    this.setState({
+      user: null
+    })
   }
 
   componentDidMount() {
@@ -38,17 +41,11 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.state.user", this.state.user)
-    console.log("sample", this.props.sample)
+    console.log("this.state.user APP", this.state.user)
     return (
       <div className="App">
-        <Navbar user={this.state.user} /> 
+        <Navbar user={this.state.user} onLogout={this.handleLogout} /> 
 
-
-
-
-
-   
         <Switch>
 {/*     
           <Route path="/repos" exact component={ReposPage} />
@@ -57,10 +54,9 @@ class App extends Component {
           <Button color="primary">primary</Button>{' '}
           <Button color="primary">primary</Button>{' '} */}
 
-          <Route path="/home" exact render={(props) => (
-            <Home {...props} sample="sampleProp"/>)}></Route>
-      
-          <Route path="/" exact component={Home}  />
+          <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} />
+
+          {/* <Route path="/" exact component={Home}  /> */}
 
 
           

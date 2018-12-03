@@ -25,6 +25,12 @@ export default {
     return localStorage.getItem('user') != null
   },
 
+  // Return null is not loggedIn
+  // Otherwise, return an object representing the logged in user
+  syncLoadUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  },
+
   signup(userInfo) {
     return service
       .post('/signup', userInfo)
@@ -68,6 +74,13 @@ export default {
   castVote(data) {
     return service
       .post('/pulls/vote', data)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
+  removeVote(data) {
+    return service 
+      .delete('/pulls/unvote',data)
       .then(res=>res.data)
       .catch(errHandler)
   },
@@ -123,6 +136,7 @@ export default {
   ///Routes above were in boiler plate, routes below are our own
 
   newLogout() {
+    localStorage.removeItem('user')
     return service
       .post('/auth/logout')
       .then(res => {
@@ -147,8 +161,14 @@ export default {
     console.log("userData() called")
     return service
       .get('/auth/loggedin')
-      .then(res => res.data)
-      .catch(err=>null)
+      .then(res => {
+        let user = res.data
+        localStorage.setItem("user", JSON.stringify(user))
+        return user
+      })
+      .catch(err=>{
+        localStorage.removeItem("user")
+      })
   },
 
   getPulls(repo) {

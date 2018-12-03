@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../../../api';
+import api from '../api';
 
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import { log } from 'util';
@@ -22,14 +22,23 @@ class Pull extends Component {
 
 
   toggleVote() {
+    let data = {
+      _user: this.props.user._github,
+      _pull: this.props.pull.pullRequestID
+    }
+    if (!this.state.likedByUser) {
+      console.log("castVote called",data)
+      api.castVote(data)
+    } else {
+      console.log("removeVote called",data)
+      api.removeVote(data)
+    }  
     this.setState({
       likedByUser: !this.state.likedByUser
     })
-    api.castVote({
-      _user: this.props.user._id,
-      _pull: this.props.pull._id
-    })
   }
+    
+  
 
 
   render() {
@@ -39,6 +48,7 @@ class Pull extends Component {
       <div className="Pull" >
         <p >{this.props.title}</p>
         <button onClick={()=> this.toggleVote()}>{buttonText}</button>
+        <button onClick={() => this.handleClick()}>Details</button>
         {this.state.likedByUser && <p>Liked by user!</p>}
         {/* <p>{props.repoName}</p> */}
   
