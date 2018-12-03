@@ -93,6 +93,13 @@ export default {
       .catch(errHandler)
   },
 
+  getPull(id) {
+    return service
+      .get('/repo/pull-detail/'+id)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   addPicture(file) {
     const formData = new FormData()
     formData.append("picture", file)
@@ -102,6 +109,13 @@ export default {
           'Content-Type': 'multipart/form-data',
         },
       })
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getRepoComments(id) {
+    return service
+      .get('/repo-comment/', id)
       .then(res => res.data)
       .catch(errHandler)
   },

@@ -2,6 +2,7 @@ const express = require('express');
 const Repo = require('../models/Repo')
 const PullRequest = require('../models/PullRequest')
 const axios = require('axios');
+const RepoComment = require('../models/RepoComment')
 
 const router = express.Router();
 
@@ -26,14 +27,14 @@ router.get('/', (req, res, next) => {
 
 
 // //Get one pull request
-// router.get('/pull-detail/:pullId', (req,res,next)=> {
-
-//   PullRequest.findById({req.params.pullId})
-//   .then(pull => {
-//     res.json(pull)
-//   })
-//   .catch(err => next(err))
-// })
+router.get('/pull-detail/:pullId', (req,res,next)=> {
+  const id = req.params.pullId
+  PullRequest.findById(id)
+  .then(pull => {
+    res.json(pull)
+  })
+  .catch(err => next(err))
+})
 
 
 
@@ -93,6 +94,41 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
     })
   })
   .catch(err=>console.log("Error at /update-pulls/:repo", err))
+})
+
+
+
+
+// Post a repoComments
+router.post('/repo-comment', (req, res, next) => {
+  const {_user, comment, repo} = req.body;
+  const newComment = new RepoComment({ _user, comment, repo });
+  newComment.save()
+    .then(repoComment => {
+      res.json(repoComment);
+    })
+    .catch(err => next(err))
+});
+
+
+
+// Get all repoComments
+router.get('/repo-comment/:id', (req,res,next)=> {
+  RepoComment.find({_id: req.params.id})
+  .then(repoComments => {
+    res.json(repoComments)
+  })
+  .catch(err => next(err))
+})
+
+
+// Delete one repoComment
+router.delete('/repo-comment', (req,res,next)=> {
+  RepoComment.findByIdAndRemove(req.body.id)
+  .then(repoComment => {
+    res.json({message: 'repoMessage deleted'})
+  })
+  .catch(err => next(err))
 })
 
 
