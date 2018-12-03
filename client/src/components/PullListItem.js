@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api';
 
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
-import { log } from 'util';
 
 
 class Pull extends Component {
@@ -16,7 +14,7 @@ class Pull extends Component {
 
 
   handleClick = () => {
-    this.props.click(this.props.id)
+    this.props.click(this.props.pull)
   }
 
 
@@ -46,7 +44,7 @@ class Pull extends Component {
     if (this.state.likedByUser) buttonText = "Unlike"
     return (
       <div className="Pull" >
-        <p >{this.props.title}</p>
+        <p >{this.props.pull.title}</p>
         <button onClick={()=> this.toggleVote()}>{buttonText}</button>
         <button onClick={() => this.handleClick()}>Details</button>
         {this.state.likedByUser && <p>Liked by user!</p>}
