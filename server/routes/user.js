@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User')
+const PullRequest = require('../models/PullRequest')
 
 const router = express.Router();
 
@@ -9,6 +10,16 @@ router.use((req, res, next) => {
   next()
 })
 
+
+
+router.get('/userpulls/:username', (req,res,next)=>{
+  PullRequest.find({_githubUsername: req.params.username})
+  .then(pulls=>{
+    res.json(pulls)
+  })
+  .catch(err=>
+    console.log("error at /userpulls/:username"))
+})
 
 
 ///////////////////////////////////////////////////SAMPLE ONLY BELOW

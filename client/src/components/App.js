@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import api from '../api';
 import Navbar from './Navbar'
 import Home from './Home'
+import Profile from './Profile'
 
 
 
@@ -56,6 +57,7 @@ class App extends Component {
 
           <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} />
           <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} />
+          <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
 
           {/* <Route path="/" exact component={Home}  /> */}
 

@@ -70,6 +70,13 @@ export default {
       .catch(errHandler)
   },
 
+  getUserPulls(username) {
+    return service
+    .get('user/userpulls/'+ username)
+    .then(res=>res.data)
+    .catch(errHandler)
+  },
+
 
   castVote(data) {
     return service

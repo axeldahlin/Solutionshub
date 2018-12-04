@@ -50,7 +50,7 @@ class Pull extends Component {
   
     return (
       <tr className="Pull">
-        <td>{flagPNG && <img src={require(`../${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
+        <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="50" height="40" alt="flag"></img>}</td>
         <td>{this.props.pull.title}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
