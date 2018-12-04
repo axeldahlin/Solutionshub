@@ -27,9 +27,9 @@ class MyNavbar extends React.Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
-            <NavItem>
+            {/* <NavItem>
                 <NavLink tag={ReactRouterDomNavLink} to="/components/">Components</NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink tag={ReactRouterDomNavLink} exact to="/home/">Home</NavLink>
               </NavItem>
