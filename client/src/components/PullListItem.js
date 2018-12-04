@@ -20,51 +20,21 @@ class Pull extends Component {
 
 
   getFlagPNG = () => {
-
     let title = this.props.pull.title
-
-
-    // if (title.match(/BER/gm)) return 'ber'
-    // if (title.match(/berlin/gmi)) return 'ber'  
-    
-    // if (title.match(/BCN/gm)) return 'esp'  
-    // if (title.match(/barcelona/gmi)) return 'esp'
-
-
-
-    // if (title.match(/MIA/gm)) return 'usa'  
-    // if (title.match(/miami/gmi)) return 'usa'
-
-
-     // if (title.match(/AMS/gm)) return 'ams'  
-    // if (title.match(/amsterdam/gmi)) return 'ams'
-
-
-         // if (title.match(/MAD/gm)) return 'esp'  
-    // if (title.match(/madrid/gmi)) return 'esp'
-
-
-    // if (title.match(/PAR/gm)) return 'fra'  
-    // if (title.match(/paris/gmi)) return 'fra'
-    
-    
-    // if (title.match(/BER/gm)) return 'ber'   
-    // if (title.match(/BER/gm)) return 'ber'  
-    
-    
-    // Last catcher
-
-
+    if (title.match(/BER/gm) || title.match(/berlin/gmi)) return 'ber' 
+    if (title.match(/BCN/gm) || title.match(/barcelona/gmi)) return 'esp'  
+    if (title.match(/MIA/gm) || title.match(/miami/gmi)) return 'usa'  
+    if (title.match(/AMS/gm) || title.match(/amsterdam/gmi)) return 'ams'  
+    if (title.match(/MAD/gm) || title.match(/madrid/gmi)) return 'esp'  
+    if (title.match(/PAR/gm) || title.match(/paris/gmi)) return 'fra'  
+    if (title.match(/MEX/gm) || title.match(/MX/gm) || title.match(/mexico/gmi)) return 'mex' 
+    // If nothing matches so far here is the second round
     if (title.match(/ber/gmi)) return 'ber'
-    // if (title.match(/bcn/gmi)) return 'esp'
-
-
-
-
-    
-
+    if (title.match(/bcn/gmi)) return 'esp'
+    if (title.match(/par/gmi)) return 'fra'  
+    if (title.match(/mia/gmi)) return 'mia'  
+    if (title.match(/mad/gmi)) return 'esp'  
     return ''
-
   }
 
 
