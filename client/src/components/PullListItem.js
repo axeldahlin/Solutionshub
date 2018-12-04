@@ -19,15 +19,27 @@ class Pull extends Component {
 
 
 
-  
+
+
+
+  test() {
+    return 'ber'
+
+  }
+
+
+
 
 
   render() {
     let buttonText = "Like"
     if (this.props.pull.likedByUser) buttonText = "Unlike"
+
+    let countryCode = this.test()
+
     return (
       <tr className="Pull">
-        <td><img src="../ber.svg" alt="flag"></img></td>
+        <td><img src={require(`../${countryCode}.png`)} alt="flag"></img></td>
         <td>{this.props.pull.title}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
@@ -35,7 +47,6 @@ class Pull extends Component {
         <td>{this.props.pull.nbOfVotes}</td>
       </tr>
     )
-
   }
 }
 
