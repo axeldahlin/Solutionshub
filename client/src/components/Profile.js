@@ -48,6 +48,7 @@ class Profile extends Component {
               {this.state.userPulls && this.state.userPulls.map((pull, index) => {
                 return <tr className="Pull">
                 <td>{pull.title}</td>
+                <td>{pull.repoName}</td>
                 <td>{new Date(pull.updated_at).toUTCString()}</td>
               </tr>
               })}
