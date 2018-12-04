@@ -14,7 +14,6 @@ let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+
 
 //Check for vote
 router.post('/getvote', (req,res,next)=>{
-  console.log("Get vote is called")
   Vote.find({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(vote=>{
     if(vote.length) res.json({state: true})
@@ -28,7 +27,7 @@ router.post('/getvote', (req,res,next)=>{
 
 //Vote for a user
 router.post('/vote', (req, res, next) => {
-  console.log("Vote route called!", req.body)
+  // console.log("Vote route called!", req.body)
   const newVote = new Vote({
     _user: req.body._user,
     _pull: req.body._pull
@@ -45,7 +44,7 @@ router.post('/vote', (req, res, next) => {
 
 //Unvote for a user
 router.post('/unvote', (req,res,next)=>{
-  console.log("Delete route called! req.body",req.body)
+  // console.log("Delete route called! req.body",req.body)
   Vote.findOneAndDelete({
     _user: req.body._user,
     _pull: req.body._pull

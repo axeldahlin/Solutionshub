@@ -22,7 +22,7 @@ class MyNavbar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="primary" light expand="md">
+        <Navbar color="dark" dark expand="md">
           <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto">reactstrap</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>

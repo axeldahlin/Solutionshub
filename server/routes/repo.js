@@ -101,8 +101,8 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
 
 // Post a repoComments
 router.post('/repo-comment', (req, res, next) => {
-  const {_user, comment, repo} = req.body;
-  const newComment = new RepoComment({ _user, comment, repo });
+  const {_user, comment, _repo, githubName, date, imgUrl} = req.body;
+  const newComment = new RepoComment({ _user, comment, _repo, githubName, date, imgUrl});
   newComment.save()
     .then(repoComment => {
       res.json(repoComment);
@@ -114,7 +114,7 @@ router.post('/repo-comment', (req, res, next) => {
 
 // Get all repoComments
 router.get('/repo-comment/:id', (req,res,next)=> {
-  RepoComment.find({repo: req.params.id})
+  RepoComment.find({_repo: req.params.id})
   .then(repoComments => {
     res.json(repoComments)
   })
@@ -123,8 +123,15 @@ router.get('/repo-comment/:id', (req,res,next)=> {
 
 
 // Delete one repoComment
-router.delete('/repo-comment', (req,res,next)=> {
-  RepoComment.findByIdAndRemove(req.body.id)
+router.delete('/repo-comment/:id', (req,res,next)=> {
+
+
+
+
+
+
+  
+  RepoComment.findByIdAndRemove(req.params.id)
   .then(repoComment => {
     res.json({message: 'repoMessage deleted'})
   })

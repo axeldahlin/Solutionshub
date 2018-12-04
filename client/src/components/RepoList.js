@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api';
 import Repo from './Repo'
+import { Table } from 'reactstrap';
 
 
 class RepoList extends Component {
@@ -32,11 +33,24 @@ class RepoList extends Component {
       <div className="RepoList">
 
 
+
+         <Table>
+        <thead>
+          <tr>
+            <th>Repos</th>
+       
+          </tr>
+          </thead>
+          <tbody>
+
+
         {this.state.repos.map((repo, index) => {
           return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
-
         })}
 
+
+        </tbody>
+        </Table>
 
         
     
