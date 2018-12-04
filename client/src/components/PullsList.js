@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../api';
 import Pull from './PullListItem'
 import CommentsContainer from './CommentsContainer'
-import { Table } from 'reactstrap';
+import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 
 class PullsPage extends Component {
@@ -10,8 +10,8 @@ class PullsPage extends Component {
     super(props)
     this.state = {
       pulls: [],
-      comments: null
-  
+      comments: null,
+      searchValue: ""
     }
   }
 
@@ -60,6 +60,12 @@ class PullsPage extends Component {
     this.props.click(value)
   }
 
+  handleChange = (event) => {
+    console.log("handleChange called", event)
+    const { name, value } = event.target;
+    this.setState({[name]: value});
+  }
+
 
   getComments() {
     api.getRepoComments(this.props.repo._id)
@@ -90,11 +96,6 @@ class PullsPage extends Component {
     .catch(err=> {
       console.log("Error at checkVotes PullList",err)
     })
-  }
-
-
-  setVoteState() {
-
   }
 
 
@@ -164,15 +165,28 @@ class PullsPage extends Component {
 
 
 
-  render() {          
+  render() {   
+    let filteredPulls;
+    if (this.state.pulls) {
+      filteredPulls = this.state.pulls.filter(pull=>{
+        return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase())
+      }); 
+    }   
+    
     return (
       <div className="PullsPage">
         <h1>{this.props.repo.name}</h1>
         <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.props.repo} user={this.props.user}/>
+        <InputGroup>
+        <InputGroupAddon addonType="prepend">
+          <InputGroupText>Search</InputGroupText>
+        </InputGroupAddon>
+        <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
+      </InputGroup>
         <Table>
           <tbody>  
             {!this.state.pulls && <div>Loading...</div>}
-              {this.state.pulls && this.state.pulls.map((pull, index) => {
+              {filteredPulls && filteredPulls.map((pull, index) => {
                 return <Pull
                   key={index} 
                   user={this.props.user}

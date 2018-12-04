@@ -20,25 +20,21 @@ router.post('/getvotes',(req,res,next)=>{
   .then(votesFromUser => {
     console.log("votesFromUser",votesFromUser)
     res.json(votesFromUser)
-    
-    // let newPulls = pulls.map(pull => {
-    //   votesFromUser.forEach(vote=> {
-    //     if (vote._pull === pull.pullRequestID) pull.likedByUser = true;
-    //     else pull.likedByUser = false
-    //   })
-    //   return pull
-    // })
-    // let response = []
-    // votesFromUser.forEach(vote => {
-    //   let matching = pulls.filter(pull=>vote._pull === pull.pullRequestID)
-    //   matching.forEach(matchingPull=> {
-    //     matchingPull.likedByUser = true;
-    //     response.push(matchingPull)
-    //   })
-    // })
   })
   .catch(err=>{
     console.log("Error at /getVotes",err)
+  })
+})
+
+
+//Count votes for specific pull
+router.post('/countvotes',(req,res,next)=>{
+  Vote.find({_pull: req.body._pull})
+  .then(votes => {
+    res.json(votes.length)
+  })
+  .catch(err=>{
+    console.log("Error at /countVotes",err)
   })
 })
 

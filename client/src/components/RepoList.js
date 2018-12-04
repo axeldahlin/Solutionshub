@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import api from '../api';
 import Repo from './Repo'
-import { Table } from 'reactstrap';
-
+import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 
 class RepoList extends Component {
   constructor(props) {
         super(props)
         this.state = {
-          repos: []
+          repos: null,
+          searchValue: ""
         }
       }
     
-     
+      handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({[name]: value});
+      }
     
       componentDidMount() {
         // console.log("component did Mount")
@@ -30,23 +33,40 @@ class RepoList extends Component {
 
 
   render() {
+    let filteredRepos;
+    if (this.state.repos) {
+      console.log(this.state.repos.length)
+      filteredRepos = this.state.repos.filter(repo=>{
+        return repo.name.toUpperCase().includes(this.state.searchValue.toUpperCase())
+      }); 
+    }  
     return (
       <div className="RepoList">
-        <div>
+     <InputGroup>
+        <InputGroupAddon addonType="prepend">
+          <InputGroupText>Search</InputGroupText>
+        </InputGroupAddon>
+        <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
+      </InputGroup>
 
-        </div>
 
          <Table>
-            <thead>
-              <tr>
-                <th>Repos</th>
-              </tr>
-            </thead>
+        <thead>
+          <tr>
+            <th>Repos</th>
+          </tr>
+          </thead>
           <tbody>
-            {this.state.repos.map((repo, index) => {
-              return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
-            })}
-          </tbody>
+
+      
+        {!this.state.repos && <div>Loading...</div>}
+
+        {filteredRepos && filteredRepos.map((repo, index) => {
+          return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
+        })}
+
+
+        </tbody>
         </Table>
       </div>
     );

@@ -13,7 +13,8 @@ const pullRequestSchema = new mongoose.Schema({
   // votes: Number,
   _githubRepo: Number,
   repoName: String,
-  nbOfVotes:  { type: Number, default: 0 }
+  nbOfVotes:  { type: Number, default: 0 },
+  updated_at: Date
 });
 
 const PullRequest = mongoose.model('PullRequest', pullRequestSchema);

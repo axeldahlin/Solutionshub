@@ -84,7 +84,8 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
         title: githubPulls.title,
         url: githubPulls.html_url,
         _githubRepo: githubPulls.base.repo.id,
-        repoName: githubPulls.base.repo.name
+        repoName: githubPulls.base.repo.name,
+        updated_at: githubPulls.updated_at
       }, {
         upsert: true,
         new: true
