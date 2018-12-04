@@ -88,5 +88,21 @@ router.post('/unvote', (req,res,next)=>{
 })
 
 
+router.post('/inc-pull-votes/', (req, res, next) => {
+
+
+
+  console.log('DEBUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+  let {pullRequestID, increment} = req.body;
+
+  let inc = -1;
+  if (increment) {
+    inc = 1
+  }
+  PullRequest.findOneAndUpdate({pullRequestID: pullRequestID},{ $inc: { nbOfLikes: inc} })
+})
+
+
 
 module.exports = router;

@@ -4,6 +4,7 @@ import Repo from './Repo'
 import { Table } from 'reactstrap';
 
 
+
 class RepoList extends Component {
   constructor(props) {
         super(props)
@@ -31,33 +32,22 @@ class RepoList extends Component {
   render() {
     return (
       <div className="RepoList">
+        <div>
 
-
+        </div>
 
          <Table>
-        <thead>
-          <tr>
-            <th>Repos</th>
-       
-          </tr>
-          </thead>
+            <thead>
+              <tr>
+                <th>Repos</th>
+              </tr>
+            </thead>
           <tbody>
-
-
-        {this.state.repos.map((repo, index) => {
-          return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
-        })}
-
-
-        </tbody>
+            {this.state.repos.map((repo, index) => {
+              return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
+            })}
+          </tbody>
         </Table>
-
-        
-    
-
-   
- 
-      
       </div>
     );
   }

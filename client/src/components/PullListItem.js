@@ -30,6 +30,7 @@ class Pull extends Component {
         <td>{this.props.pull.title}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
         <td><button onClick={() => this.handleClick()}>Details</button></td>
+        <td>{this.props.pull.nbOfVotes}</td>
       </tr>
     )
 

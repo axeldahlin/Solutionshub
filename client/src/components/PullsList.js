@@ -122,6 +122,10 @@ class PullsPage extends Component {
     let [match] = allPulls.filter(pulls => {
       return pulls.pullRequestID === clickedPull
     })
+
+
+    console.log('DEBUG clickedPull:', clickedPull)
+
     if (!match.likedByUser) {
       match.likedByUser = true
       api.castVote(data)
