@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import api from '../api';
 import Navbar from './Navbar'
 import Home from './Home'
+import SignIn from './SignIn'
 
 
 
@@ -47,7 +48,13 @@ class App extends Component {
         <Navbar user={this.state.user} onLogout={this.handleLogout} /> 
 
         <Switch>
+
+
+
+
+
 {/*     
+          <Route path="/signed-out" component={SignedOutPage}>} />
           <Route path="/repos" exact component={ReposPage} />
           <Route path="/pulls/:name" exact component={PullsPage} />
           <Route path="/user/signin/callback" exact component={PullsPage} />
@@ -56,6 +63,9 @@ class App extends Component {
 
           <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} />
           <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} />
+
+
+          <Route path="/sign-in" component={SignIn}/>
 
           {/* <Route path="/" exact component={Home}  /> */}
 

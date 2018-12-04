@@ -17,8 +17,6 @@ class Pull extends Component {
     this.props.click(this.props.pull)
   }
 
-
-
   getFlagPNG = () => {
     let title = this.props.pull.title
     if (title.match(/BER/gm) || title.match(/berlin/gmi)) return 'ber' 
@@ -37,10 +35,6 @@ class Pull extends Component {
     return ''
   }
 
-
-
-
-
   render() {
     let buttonText = "Like"
     if (this.props.pull.likedByUser) buttonText = "Unlike"
@@ -50,7 +44,7 @@ class Pull extends Component {
   
     return (
       <tr className="Pull">
-        <td>{flagPNG && <img src={require(`../${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
+        <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
         <td>{this.props.pull.title}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
