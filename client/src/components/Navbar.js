@@ -37,10 +37,7 @@ class MyNavbar extends React.Component {
                 <NavLink tag={ReactRouterDomNavLink} exact to="/user/">Profile</NavLink>
               </NavItem>
               <NavItem>
-               {!this.props.user && <NavLink href={api.service.defaults.baseURL + "/auth/github"}>Login</NavLink>}
-              </NavItem>
-              <NavItem>
-                {this.props.user && <NavLink tag={ReactRouterDomNavLink} to="/home" onClick={this.props.onLogout}>Logout</NavLink>}
+                {this.props.user && <NavLink tag={ReactRouterDomNavLink} to="/sign-in" onClick={this.props.onLogout}>Logout</NavLink>}
               </NavItem>
               <NavItem>
                 {this.props.user && <p>Welcome, {this.props.user.githubName}</p>}
