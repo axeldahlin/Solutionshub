@@ -66,7 +66,7 @@ class Home extends Component {
 
         {/* <Switch>
 
-          <Route path="/pullslist" exact render={props => <PullsList {...props} click={(pull)=> this.handleClickPull(pull)} user={this.state.user} repo={this.state.clickedRepo}/>}/>
+          <Route path="/pullslist" exact render={props => <PullsList {...props} click={(pull)=> this.handleClickPull(pull)} user={ } repo={this.state.clickedRepo}/>}/>
 
           <Route path="/pulldetails" exact render={props => <PullDetail {...props} pull={this.state.clickedPull}/>}/>
 

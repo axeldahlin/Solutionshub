@@ -92,6 +92,14 @@ export default {
       .catch(errHandler)
   },
 
+  checkVotes(data) {
+    console.log("Check votes called API")
+    return service
+      .post('/pulls/getvotes',data)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
   postCountries(data) {
     return service
       .post('/countries', data)

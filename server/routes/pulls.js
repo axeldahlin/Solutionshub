@@ -12,9 +12,41 @@ let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+
 
 
 
-//Check for vote
+
+
+//Check for all votes (expects an array of pulls)
+router.post('/getvotes',(req,res,next)=>{
+  Vote.find({$and: [{_user: req.body._user},{_repo:req.body._repo}]})
+  .then(votesFromUser => {
+    console.log("votesFromUser",votesFromUser)
+    res.json(votesFromUser)
+    
+    // let newPulls = pulls.map(pull => {
+    //   votesFromUser.forEach(vote=> {
+    //     if (vote._pull === pull.pullRequestID) pull.likedByUser = true;
+    //     else pull.likedByUser = false
+    //   })
+    //   return pull
+    // })
+    // let response = []
+    // votesFromUser.forEach(vote => {
+    //   let matching = pulls.filter(pull=>vote._pull === pull.pullRequestID)
+    //   matching.forEach(matchingPull=> {
+    //     matchingPull.likedByUser = true;
+    //     response.push(matchingPull)
+    //   })
+    // })
+  })
+  .catch(err=>{
+    console.log("Error at /getVotes",err)
+  })
+})
+
+
+
+//Check for single vote
 router.post('/getvote', (req,res,next)=>{
-  console.log("Get vote is called")
+  // console.log("Get vote is called")
   Vote.find({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(vote=>{
     if(vote.length) res.json({state: true})
@@ -28,10 +60,10 @@ router.post('/getvote', (req,res,next)=>{
 
 //Vote for a user
 router.post('/vote', (req, res, next) => {
-  console.log("Vote route called!", req.body)
   const newVote = new Vote({
     _user: req.body._user,
-    _pull: req.body._pull
+    _pull: req.body._pull,
+    _repo: req.body._repo
   })
   newVote.save()
   .then(vote=>{
@@ -45,11 +77,11 @@ router.post('/vote', (req, res, next) => {
 
 //Unvote for a user
 router.post('/unvote', (req,res,next)=>{
-  console.log("Delete route called! req.body",req.body)
-  Vote.findOneAndDelete({
-    _user: req.body._user,
-    _pull: req.body._pull
-  })
+  // Vote.findOneAndDelete({
+  //   _user: req.body._user,
+  //   _pull: req.body._pull
+  // })
+  Vote.findOneAndDelete({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(deletedVote => {
     console.log("vote deleted", deletedVote)
     res.json({deletedVote, message: "vote deleted"})
