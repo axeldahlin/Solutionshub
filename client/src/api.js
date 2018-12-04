@@ -148,6 +148,23 @@ export default {
       .catch(errHandler)
   },
 
+
+
+  postRepoComment(data){
+    return service 
+      .post('repo/repo-comment', data)
+      .then(res => res.data)
+      .catch(errHandler)
+
+  },
+
+  deleteRepoComment(id){
+    return service 
+    .delete('repo/repo-comment/'+id)
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
   ///Routes above were in boiler plate, routes below are our own
 
   newLogout() {

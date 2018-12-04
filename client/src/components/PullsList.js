@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import api from '../api';
 import Pull from './PullListItem'
 import CommentsContainer from './CommentsContainer'
+import { Table } from 'reactstrap';
+
 
 class PullsPage extends Component {
   constructor(props) {
@@ -43,14 +45,6 @@ class PullsPage extends Component {
         this.checkVotes()
       })
       .catch(err => console.log(err))
-
-    
-
-    // api.getPulls(repoName)
-    //       .then(pulls => {
-    //         this.setState({pulls})
-    //       })
-    //       .catch(err => console.log('DEBUG err:', err))
   }
 
   componentDidUpdate(prevProps) {
@@ -70,7 +64,6 @@ class PullsPage extends Component {
   getComments() {
     api.getRepoComments(this.props.repo._id)
       .then(comments => {
-        console.log('DEBUG comments:', comments)
         this.setState({comments})
       })
   }
@@ -165,25 +158,28 @@ class PullsPage extends Component {
 
 
 
-  render() {        
+
+
+  render() {          
     return (
       <div className="PullsPage">
-        <h1>Pulls List</h1>
-        <h2>{this.props.repo.name}</h2>
-        <CommentsContainer comments={this.state.comments}/>
-
-        {!this.state.pulls && <div>Loading...</div>}
-          {this.state.pulls && this.state.pulls.map((pull, index) => {
-            return <Pull
-              key={index} 
-              user={this.props.user}
-              // likedByUser={likedByUser}
-              pull={pull}
-              click={(value)=> this.handleClick(value)}
-              handleLike={()=>this.toggleLike(pull.pullRequestID)}
-              />
-          })}
-
+        <h1>{this.props.repo.name}</h1>
+        <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.props.repo} user={this.props.user}/>
+        <Table>
+          <tbody>  
+            {!this.state.pulls && <div>Loading...</div>}
+              {this.state.pulls && this.state.pulls.map((pull, index) => {
+                return <Pull
+                  key={index} 
+                  user={this.props.user}
+                  // likedByUser={likedByUser}
+                  pull={pull}
+                  click={(value)=> this.handleClick(value)}
+                  handleLike={()=>this.toggleLike(pull.pullRequestID)}
+                  />
+              })}
+            </tbody>
+        </Table>
       </div>
     );
   }

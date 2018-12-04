@@ -46,7 +46,6 @@ router.post('/getvotes',(req,res,next)=>{
 
 //Check for single vote
 router.post('/getvote', (req,res,next)=>{
-  // console.log("Get vote is called")
   Vote.find({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(vote=>{
     if(vote.length) res.json({state: true})
@@ -60,6 +59,7 @@ router.post('/getvote', (req,res,next)=>{
 
 //Vote for a user
 router.post('/vote', (req, res, next) => {
+  // console.log("Vote route called!", req.body)
   const newVote = new Vote({
     _user: req.body._user,
     _pull: req.body._pull,
@@ -77,10 +77,6 @@ router.post('/vote', (req, res, next) => {
 
 //Unvote for a user
 router.post('/unvote', (req,res,next)=>{
-  // Vote.findOneAndDelete({
-  //   _user: req.body._user,
-  //   _pull: req.body._pull
-  // })
   Vote.findOneAndDelete({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(deletedVote => {
     console.log("vote deleted", deletedVote)
@@ -90,32 +86,6 @@ router.post('/unvote', (req,res,next)=>{
     console.log("Error at UNVOTE", err)
   })
 })
-
-
-  // const newVote = new Vote({
-  //   _user: req.body._id,
-  //   _pull: req.body._pull
-  // })
-
-
-
-// const newUser = new User({
-//   _github: profile.id,
-//   githubName: profile.displayName,
-//   githubUsername: profile.username,
-//   githubBio: profile._json.bio,
-//   githubImageUrl: profile.photos[0].value,
-//   githubUrl: profile.profileUrl
-// });
-
-// newUser.save()
-// .then(user => {
-//   console.log("user",user)
-//   cb(null, newUser);
-// })
-
-
-
 
 
 

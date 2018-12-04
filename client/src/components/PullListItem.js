@@ -19,59 +19,6 @@ class Pull extends Component {
 
 
 
- 
-
-
-  // toggleVote() {
-  //   let data = {
-  //     _user: this.props.user._github,
-  //     _pull: this.props.pull.pullRequestID,
-  //     _repo: this.props.pull._githubRepo
-  //   }
-  //   if (!this.state.likedByUser) {
-  //     console.log("castVote called",data)
-  //     api.castVote(data)
-  //   } else {
-  //     console.log("removeVote called",data)
-  //     api.removeVote(data)
-  //   }  
-  //   this.setState({
-  //     likedByUser: !this.state.likedByUser
-  //   })
-  // }
-
-  // updateVotes() {
-  //   // console.log("PullListItem component did Mount")
-  //   let data = {
-  //     _user: this.props.user._github,
-  //     _pull: this.props.pull.pullRequestID,
-  //     _repo: this.props.pull._githubRepo
-  //   }
-  //   api.checkVote(data)
-  //   .then(result => {
-
-  //     this.setState({
-  //       likedByUser: result.state
-  //     })
-  //   })
-  //   .catch(err=> {
-  //     console.log("error at PullListItem", err)
-  //   })
-  // }
-
-
-  // componentDidMount() {
-  //   this.updateVotes()
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   if (this.props.pull !== prevProps.pull) {
-  //     // console.log('componentdidupdate')
-  //     this.updateVotes()
-  //   }
-  // }
-    
   
 
 
@@ -79,17 +26,11 @@ class Pull extends Component {
     let buttonText = "Like"
     if (this.props.pull.likedByUser) buttonText = "Unlike"
     return (
-      <div className="Pull" >
-        <p >{this.props.pull.title} -- ID: {this.props.pull.pullRequestID}</p>
-        
-
-        {/* <button onClick={()=> this.toggleVote()}>{buttonText}</button> */}
-        <button onClick={()=>this.props.handleLike()}>{buttonText} NEW!</button>
-        <button onClick={this.handleClick}>Details</button>
-        {this.props.pull.likedByUser && <p>Liked by user!</p>}
-        {/* <p>{props.repoName}</p> */}
-  
-      </div>
+      <tr className="Pull">
+        <td>{this.props.pull.title}</td>
+        <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
+        <td><button onClick={() => this.handleClick()}>Details</button></td>
+      </tr>
     )
 
   }

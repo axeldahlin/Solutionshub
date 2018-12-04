@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Repo extends Component {
   constructor(props) {
     super(props)
@@ -9,25 +8,19 @@ class Repo extends Component {
     }
   }
 
-
   handleClick = (repo) => {
     this.props.click(repo)
-
-    
-
   }
 
   render() {
     return (
-      <div className="Repo">
-        <p>{this.props.repo.name}</p>
+      <tr className="Repo">
+            <td>{this.props.repo.name}</td>
+            <td><button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button></td>
         {/* <p>{this.props.url}</p> */}
-        <button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button>
-      </div>
+      </tr>
     )
-
   }
 }
-
 
 export default Repo;
