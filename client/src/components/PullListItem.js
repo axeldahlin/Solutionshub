@@ -25,9 +25,12 @@ class Pull extends Component {
   render() {
     let buttonText = "Like"
     if (this.props.pull.likedByUser) buttonText = "Unlike"
+
+
+
     return (
       <tr className="Pull">
-        <td><img src="../ber.svg" alt="flag"></img></td>
+        <td><img src={require("../ber.png")} width="60" height="50" alt="flag"></img></td>
         <td>{this.props.pull.title}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
