@@ -11,7 +11,10 @@ class PullsPage extends Component {
     this.state = {
       pulls: [],
       comments: null,
-      searchValue: ""
+      searchValue: "",
+      orderBy: "",
+      order: "",
+      dropDownActive: false
     }
   }
 
