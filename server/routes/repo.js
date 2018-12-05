@@ -44,24 +44,17 @@ router.get('/onerepo/:reponame',(req,res,next)=>{
 router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
   let pullsPromise = PullRequest.find({repoName: req.params.repo})
   let votesPromise = Vote.find({_repo: req.params.repo_id})
-  console.log("req.user._github",req.user._github)
   Promise.all([pullsPromise,votesPromise])
   .then(results => {
     let [pulls,votes] = results
     let pullsWithVotes = pulls.map(pull=>{
       let likedByUser = votes.filter(vote=>{
-        // console.log(pull.title)
-        // console.log("vote._user", vote._user)
-        // console.log("req.user._github",req.user._github)
-        // console.log(Number(vote._user) === Number(req.user._github))
-        // console.log("...")
         return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
       }).length === 1; 
       // console.log("likedByUser", likedByUser)
       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
       pull.nbOfVotes = nbOfVotes
       pull.likedByUser = likedByUser
-      console.log(pull.likedByUser)
       return pull
     })
     res.json(pullsWithVotes)
@@ -73,8 +66,10 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
 
 // Fetches all repos with github api and updates database
 router.get('/repos', (req,res,next)=> {
+  console.log("GET /repos called")
   axios.get(`https://api.github.com/orgs/ironhack-labs/repos` + authPath + '&per_page=100')
   .then(response => {
+    console.log("response from Axios", response)
     response.data.forEach(githubRepo => {
       Repo.findOneAndUpdate({githubID: githubRepo.id}, {
         name: githubRepo.name,

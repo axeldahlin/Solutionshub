@@ -14,37 +14,23 @@ class SignIn extends Component {
   render() {
     return (
      <div>
-
        <div className="signed-out-container">
-
-
          <div className="logo-container">
             <img src="logo.png" alt="logo" className="logo"/>
-
             <div className="signin-modal">
-           <a href={api.service.defaults.baseURL + "/auth/github"}>Login</a>
-
-          
+           <a href={api.service.defaults.baseURL + "/auth/github"}>Login with Github</a>
             </div>
-
-         </div>
-
-       
+         </div>       
        <div className="Img-container">
-
          <div>
             <img src="Octocat-low.png" alt="cat"/>
          </div>
-
          <div>
           <img src="ironhack.png" alt="iron"/>
          </div>
-
          <div>
             <img src="idea.png" alt="idea"/>
-
          </div>
-
        </div>
 
 

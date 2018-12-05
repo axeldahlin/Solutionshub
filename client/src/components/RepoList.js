@@ -22,7 +22,13 @@ class RepoList extends Component {
         // console.log("component did Mount")
         api.getRepos()
           .then(repos => {
-            this.setState({repos: repos})
+            this.setState({
+              repos: repos
+            })
+            return
+          })
+          .then(_ => {
+            api.updateRepos()
           })
       }
 

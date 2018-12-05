@@ -59,14 +59,11 @@ class Home extends Component {
         
         <Switch>
           <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
-          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
 
 
 
         </Switch>
-      
 
-   
       </div>
     );
   }

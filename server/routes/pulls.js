@@ -18,7 +18,6 @@ let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+
 router.post('/getvotes',(req,res,next)=>{
   Vote.find({$and: [{_user: req.body._user},{_repo:req.body._repo}]})
   .then(votesFromUser => {
-    console.log("votesFromUser",votesFromUser)
     res.json(votesFromUser)
   })
   .catch(err=>{

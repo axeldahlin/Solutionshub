@@ -46,6 +46,7 @@ class Pull extends Component {
       <tr className="Pull">
         <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
         <td>{this.props.pull.title}</td>
+        <td>{this.props.pull._githubUsername}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td>{this.props.pull.nbOfVotes}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>

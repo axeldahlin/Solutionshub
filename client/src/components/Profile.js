@@ -8,7 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userPulls: null
+      userPulls: null,
+      totalLikes: 0
     }
   }
 
@@ -18,13 +19,14 @@ class Profile extends Component {
 
   getUserPulls() {
     api.getUserPulls(this.props.user.githubUsername)
-    .then(userPulls=>{
+    .then(response=>{
       this.setState({
-        userPulls
+        userPulls: response.userPullsWithVotes,
+        totalLikes: response.totalVotes
       })
     })
     .catch(err=>{
-      console.log("error at User Component did Mount")
+      console.log("error at User Component did Mount",err)
     })
   }
 
@@ -38,17 +40,30 @@ class Profile extends Component {
       <br></br>
       <h2>Hello, {this.props.user.githubName}</h2>
       <h3>@{this.props.user.githubUsername}</h3>
+      <div>Likes: {this.state.totalLikes} <img src='lightbulb.png'></img></div>
+      <img src="logo.png" alt="logo" className="logo"/>
       <img src={this.props.user.githubImageUrl} alt="profile_picture"></img>
 
-      <h3>My Pulls: </h3>
+      <br></br>
 
+      <h3>My Pulls: </h3>
       <Table>
+          <thead>
+            <tr>
+              <th>Pull</th>
+              <th>Repo</th>
+              <th>Likes</th>
+              <th>Date</th>
+
+            </tr>
+          </thead>
           <tbody>  
             {!this.state.userPulls && <div>Loading...</div>}
               {this.state.userPulls && this.state.userPulls.map((pull, index) => {
                 return <tr className="Pull">
                 <td>{pull.title}</td>
                 <td>{pull.repoName}</td>
+                <td>{pull.nbOfVotes}</td>
                 <td>{new Date(pull.updated_at).toUTCString()}</td>
               </tr>
               })}
