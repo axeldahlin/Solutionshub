@@ -155,6 +155,13 @@ export default {
       .catch(errHandler)
   },
 
+  fetchRepoInfo(repoName) {
+    return service
+      .get('repo/onerepo/'+repoName)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
 
 
   postRepoComment(data){
@@ -207,6 +214,7 @@ export default {
         localStorage.removeItem("user")
       })
   },
+
 
   getPulls(repo,id) {
     console.log("METHOD:", '/repo/pulls/'+repo+'/'+id)

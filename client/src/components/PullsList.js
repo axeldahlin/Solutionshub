@@ -9,6 +9,7 @@ class PullsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      repo: null,
       pulls: [],
       comments: null,
       searchValue: "",
@@ -18,16 +19,41 @@ class PullsPage extends Component {
     }
   }
 
+
+
   componentDidMount() {
-    this.updatePulls()
-    this.getComments()
+    this.fetchRepoInfo()
+    console.log(this.state.repo)
+    
+  
+  }
+
+  fetchRepoInfo() {
+    let repoName = this.props.match.params.repo
+    api.fetchRepoInfo(repoName)
+    .then(repo=>{
+      console.log("fetched Repo:",repo)
+      this.setState({
+        repo:repo[0]
+      })
+      return
+    })
+    .then(_=>{
+      return this.updatePulls() 
+    })
+    .then(_=>{
+      return this.getComments()
+    })
+    .catch(err=>{
+      console.log("error at fetchRepoInfo",err)
+    })
   }
 
 
   updatePulls() {
-    const repoName = this.props.repo.name
-    const repoId = this.props.repo.githubID
-    console.log("repoId",repoId)
+    // const repoName = this.props.repo.name //OLD
+    const repoName = this.state.repo.name //NEW
+    const repoId = this.state.repo.githubID
       this.setState({
         pulls: null
       })
@@ -72,7 +98,7 @@ class PullsPage extends Component {
 
 
   getComments() {
-    api.getRepoComments(this.props.repo._id)
+    api.getRepoComments(this.state.repo._id)
       .then(comments => {
         this.setState({comments})
       })
@@ -122,7 +148,7 @@ class PullsPage extends Component {
     let data = {
       _user: this.props.user._github,
       _pull: clickedPull,
-      _repo: this.props.repo.githubID
+      _repo: this.state.repo.githubID
     }
     let [match] = allPulls.filter(pulls => {
       return pulls.pullRequestID === clickedPull
@@ -174,34 +200,40 @@ class PullsPage extends Component {
         return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase())
       }); 
     }   
+
+    if (!this.state.repo) {
+      return <h1>Loading....</h1>
+    } else {
+        return (
+          <div className="PullsPage">
+            <h1>{this.state.repo.name}</h1>
+            <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.state.user}/>
+            <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Search</InputGroupText>
+            </InputGroupAddon>
+            <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
+          </InputGroup>
+            <Table>
+              <tbody>  
+                {!this.state.pulls && <div>Loading...</div>}
+                  {filteredPulls && filteredPulls.map((pull, index) => {
+                    return <Pull
+                      key={index} 
+                      user={this.props.user}
+                      // likedByUser={likedByUser}
+                      pull={pull}
+                      click={(value)=> this.handleClick(value)}
+                      handleLike={()=>this.toggleLike(pull.pullRequestID)}
+                      />
+                  })}
+                </tbody>
+            </Table>
+          </div>
+        );
+    }
     
-    return (
-      <div className="PullsPage">
-        <h1>{this.props.repo.name}</h1>
-        <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.props.repo} user={this.props.user}/>
-        <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          <InputGroupText>Search</InputGroupText>
-        </InputGroupAddon>
-        <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
-      </InputGroup>
-        <Table>
-          <tbody>  
-            {!this.state.pulls && <div>Loading...</div>}
-              {filteredPulls && filteredPulls.map((pull, index) => {
-                return <Pull
-                  key={index} 
-                  user={this.props.user}
-                  // likedByUser={likedByUser}
-                  pull={pull}
-                  click={(value)=> this.handleClick(value)}
-                  handleLike={()=>this.toggleLike(pull.pullRequestID)}
-                  />
-              })}
-            </tbody>
-        </Table>
-      </div>
-    );
+   
   }
 }
 

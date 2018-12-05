@@ -56,6 +56,16 @@ class Home extends Component {
           {this.state.clickedPull &&  <PullDetail user={this.state.user} pull={this.state.clickedPull}/>} */}
 
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
+        
+        <Switch>
+
+          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
+
+
+
+        </Switch>
+
+      
 
         <div style={{width: '100%'}}>
 

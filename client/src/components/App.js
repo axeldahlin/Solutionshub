@@ -62,11 +62,19 @@ class App extends Component {
           <Button color="primary">primary</Button>{' '}
           <Button color="primary">primary</Button>{' '} */}
 
-          <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} />
-          <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} />
+          {/* <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
+
+          <Route path="/" render={props => <Home {...props} user={this.state.user}/>} />
+
+
+
+
+
+          {/* <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
+
+
+
           <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
-
-
           <Route path="/sign-in" component={SignIn}/>
 
           {/* <Route path="/" exact component={Home}  /> */}

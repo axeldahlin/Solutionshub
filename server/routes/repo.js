@@ -27,6 +27,13 @@ router.get('/', (req, res, next) => {
 
 
 
+router.get('/onerepo/:reponame',(req,res,next)=>{
+  Repo.find({name: req.params.reponame})
+    .then(repo=>{
+      res.json(repo)
+    })
+    .catch(next)
+});
 
 
 
