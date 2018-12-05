@@ -58,7 +58,7 @@ class Home extends Component {
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
         
         <Switch>
-
+          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
           <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
 
 

@@ -105,7 +105,7 @@ router.post('/inc-pull-votes/', (req, res, next) => {
 // //Get one pull request
 router.get('/pull-detail/:pullId', (req,res,next)=> {
   const id = req.params.pullId
-  PullRequest.findById(id)
+  PullRequest.findOne({pullRequestID: id})
   .then(pull => {
     res.json(pull)
   })

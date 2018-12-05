@@ -7,6 +7,7 @@ import api from '../api';
 import Navbar from './Navbar'
 import Home from './Home'
 import Profile from './Profile'
+import PullDetail from './PullDetail'
 import SignIn from './SignIn'
 
 
@@ -64,7 +65,10 @@ class App extends Component {
 
           {/* <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
 
-          <Route path="/" render={props => <Home {...props} user={this.state.user}/>} />
+          <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
+          <Route path="/sign-in" component={SignIn}/>
+          <Route path="/:repo/:pull" render={props => <PullDetail {...props} user={this.state.user}/>}/>    
+          <Route path="/"  render={props => <Home {...props} user={this.state.user}/>} />
 
 
 
@@ -74,8 +78,8 @@ class App extends Component {
 
 
 
-          <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
-          <Route path="/sign-in" component={SignIn}/>
+       
+        
 
           {/* <Route path="/" exact component={Home}  /> */}
 

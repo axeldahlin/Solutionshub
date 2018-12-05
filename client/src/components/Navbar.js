@@ -23,7 +23,7 @@ class MyNavbar extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto">reactstrap</NavbarBrand>
+          <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto">Solutions Hub</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
@@ -31,7 +31,7 @@ class MyNavbar extends React.Component {
                 <NavLink tag={ReactRouterDomNavLink} to="/components/">Components</NavLink>
               </NavItem> */}
               <NavItem>
-                <NavLink tag={ReactRouterDomNavLink} exact to="/home/">Home</NavLink>
+                <NavLink tag={ReactRouterDomNavLink} exact to="/">Home</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={ReactRouterDomNavLink} exact to="/user/">Profile</NavLink>

@@ -60,7 +60,7 @@ class PullsPage extends Component {
 
     api.getPulls(repoName,repoId)
       .then(pulls => {
-        this.setState({ pulls, repoName })
+        this.setState({ pulls })
         // this.checkVotes()
         return api.updatePulls(repoName)
       })
@@ -79,10 +79,11 @@ class PullsPage extends Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.repo !== prevProps.repo || this.props.pulls !== prevProps.pulls) {
+    if (this.props.match.params.repo !== prevProps.match.params.repo ) {
+      this.fetchRepoInfo()
       console.log('componentdidupdate')
-      this.updatePulls()
-      this.getComments()
+      // this.updatePulls()
+      // this.getComments()
     }
   }
 
@@ -207,7 +208,7 @@ class PullsPage extends Component {
         return (
           <div className="PullsPage">
             <h1>{this.state.repo.name}</h1>
-            <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.state.user}/>
+            <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
             <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Search</InputGroupText>
@@ -220,6 +221,7 @@ class PullsPage extends Component {
                   {filteredPulls && filteredPulls.map((pull, index) => {
                     return <Pull
                       key={index} 
+                      repo={this.state.repo}
                       user={this.props.user}
                       // likedByUser={likedByUser}
                       pull={pull}

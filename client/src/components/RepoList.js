@@ -21,7 +21,9 @@ class RepoList extends Component {
       componentDidMount() {
         // console.log("component did Mount")
         api.getRepos()
-          .then(repos => this.setState({repos: repos}))
+          .then(repos => {
+            this.setState({repos: repos})
+          })
       }
 
 

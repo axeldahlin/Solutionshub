@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 
 class Repo extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class Repo extends Component {
     return (
       <tr className="Repo">
             <td>{this.props.repo.name}</td>
-            <td><button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button></td>
+            {/* <td><button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button></td> */}
+            <td><Link to={"/" + this.props.repo.name} > See Pulls </Link> </td>
         {/* <p>{this.props.url}</p> */}
       </tr>
     )

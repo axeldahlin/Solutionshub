@@ -130,7 +130,7 @@ export default {
 
   getPull(id) {
     return service
-      .get('/repo/pull-detail/'+id)
+      .get('/pulls/pull-detail/'+id)
       .then(res => res.data)
       .catch(errHandler)
   },
