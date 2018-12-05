@@ -215,6 +215,13 @@ export default {
       })
   },
 
+  updateRepos() {
+    return service 
+      .get('/repo/repos')
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
 
   getPulls(repo,id) {
     console.log("METHOD:", '/repo/pulls/'+repo+'/'+id)

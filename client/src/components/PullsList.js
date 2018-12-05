@@ -171,34 +171,11 @@ class PullsPage extends Component {
     } 
   }
 
-  // toggleVote() {
-  //   let data = {
-  //     _user: this.props.user._github,
-  //     _pull: this.props.pull.pullRequestID,
-  //     _repo: this.props.pull._githubRepo
-  //   }
-  //   if (!this.state.likedByUser) {
-  //     console.log("castVote called",data)
-  //     api.castVote(data)
-  //   } else {
-  //     console.log("removeVote called",data)
-  //     api.removeVote(data)
-  //   }  
-  //   this.setState({
-  //     likedByUser: !this.state.likedByUser
-  //   })
-  // }
-
-
-
-
-
-
   render() {   
     let filteredPulls;
     if (this.state.pulls) {
       filteredPulls = this.state.pulls.filter(pull=>{
-        return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase())
+        return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase()) || pull._githubUsername.toUpperCase().includes(this.state.searchValue.toUpperCase())
       }); 
     }   
 
@@ -216,6 +193,14 @@ class PullsPage extends Component {
             <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
           </InputGroup>
             <Table>
+              <thead>
+                  <th scope="col">Campus</th>
+                  <th scope="col">Pull Request</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Likes</th>
+                  <th scope="col"></th>
+              </thead>
               <tbody>  
                 {!this.state.pulls && <div>Loading...</div>}
                   {filteredPulls && filteredPulls.map((pull, index) => {

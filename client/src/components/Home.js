@@ -59,24 +59,12 @@ class Home extends Component {
         
         <Switch>
           <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
-          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
 
 
 
         </Switch>
 
       
-
-        <div style={{width: '100%'}}>
-
-         {/* <Switch>
-
-          <Route path="/pullslist" exact render={props => <PullsList {...props} click={(pull)=> this.handleClickPull(pull)} user={ } repo={this.state.clickedRepo}/>}/>
-
-          <Route path="/pulldetails" exact render={props => <PullDetail {...props} pull={this.state.clickedPull}/>}/>
-
-      
-        </Switch> */}
 
 
          {this.state.clickedRepo && <PullsList 
@@ -89,7 +77,6 @@ class Home extends Component {
          pull={this.state.clickedPull}
          />}
 
-        </div>
       </div>
     );
   }
