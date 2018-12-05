@@ -30,7 +30,7 @@ class Pull extends Component {
     if (title.match(/ber/gmi)) return 'ber'
     if (title.match(/bcn/gmi)) return 'esp'
     if (title.match(/par/gmi)) return 'fra'  
-    if (title.match(/mia/gmi)) return 'mia'  
+    if (title.match(/mia/gmi)) return 'usa'  
     if (title.match(/mad/gmi)) return 'esp'  
     return ''
   }

@@ -35,20 +35,19 @@ class PullsPage extends Component {
     api.getPulls(repoName,repoId)
       .then(pulls => {
         this.setState({ pulls, repoName })
-        this.checkVotes()
+        // this.checkVotes()
         return api.updatePulls(repoName)
       })
-      .then(res => {
-        return api.getPulls(repoName,repoId)
-      })
-      .then(pulls => {
-        this.setState({ pulls })
-        return 
-      })
-      .then(_ => {
-        console.log("check votes called in updatePulls()")
-        this.checkVotes()
-      })
+      // .then(res => {
+      //   return api.getPulls(repoName,repoId)
+      // })
+      // .then(pulls => {
+      //   this.setState({ pulls })
+      // })
+      // .then(_ => {
+      //   console.log("check votes called in updatePulls()")
+      //   this.checkVotes()
+      // })
       .catch(err => console.log(err))
   }
 
@@ -79,29 +78,29 @@ class PullsPage extends Component {
       })
   }
 
-  checkVotes() {
-    console.log("check votes method called in PullsList")
-    let data = {
-      // pulls: this.state.pulls,
-      _user: this.props.user._github,
-      _repo: this.props.repo.githubID
-    }
-    api.checkVotes(data)
-    .then(votes => {
-      let pulls = [...this.state.pulls]
-      let pullIds = votes.map(vote => vote._pull)
-      let newPullsState = pulls.map(pull => {
-        if (pullIds.includes(pull.pullRequestID)) pull.likedByUser = true
-        return pull
-      })
-      this.setState({
-        pulls: newPullsState
-      })
-    })
-    .catch(err=> {
-      console.log("Error at checkVotes PullList",err)
-    })
-  }
+  // checkVotes() {
+  //   console.log("check votes method called in PullsList")
+  //   let data = {
+  //     // pulls: this.state.pulls,
+  //     _user: this.props.user._github,
+  //     _repo: this.props.repo.githubID
+  //   }
+  //   api.checkVotes(data)
+  //   .then(votes => {
+  //     let pulls = [...this.state.pulls]
+  //     let pullIds = votes.map(vote => vote._pull)
+  //     let newPullsState = pulls.map(pull => {
+  //       if (pullIds.includes(pull.pullRequestID)) pull.likedByUser = true
+  //       return pull
+  //     })
+  //     this.setState({
+  //       pulls: newPullsState
+  //     })
+  //   })
+  //   .catch(err=> {
+  //     console.log("Error at checkVotes PullList",err)
+  //   })
+  // }
 
 
   // componentDidMount() {
