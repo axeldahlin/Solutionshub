@@ -55,33 +55,30 @@ class CommentsContainer extends Component {
 
   render() {          
     return (
-      <div className="CommentsContainer">
-        <h1>Comments</h1>
+      <div className="Comments-container" id="textarea_id">
 
-        {/* <pre>{JSON.stringify(this.props.user)}</pre> */}
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label>
-            Comment:
-            <input type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+  
         
         {this.props.comments && this.props.comments.map((comment, index) => {
           return (
-            <div class="Comment"key={index}>
-              <div className="Comment-header">
-                <img src={comment.imgUrl} alt=""/>
-                <div>
-                  <p className="Comment-name">{comment.githubName}</p>
-                  <p className="Comment-date">{comment.date}</p>
+                <div className="comment" key={index}>
+                  
+                    <div className="comment-header">
+                     <img src={comment.imgUrl} alt="user"/>
+                      <p className="comment-name">{comment.githubName}</p>
+                      <p className="comment-date">{comment.date}</p>
+
+                    </div>
+                    {/* {this.props.user._id === comment._user && <button onClick={() => this.handleDeleteComment(comment._id)}>Delete</button>} */}
+                
+                    <p className="comment-text">{comment.comment}</p>
                 </div>
-              </div>
-              <p>{comment.comment}</p>
-              {this.props.user._id === comment._user && <button onClick={() => this.handleDeleteComment(comment._id)}>Delete</button>}
-            </div>
           )
         })}
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+            <input placeholder="Your cool solution..." className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
+        </form>
+        
       </div>
     );
   }

@@ -60,7 +60,7 @@ class PullsPage extends Component {
 
     api.getPulls(repoName,repoId)
       .then(pulls => {
-        this.setState({ pulls, repoName })
+        this.setState({ pulls })
         // this.checkVotes()
         return api.updatePulls(repoName)
       })
@@ -79,10 +79,11 @@ class PullsPage extends Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.match.params !== prevProps.match.params) {
-      console.log('componentdidupdate')
+    if (this.props.match.params.repo !== prevProps.match.params.repo ) {
       this.fetchRepoInfo()
-  
+      console.log('componentdidupdate')
+      // this.updatePulls()
+      // this.getComments()
     }
 
  
@@ -209,14 +210,15 @@ class PullsPage extends Component {
         return (
           <div className="PullsPage">
             <h1>{this.state.repo.name}</h1>
-            
             <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
+          <div className="pull-table">
             <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Search</InputGroupText>
             </InputGroupAddon>
             <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
           </InputGroup>
+
             <Table>
               <tbody>  
                 {!this.state.pulls && <div>Loading...</div>}
@@ -224,6 +226,7 @@ class PullsPage extends Component {
                     return <Pull
                       repo={this.state.repo}
                       key={index} 
+                      repo={this.state.repo}
                       user={this.props.user}
                       // likedByUser={likedByUser}
                       pull={pull}
@@ -233,6 +236,8 @@ class PullsPage extends Component {
                   })}
                 </tbody>
             </Table>
+
+          </div>
           </div>
         );
     }

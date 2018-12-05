@@ -23,7 +23,6 @@ class RepoList extends Component {
         api.getRepos()
           .then(repos => {
             this.setState({repos: repos})
-
           })
       }
 
