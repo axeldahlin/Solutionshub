@@ -85,6 +85,8 @@ class PullsPage extends Component {
       // this.updatePulls()
       // this.getComments()
     }
+
+ 
   }
 
   handleClick = (value) => {
@@ -186,12 +188,14 @@ class PullsPage extends Component {
           <div className="PullsPage">
             <h1>{this.state.repo.name}</h1>
             <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
+          <div className="pull-table">
             <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Search</InputGroupText>
             </InputGroupAddon>
             <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
           </InputGroup>
+
             <Table>
               <thead>
                   <th scope="col">Campus</th>
@@ -205,6 +209,7 @@ class PullsPage extends Component {
                 {!this.state.pulls && <div>Loading...</div>}
                   {filteredPulls && filteredPulls.map((pull, index) => {
                     return <Pull
+                      repo={this.state.repo}
                       key={index} 
                       repo={this.state.repo}
                       user={this.props.user}
@@ -216,6 +221,8 @@ class PullsPage extends Component {
                   })}
                 </tbody>
             </Table>
+
+          </div>
           </div>
         );
     }

@@ -15,6 +15,7 @@ import SignIn from './SignIn'
 
 
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -85,7 +86,6 @@ class App extends Component {
 
 
           
-          <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>
     );

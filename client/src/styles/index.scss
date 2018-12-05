@@ -3,6 +3,11 @@
 $primary: #2c3336;
 
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 // ----------------------------------------
 // To install Boostrap:
 // 1) Run in the client folder: $ npm i bootstrap
@@ -119,6 +124,7 @@ body {
   // color: white;
   // height: 100px;
     width: 100%;
+    background: white;
   // margin: 20px auto;
   // border-radius: 15px;
 
@@ -128,64 +134,132 @@ body {
   width: 500px;
   height: calc(100vh - 56px);
   overflow-y: scroll;
+  // background: #8ee4af;
 
+}
+
+.pull-table {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
 
 .PullsPage {
   height: calc(100vh - 56px);
   width: 150%;
-
+  background: #5cdb95;
   overflow-y: scroll;
 
 }
 
 
+// ******************** Comment Container
 
+input:focus {
+  outline:none;
+}
 
-.CommentsContainer {
-  width: 100%;
-  height: 400px;
-  border: solid black 2px;
-  overflow-y: scroll;
+.comment-input {
+  width: 95%;
+  border-radius: 10px;
+  border: solid #5cdb95 2px;
+  padding: 0 10px 0 10px;
 }
 
 
-.Comment {
-  border: solid black 3px;
+.Comments-container {
+  width: 60%;
+  margin: 0 auto;
+  background: white;
+  height: 300px;
+  overflow-y: scroll;
+
+  border-radius: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+
+
+}
+
+.comment {
+
+
+}
+
+.comment img{
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+.comment-name {
+  font-size: 10px !important;
+  margin-left: 5px;
+}
+.comment-date {
+  font-size: 10px !important;
+  margin-left: 10px;
+  
+}
+
+.comment-header {
+  display: flex;
+}
+
+.comment-text {
   text-align: left;
-
+  font-size: 14px !important;
 }
 
-.Comment-header {
-  display: flex;
-  height: 50px;
-  background-color: rgba(100, 0, 0, .3)
 
-}
 
-.Comment-header div{
-  display: flex;
+
+// .CommentsContainer {
+//   width: 100%;
+//   height: 400px;
+//   overflow-y: scroll;
+// }
+
+
+// .Comment {
+//   text-align: left;
+
+// }
+
+// .Comment-header {
+//   padding-left: 10px;
+//   display: flex;
+//   height: 50px;
+//   background-color: rgba(100, 0, 0, .3);
+//   align-items: center;
+
+// }
+
+// .Comment-header div{
+//   display: flex;
  
 
-}
+// }
 
-.Comment-header img{
-  width: 30px;
-  border-radius: 50%;
+// .Comment-header img{
+//   width: 30px;
+//   border-radius: 50%;
+//   object-fit: cover;
+//   height: 30px;
 
-}
+// }
 
-.Comment-name {
-  margin: 5px;
-  font-size: 10px !important;
-}
+// .Comment-name {
+//   margin: 5px;
+//   font-size: 10px !important;
+// }
 
-.Comment-date {
-  margin: 5px;
-  font-size: 10px !important;
+// .Comment-date {
+//   margin: 5px;
+//   font-size: 10px !important;
 
-}
+// }
 
 .signed-out-container {
   width: 80%;
@@ -227,4 +301,9 @@ body {
   background: darkgrey;
   width: 300px;
   height: 200px;
+}
+
+
+.table {
+  background:white;
 }
