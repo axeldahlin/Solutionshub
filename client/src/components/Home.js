@@ -64,15 +64,7 @@ class Home extends Component {
 
 
         </Switch>
-         {this.state.clickedRepo && <PullsList 
-          click={(pull)=> this.handleClickPull(pull)} 
-          user={this.props.user} 
-          repo={this.state.clickedRepo}
-          />}
-
-         {this.state.clickedPull &&  <PullDetail 
-         pull={this.state.clickedPull}
-         />}
+      
 
    
       </div>
