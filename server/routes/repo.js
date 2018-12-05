@@ -51,10 +51,19 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
   .then(results => {
     let [pulls,votes] = results
     let pullsWithVotes = pulls.map(pull=>{
-      let likedByUser = votes.filter(vote=>vote._user === req.user._github && vote._pull === pull.pullRequestID).length === 1; 
+      let likedByUser = votes.filter(vote=>{
+        // console.log(pull.title)
+        // console.log("vote._user", vote._user)
+        // console.log("req.user._github",req.user._github)
+        // console.log(Number(vote._user) === Number(req.user._github))
+        // console.log("...")
+        return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
+      }).length === 1; 
+      // console.log("likedByUser", likedByUser)
       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
       pull.nbOfVotes = nbOfVotes
-      pull.likedByuser = likedByUser
+      pull.likedByUser = likedByUser
+      console.log(pull.likedByUser)
       return pull
     })
     res.json(pullsWithVotes)

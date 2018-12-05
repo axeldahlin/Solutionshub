@@ -38,12 +38,8 @@ class Pull extends Component {
   render() {
     let buttonText = "Like"
     if (this.props.pull.likedByUser) buttonText = "Unlike"
-
     let flagPNG = this.getFlagPNG()
-
-  
     return (
-    
       <tr className="Pull">
         <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
         <td>{this.props.pull.title}</td>
