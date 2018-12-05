@@ -208,13 +208,11 @@ export default {
       })
   },
 
-  getPulls(repo) {
+  getPulls(repo,id) {
+    console.log("METHOD:", '/repo/pulls/'+repo+'/'+id)
     return service
-      .get('/repo/pulls/'+repo)
-      .then(res => {
-        return res.data
-      
-      })
+      .get('/repo/pulls/'+repo+'/'+id)
+      .then(res =>res.data)
       .catch(errHandler)
   },
 

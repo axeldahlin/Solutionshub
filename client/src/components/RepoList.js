@@ -35,7 +35,6 @@ class RepoList extends Component {
   render() {
     let filteredRepos;
     if (this.state.repos) {
-      console.log(this.state.repos.length)
       filteredRepos = this.state.repos.filter(repo=>{
         return repo.name.toUpperCase().includes(this.state.searchValue.toUpperCase())
       }); 

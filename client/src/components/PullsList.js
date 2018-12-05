@@ -26,18 +26,20 @@ class PullsPage extends Component {
 
   updatePulls() {
     const repoName = this.props.repo.name
+    const repoId = this.props.repo.githubID
+    console.log("repoId",repoId)
       this.setState({
         pulls: null
       })
 
-    api.getPulls(repoName)
+    api.getPulls(repoName,repoId)
       .then(pulls => {
         this.setState({ pulls, repoName })
         this.checkVotes()
         return api.updatePulls(repoName)
       })
       .then(res => {
-        return api.getPulls(repoName)
+        return api.getPulls(repoName,repoId)
       })
       .then(pulls => {
         this.setState({ pulls })
@@ -126,18 +128,16 @@ class PullsPage extends Component {
     let [match] = allPulls.filter(pulls => {
       return pulls.pullRequestID === clickedPull
     })
-
-
-    console.log('DEBUG clickedPull:', clickedPull)
-
     if (!match.likedByUser) {
       match.likedByUser = true
+      match.nbOfVotes++;
       api.castVote(data)
       .then(this.setState({
         pulls: allPulls
       }))
     } else {
       match.likedByUser = false
+      match.nbOfVotes--;
       api.removeVote(data)
       .then(this.setState({
         pulls: allPulls
