@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import api from '../api';
 
+import { Link } from 'react';
+
+
 
 
 class Pull extends Component {
@@ -46,7 +49,7 @@ class Pull extends Component {
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td>{this.props.pull.nbOfVotes}</td>
         <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
-        <td><button onClick={() => this.handleClick()}>Details</button></td>
+        <td><Link to={`/${this.props.repo.name}/${this.props.pull.pullRequestID}`}>PULL DETAIL</Link></td>
       </tr>
     )
   }

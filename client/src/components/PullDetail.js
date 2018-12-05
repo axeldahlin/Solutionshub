@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../api';
 
 
 
@@ -7,8 +8,17 @@ class PullDetail extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      pull: null
   
     }
+  }
+
+  componentDidMount() {
+    // api.getPull(this.props.match.params.pull)
+    //   .then(pull=> {
+    //     this.setState({pull})
+
+    //   })
   }
 
 
@@ -16,15 +26,7 @@ class PullDetail extends Component {
 
   render() {
     console.log("this.props.user PULL DETAIL",this.props.user)
-    return (
-      <div className="PullDetail" >
-        <h1>Pull detail</h1>
-        <p>{this.props.pull._id}</p>
-        <p>{this.props.pull.repoName}</p>
-        <p>{this.props.pull.title}</p>
-      </div>
-    )
-
+    return <h1>hh</h1>
   }
 }
 
