@@ -13,26 +13,21 @@ class Home extends Component {
       clickedPull: null
     }
   }
+
   handleClickRepo = (repo) => {
+    console.log('DEBUG repo pull:', repo)
     this.setState({clickedRepo: repo})
   }
 
 
-
   handleClickPull = (id) => {
-    // console.log('DEBUG id:', id)
+    console.log('DEBUG id pull:', id)
     api.getPull(id)
       .then(pull => {
-
-        console.log(pull)
-
-   
         this.setState({
           clickedPull: pull,
           clickedRepo: null
-
         })
-        console.log(pull)
       })
   }
 
@@ -64,7 +59,7 @@ class Home extends Component {
 
         <div style={{width: '100%'}}>
 
-        {/* <Switch>
+         {/* <Switch>
 
           <Route path="/pullslist" exact render={props => <PullsList {...props} click={(pull)=> this.handleClickPull(pull)} user={ } repo={this.state.clickedRepo}/>}/>
 
@@ -74,9 +69,15 @@ class Home extends Component {
         </Switch> */}
 
 
-         {this.state.clickedRepo && <PullsList click={(pull)=> this.handleClickPull(pull)} user={this.props.user} repo={this.state.clickedRepo}/>}
+         {this.state.clickedRepo && <PullsList 
+          click={(pull)=> this.handleClickPull(pull)} 
+          user={this.props.user} 
+          repo={this.state.clickedRepo}
+          />}
 
-          {this.state.clickedPull &&  <PullDetail pull={this.state.clickedPull}/>}
+         {this.state.clickedPull &&  <PullDetail 
+         pull={this.state.clickedPull}
+         />}
 
         </div>
       </div>

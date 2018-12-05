@@ -1,6 +1,7 @@
 const express = require('express');
 const Repo = require('../models/Repo')
 const PullRequest = require('../models/PullRequest')
+const Vote = require('../models/Votes')
 const axios = require('axios');
 const RepoComment = require('../models/RepoComment')
 
@@ -33,10 +34,30 @@ router.get('/', (req, res, next) => {
 
 //Fetches all pull requests for given repo and returns JSON
 // :repo is Github Repo name
-router.get('/pulls/:repo', (req,res,next)=> {
-  PullRequest.find({repoName: req.params.repo})
-  .then(pulls => {
-    res.json(pulls)
+router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
+  let pullsPromise = PullRequest.find({repoName: req.params.repo})
+  let votesPromise = Vote.find({_repo: req.params.repo_id})
+  console.log("req.user._github",req.user._github)
+  Promise.all([pullsPromise,votesPromise])
+  .then(results => {
+    let [pulls,votes] = results
+    let pullsWithVotes = pulls.map(pull=>{
+      let likedByUser = votes.filter(vote=>{
+        // console.log(pull.title)
+        // console.log("vote._user", vote._user)
+        // console.log("req.user._github",req.user._github)
+        // console.log(Number(vote._user) === Number(req.user._github))
+        // console.log("...")
+        return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
+      }).length === 1; 
+      // console.log("likedByUser", likedByUser)
+      let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
+      pull.nbOfVotes = nbOfVotes
+      pull.likedByUser = likedByUser
+      console.log(pull.likedByUser)
+      return pull
+    })
+    res.json(pullsWithVotes)
   })
   .catch(next)
 })
@@ -116,14 +137,7 @@ router.get('/repo-comment/:id', (req,res,next)=> {
 
 
 // Delete one repoComment
-router.delete('/repo-comment/:id', (req,res,next)=> {
-
-
-
-
-
-
-  
+router.delete('/repo-comment/:id', (req,res,next)=> {  
   RepoComment.findByIdAndRemove(req.params.id)
   .then(repoComment => {
     res.json({message: 'repoMessage deleted'})

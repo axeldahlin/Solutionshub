@@ -26,27 +26,28 @@ class PullsPage extends Component {
 
   updatePulls() {
     const repoName = this.props.repo.name
+    const repoId = this.props.repo.githubID
+    console.log("repoId",repoId)
       this.setState({
         pulls: null
       })
 
-    api.getPulls(repoName)
+    api.getPulls(repoName,repoId)
       .then(pulls => {
         this.setState({ pulls, repoName })
-        this.checkVotes()
+        // this.checkVotes()
         return api.updatePulls(repoName)
       })
-      .then(res => {
-        return api.getPulls(repoName)
-      })
-      .then(pulls => {
-        this.setState({ pulls })
-        return 
-      })
-      .then(_ => {
-        console.log("check votes called in updatePulls()")
-        this.checkVotes()
-      })
+      // .then(res => {
+      //   return api.getPulls(repoName,repoId)
+      // })
+      // .then(pulls => {
+      //   this.setState({ pulls })
+      // })
+      // .then(_ => {
+      //   console.log("check votes called in updatePulls()")
+      //   this.checkVotes()
+      // })
       .catch(err => console.log(err))
   }
 
@@ -77,29 +78,29 @@ class PullsPage extends Component {
       })
   }
 
-  checkVotes() {
-    console.log("check votes method called in PullsList")
-    let data = {
-      // pulls: this.state.pulls,
-      _user: this.props.user._github,
-      _repo: this.props.repo.githubID
-    }
-    api.checkVotes(data)
-    .then(votes => {
-      let pulls = [...this.state.pulls]
-      let pullIds = votes.map(vote => vote._pull)
-      let newPullsState = pulls.map(pull => {
-        if (pullIds.includes(pull.pullRequestID)) pull.likedByUser = true
-        return pull
-      })
-      this.setState({
-        pulls: newPullsState
-      })
-    })
-    .catch(err=> {
-      console.log("Error at checkVotes PullList",err)
-    })
-  }
+  // checkVotes() {
+  //   console.log("check votes method called in PullsList")
+  //   let data = {
+  //     // pulls: this.state.pulls,
+  //     _user: this.props.user._github,
+  //     _repo: this.props.repo.githubID
+  //   }
+  //   api.checkVotes(data)
+  //   .then(votes => {
+  //     let pulls = [...this.state.pulls]
+  //     let pullIds = votes.map(vote => vote._pull)
+  //     let newPullsState = pulls.map(pull => {
+  //       if (pullIds.includes(pull.pullRequestID)) pull.likedByUser = true
+  //       return pull
+  //     })
+  //     this.setState({
+  //       pulls: newPullsState
+  //     })
+  //   })
+  //   .catch(err=> {
+  //     console.log("Error at checkVotes PullList",err)
+  //   })
+  // }
 
 
   // componentDidMount() {
@@ -126,18 +127,16 @@ class PullsPage extends Component {
     let [match] = allPulls.filter(pulls => {
       return pulls.pullRequestID === clickedPull
     })
-
-
-    console.log('DEBUG clickedPull:', clickedPull)
-
     if (!match.likedByUser) {
       match.likedByUser = true
+      match.nbOfVotes++;
       api.castVote(data)
       .then(this.setState({
         pulls: allPulls
       }))
     } else {
       match.likedByUser = false
+      match.nbOfVotes--;
       api.removeVote(data)
       .then(this.setState({
         pulls: allPulls
