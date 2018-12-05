@@ -38,11 +38,15 @@ class Profile extends Component {
     return (
       <div className="Profile">
       <br></br>
+      {this.state.userPulls &&
+      <div>
       <h2>Hello, {this.props.user.githubName}</h2>
       <h3>@{this.props.user.githubUsername}</h3>
-      <div>Likes: {this.state.totalLikes} <img src='lightbulb.png'></img></div>
-      <img src="logo.png" alt="logo" className="logo"/>
+      <div>Likes: {this.state.totalLikes}</div>
       <img src={this.props.user.githubImageUrl} alt="profile_picture"></img>
+      </div>
+      }
+     
 
       <br></br>
 
