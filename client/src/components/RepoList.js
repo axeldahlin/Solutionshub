@@ -49,12 +49,14 @@ class RepoList extends Component {
     }  
     return (
       <div className="RepoList">
-     <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          <InputGroupText>Search</InputGroupText>
-        </InputGroupAddon>
-        <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
-      </InputGroup>
+      <InputGroup className="pull-input">
+            
+            <Input style={{boxShadow: 'none'}} 
+            className="search-input"
+            name="searchValue" onChange={e => this.handleChange(e)}
+             value={this.state.searchValue} />
+            <img className="input-img"src="zoom-tool.png" alt="search"/>
+          </InputGroup>
 
 
          <Table>
