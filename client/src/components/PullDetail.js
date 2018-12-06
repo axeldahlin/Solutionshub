@@ -56,9 +56,11 @@ class PullDetail extends Component {
             <div className="detail-body">
 
               <div className="terminal">
-                <div className="bar-terminal"></div>
+                <div className="bar-terminal">
+                  <span>ironhackstudent@coolcoder</span>
+                </div>
                 <div className="text-terminal">
-                    <p>git clone {this.state.repo.url}</p>
+                    <p><span className="detail-arrow">&rarr;</span> <span className="detail-folder">ironhack-lab-folder</span> git clone {this.state.repo.url}</p>
                     <p>cd {this.state.pull.repoName}</p>
                     <p>git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
                     <p>git checkout pr/{this.state.pull.number}</p>
