@@ -43,6 +43,7 @@ class LoginPage extends Component {
       <button onClick={()=>api.newLogout()}>Logout</button>
       {/* <Link to='/auth/github'>Link to GitHub login</Link> */}
       <a href="https://github.com/login/oauth/authorize?client_id=ef51dc0616f91cc5207e">Link to GitHub login</a>
+      <a href="https://solutionshub.herokuapp.com/api/auth/github/callback">Link to GitHub login</a>
       </div>
     )
   }
