@@ -42,7 +42,7 @@ class Pull extends Component {
   getDate(date) {
     let formatedDate = new Date(date)
     let day = formatedDate.getDate();
-    let month = formatedDate.getMonth();
+    let month = formatedDate.getMonth() + 1;
     let year = formatedDate.getFullYear();
     if (month < 10) month = '0' + month
     if (day < 10) day = '0' + day
