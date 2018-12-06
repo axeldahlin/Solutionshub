@@ -36,21 +36,6 @@ class PullDetail extends Component {
       })
   }
 
-  handleCopy() {
-    var textField = document.createElement('textarea')
-    textField.innerText = 
-      "git clone " + this.state.repo.url + "\
-      cd"
-      //  cd ${this.state.pull.repoName}\n
-      //  git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'\n
-      //  git checkout pr/${this.state.pull.number}
-      //  `
-    document.body.appendChild(textField)
-    textField.select()
-    document.execCommand('copy')
-    textField.remove()
-    console.log("successful copy")
-  }
 
 
   render() {
@@ -68,7 +53,6 @@ class PullDetail extends Component {
             </div>
 
             <div className="detail-body">
-              <button onClick={()=>this.handleCopy()}>Copy to Clipboard</button>
               <div className="terminal">
                 <div className="bar-terminal"></div>
                 <div className="text-terminal">
