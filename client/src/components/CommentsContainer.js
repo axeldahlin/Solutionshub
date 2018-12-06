@@ -62,16 +62,14 @@ class CommentsContainer extends Component {
 
 
         <div className="comments-container">
-
+        <h5>Comments</h5>
           {this.props.comments && this.props.comments.map((comment, index) => {
             return (
-                  <div className="comment" key={index}>
-                    
+                  <div className="comment" key={index}>  
                       <div className="comment-header">
                       <img src={comment.imgUrl} alt="user"/>
                         <p className="comment-name">{comment.githubName}</p>
                         <p className="comment-date">{comment.date}</p>
-
                       </div>
                       {/* {this.props.user._id === comment._user && <button onClick={() => this.handleDeleteComment(comment._id)}>Delete</button>} */}
                   
@@ -85,7 +83,7 @@ class CommentsContainer extends Component {
   
         
         <form className="comment-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <input placeholder="Your cool solution..." className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
+            <input placeholder="Leave a comment... [ENTER]" className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
         </form>
         
       </div>
