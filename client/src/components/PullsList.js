@@ -250,7 +250,7 @@ class PullsPage extends Component {
                   : (<span class="material-icons"> ⬇</span>)
                   ) : null}
                   </div></th>
-                  <th scope="col"></th>
+                  <th scope="col"> Liked</th>
               </thead>
               <tbody>  
                 {!this.state.pulls && <div>Loading...</div>}

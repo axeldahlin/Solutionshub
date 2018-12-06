@@ -40,7 +40,12 @@ class Pull extends Component {
 
   render() {
     let buttonText = "Like"
-    if (this.props.pull.likedByUser) buttonText = "Unlike"
+    let buttonImage = "light_off.svg"
+    if (this.props.pull.likedByUser) {
+      buttonText = "Unlike"
+      buttonImage = "light_on.svg"
+    }
+
     let flagPNG = this.getFlagPNG()
     return (
       <tr className="Pull">
@@ -49,8 +54,8 @@ class Pull extends Component {
         <td>{this.props.pull._githubUsername}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td>{this.props.pull.nbOfVotes}</td>
-        <td><button onClick={()=> this.props.handleLike()}>{buttonText}</button></td>
-        <Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>Pull Details</Link>
+        <td><img onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
+        {/* <Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>Pull Details</Link> */}
         {/* <td><button onClick={() => this.handleClick()}>Details</button></td> */}
       </tr>
     )
