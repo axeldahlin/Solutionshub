@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api';
-import Script from 'react-load-script'
-import {Helmet} from 'react-helmet'
+
 
 
 
@@ -31,65 +30,44 @@ class PullDetail extends Component {
 
 
   render() {
-
-   
-
-    
-
     if(this.state.pull) {
       return (
         <div id="test" className="PullDetail" >
+          <div className="detail-container">
+            <div className="detail-header">
+            <img className="detail-img" src="../idea.png" alt="hey"/>
+            <div className="title-container">
+              <p className="detail-title">{this.state.pull.title}</p>
+              <p>{this.state.pull.repoName}</p>
+            </div>
+            </div>
 
-          <iframe 
-            src="https://gist.github.com/axeldahlin/54d8327ae49456398bc8f512cd6534e6.js"
+            <div className="detail-body">
+
+              <div className="terminal">
+                <div className="bar-terminal"></div>
+                <div className="text-terminal">
+                    <p>$ git clone &lt;the repo link&gt;</p>
+                    <p>$ cd &lt;the project&gt;</p>
+                    <p>$ git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
+                    <p>$ git checkout pr/999</p>
+                </div>
+              </div>
+              <div className="detail-details">
+                <p>Likes: {this.state.pull.nbOfVotes}</p>
+                <a className="detail-link" target="_blank" href={this.state.pull.url}>See on Github <i class="far fa-angle-right"></i></a>
+
+              </div>
+
+            </div>
+
+            <h2>Play with the code!</h2>
+            <p>Write the commands above in your terminal to clone this solution to your own computer.</p>
           
-          />
 
-            {/* {this.state.script} */}
-           <h1>Pull detail</h1>
-           <p>{this.state.pull._id}</p>
-           <p>{this.state.pull.repoName}</p>
-           <p>{this.state.pull.title}</p>
+                    {/* <pre>{JSON.stringify(this.state.pull)}</pre> */}
 
-
-           <div className="terminal">
-             <div className="bar-terminal">
-
-             </div>
-
-             <div className="text-terminal">
-                <p>
-                $ git clone &lt;the repo link&gt;
-
-                </p>
-                <p>
-                  $ cd &lt;the project&gt;
-
-                </p>
-                <p>
-                  $ git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'
-
-                </p>
-                <p>
-                  $ git checkout pr/999
-
-                </p>
-
-             </div>
-
-
-           </div>
-
-            
-  <p>
-
-        <pre>{JSON.stringify(this.state.pull)}</pre>
-
-  </p>
-
-         
-        <h1>This is the pull details page</h1>
-        <h2><a href={this.state.pull.url}>Find this solution on Github</a></h2>
+          </div>
         </div>
       )
     } else {
