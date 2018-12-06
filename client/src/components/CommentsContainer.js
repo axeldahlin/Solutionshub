@@ -56,9 +56,6 @@ class CommentsContainer extends Component {
   render() {          
     return (
       <div className="comments-modal" id="textarea_id">
-
-
-
         <div className="comments-container">
         <h5>Comments</h5>
           {this.props.comments && this.props.comments.map((comment, index) => {
@@ -68,14 +65,14 @@ class CommentsContainer extends Component {
                       <img src={comment.imgUrl} alt="user"/>
                         <p className="comment-name">{comment.githubName}</p>
                         <p className="comment-date">{comment.date}</p>
+                        {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
                       </div>
-                      {/* {this.props.user._id === comment._user && <button onClick={() => this.handleDeleteComment(comment._id)}>Delete</button>} */}
+                      
                   
                       <p className="comment-text">{comment.comment}</p>
                   </div>
             )
           })}
-
         </div>
 
   
