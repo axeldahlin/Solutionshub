@@ -100,10 +100,15 @@ body {
   width: auto; }
 
 .maintext {
-  grid-column-start: 2;
-  grid-column-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 1; }
+  grid-row-end: 1;
+  display: flex;
+  justify-content: center; }
+
+.intro-text {
+  width: 50%; }
 
 .Pull {
   width: 100%;
@@ -221,6 +226,9 @@ input:focus {
 .main-text {
   width: 50%; }
 
+.comment {
+  margin-bottom: 10px; }
+
 .comments-container {
   overflow-y: scroll;
   width: 350px;
@@ -235,6 +243,11 @@ input:focus {
 .search-input {
   border: none !important;
   box-shadow: 'none'; }
+
+.delete-comment {
+  font-size: 10px !important;
+  margin-left: 50px;
+  cursor: pointer; }
 
 .comments-container h5 {
   text-align: left; }

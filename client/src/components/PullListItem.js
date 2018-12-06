@@ -22,12 +22,13 @@ class Pull extends Component {
 
   getFlagPNG = () => {
     let title = this.props.pull.title
-    if (title.match(/BER/gm) || title.match(/berlin/gmi)) return 'ber' 
+   
     if (title.match(/BCN/gm) || title.match(/barcelona/gmi)) return 'esp'  
     if (title.match(/MIA/gm) || title.match(/miami/gmi)) return 'usa'  
     if (title.match(/AMS/gm) || title.match(/amsterdam/gmi)) return 'ams'  
     if (title.match(/MAD/gm) || title.match(/madrid/gmi)) return 'esp'  
     if (title.match(/PAR/gm) || title.match(/paris/gmi)) return 'fra'  
+     if (title.match(/BER/gm) || title.match(/berlin/gmi)) return 'ber' 
     if (title.match(/MEX/gm) || title.match(/MX/gm) || title.match(/mexico/gmi)) return 'mex' 
     // If nothing matches so far here is the second round
     if (title.match(/ber/gmi)) return 'ber'
@@ -42,7 +43,6 @@ class Pull extends Component {
     let formatedDate = new Date(date)
     let day = formatedDate.getDate();
     let month = formatedDate.getMonth();
-    
     let year = formatedDate.getFullYear();
     if (month < 10) month = '0' + month
     if (day < 10) day = '0' + day
@@ -51,18 +51,14 @@ class Pull extends Component {
   }
 
   render() {
-    let buttonImage = "light_off.svg"
-    if (this.props.pull.likedByUser) buttonImage = "light_on.svg"
-    let flagPNG = this.getFlagPNG()
+    let buttonImage = this.props.pull.likedByUser ? "light_on.svg" : "light_off.svg"
     return (
       <tr className="Pull">
-        <td className="pull-table-cell">{flagPNG && <img src={`flags/${flagPNG}.png`} width="40" height="30" alt="flag"></img>}</td>
+        <td className="pull-table-cell">{this.getFlagPNG() && <img src={`flags/${this.getFlagPNG()}.png`} width="40" height="30" alt="flag"></img>}</td>
         <td className="table-title pull-table-cell"><Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
         <td className="table-name pull-table-cell">{this.props.pull._githubUsername}</td>
         <td className="pull-table-cell">{this.getDate(this.props.pull.updated_at)}</td>
         <td className="pull-table-cell table-img">{this.props.pull.nbOfVotes} <img className="table-bulb" onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
-        
-        {/* <td><button onClick={() => this.handleClick()}>Details</button></td> */}
       </tr>
     )
   }

@@ -3,7 +3,6 @@ import api from '../api';
 
 
 
-
 class PullDetail extends Component {
   constructor(props) {
     super(props)

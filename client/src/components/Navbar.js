@@ -23,12 +23,12 @@ class MyNavbar extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto">Solutions Hub</NavbarBrand>
+          <NavbarBrand tag={ReactRouterDomNavLink} to="/" className="mr-auto"><img height="60px" src="BrainBulb.png"></img>Solutions Hub</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
+            <Nav className="navbar-nav ml-auto" >
               <NavItem>
-                <NavLink tag={ReactRouterDomNavLink} exact to="/">Home</NavLink>
+                <NavLink tag={ReactRouterDomNavLink} exact to="/">Ironhack Repos</NavLink>
               </NavItem>
               {api.isLoggedIn() && 
               <NavItem>
