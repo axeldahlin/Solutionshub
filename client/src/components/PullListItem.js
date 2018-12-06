@@ -61,7 +61,7 @@ class Pull extends Component {
     let flagPNG = this.getFlagPNG()
     return (
       <tr className="Pull">
-        <td className="pull-table-cell">{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="40" height="30" alt="flag"></img>}</td>
+        <td className="pull-table-cell">{flagPNG && <img src={`flags/${flagPNG}.png`} width="40" height="30" alt="flag"></img>}</td>
         <td className="table-title pull-table-cell"><Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
         <td className="table-name pull-table-cell">{this.props.pull._githubUsername}</td>
         <td className="pull-table-cell">{this.getDate(this.props.pull.updated_at)}</td>

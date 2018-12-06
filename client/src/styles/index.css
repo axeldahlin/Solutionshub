@@ -61,7 +61,19 @@ body {
 .RepoList {
   width: 500px;
   height: calc(100vh - 56px);
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  margin-top: 100px;
+  border: solid grey 1px;
+  border-radius: 3px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 300px; }
+
+.repo-cell {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 25px; }
 
 .pull-table {
   width: 60%;

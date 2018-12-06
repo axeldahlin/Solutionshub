@@ -136,6 +136,23 @@ body {
   overflow-y: scroll;
   // background: #8ee4af;
 
+ 
+  margin-top: 100px;
+  border: solid grey 1px;
+  border-radius: 3px;
+
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 300px;
+}
+
+.repo-cell {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  max-width: 25px;
+
 }
 
 .pull-table {
@@ -237,54 +254,6 @@ input:focus {
   font-size: 14px !important;
 }
 
-
-
-
-// .CommentsContainer {
-//   width: 100%;
-//   height: 400px;
-//   overflow-y: scroll;
-// }
-
-
-// .Comment {
-//   text-align: left;
-
-// }
-
-// .Comment-header {
-//   padding-left: 10px;
-//   display: flex;
-//   height: 50px;
-//   background-color: rgba(100, 0, 0, .3);
-//   align-items: center;
-
-// }
-
-// .Comment-header div{
-//   display: flex;
- 
-
-// }
-
-// .Comment-header img{
-//   width: 30px;
-//   border-radius: 50%;
-//   object-fit: cover;
-//   height: 30px;
-
-// }
-
-// .Comment-name {
-//   margin: 5px;
-//   font-size: 10px !important;
-// }
-
-// .Comment-date {
-//   margin: 5px;
-//   font-size: 10px !important;
-
-// }
 
 .signed-out-container {
   width: 80%;
