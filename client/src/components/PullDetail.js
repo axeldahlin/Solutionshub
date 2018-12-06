@@ -32,6 +32,7 @@ class PullDetail extends Component {
     if(this.state.pull) {
       return (
         <div id="test" className="PullDetail" >
+          <img className="octo-detail" src="../Octocat-low.png" alt="cat"/>
           <div className="detail-container">
             <div className="detail-header">
             <img className="detail-img" src="../idea.png" alt="hey"/>
