@@ -9,6 +9,7 @@ import Home from './Home'
 import Profile from './Profile'
 import PullDetail from './PullDetail'
 import SignIn from './SignIn'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 
 

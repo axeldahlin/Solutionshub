@@ -4,7 +4,6 @@ import Pull from './PullListItem'
 import CommentsContainer from './CommentsContainer'
 import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
-
 class PullsPage extends Component {
   constructor(props) {
     super(props)
@@ -13,9 +12,9 @@ class PullsPage extends Component {
       pulls: [],
       comments: null,
       searchValue: "",
-      orderBy: "",
-      order: "",
-      dropDownActive: false
+      columnToSort: "",
+      sortDirection: "desc",
+      // dropDownActive: false
     }
   }
 
@@ -173,13 +172,41 @@ class PullsPage extends Component {
     } 
   }
 
+ 
+
+  handleSort = (columnName) => {
+    const invertDirection = {
+      asc: "desc",
+      desc: "asc"
+    }
+    this.setState({
+      columnToSort: columnName,
+      sortDirection: 
+        this.state.columnToSort === columnName 
+        ? invertDirection[this.state.sortDirection] 
+        : "asc"
+    })
+  }
+
+
+  sortAscending = (a,b) =>{
+    return b[this.state.columnToSort] < a[this.state.columnToSort] ? 1 : -1
+  }
+
+  sortDescending = (a,b) =>{
+    return b[this.state.columnToSort] > a[this.state.columnToSort] ? 1 : -1
+  }
+
+
   render() {   
     let filteredPulls;
     if (this.state.pulls) {
       filteredPulls = this.state.pulls.filter(pull=>{
         return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase()) || pull._githubUsername.toUpperCase().includes(this.state.searchValue.toUpperCase())
-      }); 
-    }   
+      })
+      if (this.state.sortDirection === "asc") filteredPulls.sort(this.sortAscending)
+      else filteredPulls.sort(this.sortDescending)
+    }
 
     if (!this.state.repo) {
       return <h1>Loading....</h1>
@@ -200,9 +227,29 @@ class PullsPage extends Component {
               <thead>
                   <th scope="col">Campus</th>
                   <th scope="col">Pull Request</th>
-                  <th scope="col">User</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Likes</th>
+                  <th scope="col">
+                  <div onClick={()=>this.handleSort("_githubUsername")}>User 
+                  {this.state.columnToSort === "_githubUsername" ? (
+                  this.state.sortDirection === "asc" 
+                  ? (<span class="material-icons"> ⬆ </span> )             
+                  : (<span class="material-icons"> ⬇</span>)
+                  ) : null}
+                  </div>
+                  </th> 
+                  <th scope="col" onClick={()=>this.handleSort("updated_at")} >Date
+                  {this.state.columnToSort === "updated_at" ? (
+                  this.state.sortDirection === "asc" 
+                  ? (<span class="material-icons"> ⬆ </span> )             
+                  : (<span class="material-icons"> ⬇</span>)
+                  ) : null}
+                  </th>
+                  <th scope="col"><div onClick={()=>this.handleSort("nbOfVotes")} >Likes
+                  {this.state.columnToSort === "nbOfVotes" ? (
+                  this.state.sortDirection === "asc" 
+                  ? (<span class="material-icons"> ⬆ </span> )             
+                  : (<span class="material-icons"> ⬇</span>)
+                  ) : null}
+                  </div></th>
                   <th scope="col"></th>
               </thead>
               <tbody>  
