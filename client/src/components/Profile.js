@@ -35,19 +35,19 @@ class Profile extends Component {
   }
 
   render() {
+    let lightBulb = "../light_on.svg"
     return (
       <div className="Profile">
         <div className="profile-header">
-      <img src={this.props.user.githubImageUrl} alt="profile_picture"></img>
-      <div>
-      {this.state.userPulls &&
-      <div>
-      <h2>Hello, {this.props.user.githubName}</h2>
-      <h3>@{this.props.user.githubUsername}</h3>
-      <div>Likes: {this.state.totalLikes}</div>
-      </div>
-      }
-
+            <img className="profile-pic" src={this.props.user.githubImageUrl} alt="profile_picture"></img>
+            <div className="profile-info">
+              {this.state.userPulls &&
+              <div >
+              <h2>Hello, {this.props.user.githubName}</h2>
+              <h3>@{this.props.user.githubUsername}</h3>
+              <div className="likes-container"><img className="profile-lightbulb" src={lightBulb} alt="bulb" />  <span className="profile-likes">: {this.state.totalLikes}</span></div>
+              </div>
+              }
         </div>
 
       </div>
