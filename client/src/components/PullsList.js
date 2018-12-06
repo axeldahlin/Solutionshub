@@ -81,7 +81,6 @@ class PullsPage extends Component {
     // Typical usage (don't forget to compare props):
     if (this.props.match.params.repo !== prevProps.match.params.repo ) {
       this.fetchRepoInfo()
-      console.log('componentdidupdate')
       // this.updatePulls()
       // this.getComments()
     }
@@ -94,7 +93,6 @@ class PullsPage extends Component {
   }
 
   handleChange = (event) => {
-    console.log("handleChange called", event)
     const { name, value } = event.target;
     this.setState({[name]: value});
   }

@@ -46,8 +46,6 @@ class CommentsContainer extends Component {
   handleDeleteComment = (id) => {
     api.deleteRepoComment(id)
       .then(_ => {
-
-        console.log(id)
         this.props.getComments()
       })
       .catch(err => console.log(err))

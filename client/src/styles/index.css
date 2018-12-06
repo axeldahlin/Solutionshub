@@ -100,10 +100,15 @@ body {
   width: auto; }
 
 .maintext {
-  grid-column-start: 2;
-  grid-column-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 1; }
+  grid-row-end: 1;
+  display: flex;
+  justify-content: center; }
+
+.intro-text {
+  width: 50%; }
 
 .Pull {
   width: 100%;

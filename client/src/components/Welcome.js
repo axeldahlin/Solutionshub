@@ -40,9 +40,9 @@ class Welcome extends Component {
        </div> */}
 
        <div className="Welcome-Container-Grid">
-       <div className="lightbulb">
+       {/* <div className="lightbulb">
             <img src="idea.png" alt="idea"/>
-         </div>
+         </div> */}
          <div className="octocat">
             <img src="Octocat-low.png" alt="cat"/>
          </div>
@@ -50,8 +50,10 @@ class Welcome extends Component {
           <img src="ironhack.png" alt="iron"/>
          </div>
          <div className="maintext">
+         <div className="intro-text">
        <h2>What is Solutions Hub?</h2>
        <p>Solutions Hub is a tool for Ironhackers–students and teachers–to have access to good quality solutions to the Ironhack labs.  </p>
+       </div>
        </div>
        </div>
       
