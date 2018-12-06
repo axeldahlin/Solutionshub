@@ -27,9 +27,6 @@ class MyNavbar extends React.Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
-            {/* <NavItem>
-                <NavLink tag={ReactRouterDomNavLink} to="/components/">Components</NavLink>
-              </NavItem> */}
               <NavItem>
                 <NavLink tag={ReactRouterDomNavLink} exact to="/">Home</NavLink>
               </NavItem>
@@ -39,14 +36,12 @@ class MyNavbar extends React.Component {
               <NavItem>
                 {this.props.user && <NavLink tag={ReactRouterDomNavLink} to="/sign-in" onClick={this.props.onLogout}>Logout</NavLink>}
               </NavItem>
-              <NavItem>
-                {this.props.user && <p>Welcome, {this.props.user.githubName}</p>}
-              </NavItem>
               {/* <NavItem>
-                {this.props.user && <img src={this.props.user.githubUrl}></img>}
+              {this.props.user && <p>Welcome, {this.props.user.githubName}</p>}
               </NavItem> */}
             </Nav>
           </Collapse>
+        
         </Navbar>
       </div>
     );

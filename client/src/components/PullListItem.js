@@ -39,23 +39,18 @@ class Pull extends Component {
   }
 
   render() {
-    let buttonText = "Like"
     let buttonImage = "light_off.svg"
-    if (this.props.pull.likedByUser) {
-      buttonText = "Unlike"
-      buttonImage = "light_on.svg"
-    }
-
+    if (this.props.pull.likedByUser) buttonImage = "light_on.svg"
     let flagPNG = this.getFlagPNG()
     return (
       <tr className="Pull">
         <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
-        <td>{this.props.pull.title}</td>
+        <td>  <Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
         <td>{this.props.pull._githubUsername}</td>
         <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
         <td>{this.props.pull.nbOfVotes}</td>
         <td><img onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
-        {/* <Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>Pull Details</Link> */}
+      
         {/* <td><button onClick={() => this.handleClick()}>Details</button></td> */}
       </tr>
     )

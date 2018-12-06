@@ -107,6 +107,7 @@ body {
   height: 80px;
   background: blue;
   color: white;
+  text-align: center;
 }
 
 
@@ -117,7 +118,9 @@ body {
   // width: 80%;
   // margin: 20px auto;
   // border-radius: 15px;
+
 }
+
 
 .Pull {
   // background-color: #5776e9;
@@ -128,6 +131,11 @@ body {
   // margin: 20px auto;
   // border-radius: 15px;
 
+}
+
+.speech-bubble {
+  width: 800px;
+  height: 450px
 }
 
 .RepoList {

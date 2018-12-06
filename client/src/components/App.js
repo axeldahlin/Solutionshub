@@ -65,7 +65,7 @@ class App extends Component {
 
           {/* <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
 
-          <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
+          {api.isLoggedIn() && <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />}
           <Route path="/sign-in" component={SignIn}/>
           <Route path="/:repo/:pull" render={props => <PullDetail {...props} user={this.state.user}/>}/>    
           <Route path="/"  render={props => <Home {...props} user={this.state.user}/>} />

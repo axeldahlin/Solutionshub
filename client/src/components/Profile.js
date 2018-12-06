@@ -65,7 +65,6 @@ class Profile extends Component {
                 <th>Repo</th>
                 <th>Likes</th>
                 <th>Date</th>
-
               </tr>
             </thead>
             <tbody>  
@@ -80,10 +79,8 @@ class Profile extends Component {
                 })}
               </tbody>
           </Table>
-
       </div>
-
-      </div>
+    </div>
     )
   }
 }

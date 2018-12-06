@@ -52,11 +52,16 @@ body {
 .Navbar {
   height: 80px;
   background: blue;
-  color: white; }
+  color: white;
+  text-align: center; }
 
 .Pull {
   width: 100%;
   background: white; }
+
+.speech-bubble {
+  width: 800px;
+  height: 450px; }
 
 .RepoList {
   width: 500px;
