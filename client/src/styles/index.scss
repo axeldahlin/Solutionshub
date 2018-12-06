@@ -502,3 +502,31 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
+
+
+.terminal {
+  width: 600px;
+  height: 400px;
+  // color: 20C20E;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.bar-terminal {
+  background: grey;
+  border-radius: 15px 15px 0 0;
+  height: 20px;
+}
+
+.text-terminal {
+  height: 100%;
+  background: black;
+}
+
+.text-terminal p {
+  font-family: 'Courier';
+  color: white;
+  text-align: left;
+  margin: 0;
+  margin-left: 10px;
+}

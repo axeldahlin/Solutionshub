@@ -24,25 +24,8 @@ class PullDetail extends Component {
       .catch(err => {
         console.log("Error at apiGetPull",err)
       })
-      const script = document.createElement('script');
-
-      script.src= "https://gist.github.com/axeldahlin/2de492f5aa0c289ef92678e87cea623e.js"
-  
-      script.async = true;
 
 
-  }
-
-  handleScriptCreate() {
-    this.setState({ scriptLoaded: false })
-  }
-   
-  handleScriptError() {
-    this.setState({ scriptError: true })
-  }
-   
-  handleScriptLoad() {
-    this.setState({ scriptLoaded: true })
   }
 
 
@@ -51,7 +34,6 @@ class PullDetail extends Component {
 
    
 
-    // document.querySelector('.PullDetail').appendChild(script)
     
 
     if(this.state.pull) {
@@ -69,14 +51,43 @@ class PullDetail extends Component {
            <p>{this.state.pull.repoName}</p>
            <p>{this.state.pull.title}</p>
 
-            <Helmet>
-                <script src="https://gist.github.com/axeldahlin/54d8327ae49456398bc8f512cd6534e6.js"></script>
-               
-            </Helmet>
-  
+
+           <div className="terminal">
+             <div className="bar-terminal">
+
+             </div>
+
+             <div className="text-terminal">
+                <p>
+                $ git clone &lt;the repo link&gt;
+
+                </p>
+                <p>
+                  $ cd &lt;the project&gt;
+
+                </p>
+                <p>
+                  $ git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'
+
+                </p>
+                <p>
+                  $ git checkout pr/999
+
+                </p>
+
+             </div>
+
+
+           </div>
+
+            
+  <p>
+
+        <pre>{JSON.stringify(this.state.pull)}</pre>
+
+  </p>
 
          
-        <pre>{JSON.stringify(this.state.pull)}</pre>
         <h1>This is the pull details page</h1>
         <h2><a href={this.state.pull.url}>Find this solution on Github</a></h2>
         </div>
