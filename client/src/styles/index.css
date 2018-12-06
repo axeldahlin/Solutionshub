@@ -66,13 +66,35 @@ body {
 .pull-table {
   width: 60%;
   margin: 0 auto;
-  margin-top: 40px; }
+  margin-top: 40px;
+  border: solid grey 1px;
+  min-width: 610px;
+  border-radius: 3px; }
+
+.table-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 30px; }
+
+.table-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 25px; }
+
+.table-bulb {
+  width: 40px;
+  margin-top: 5px; }
 
 .PullsPage {
   height: calc(100vh - 56px);
   width: 150%;
-  background: #FFFBF3;
+  background: #FAFAFA;
   overflow-y: scroll; }
+
+.table-img {
+  padding: 0 !important; }
 
 input:focus {
   outline: none; }
