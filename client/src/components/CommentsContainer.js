@@ -83,7 +83,7 @@ class CommentsContainer extends Component {
   
         
         <form className="comment-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <input placeholder="Your cool solution..." className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
+            <input placeholder="Leave a comment... [ENTER]" className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
         </form>
         
       </div>

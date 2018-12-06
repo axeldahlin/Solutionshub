@@ -62,7 +62,7 @@ class RepoList extends Component {
          <Table hover>
         <thead>
           <tr>
-            <th>Repos</th>
+            <th>Ironhack Repos</th>
           </tr>
         </thead>
         <tbody>      

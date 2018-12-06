@@ -40,6 +40,7 @@ class PullDetail extends Component {
          
         <pre>{JSON.stringify(this.state.pull)}</pre>
         <h1>This is the pull details page</h1>
+        <h2><a href={this.state.pull.url}>Find this solution on Github</a></h2>
         </div>
       )
     } else {

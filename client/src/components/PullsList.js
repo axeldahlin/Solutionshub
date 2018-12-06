@@ -235,7 +235,7 @@ class PullsPage extends Component {
                   <th scope="col">Campus</th>
                   <th scope="col">Pull Request</th>
                   <th scope="col">
-                  <div onClick={()=>this.handleSort("_githubUsername")}>User 
+                  <div style={{"cursor": "pointer"}} onClick={()=>this.handleSort("_githubUsername")}>User 
                   {this.state.columnToSort === "_githubUsername" ? (
                   this.state.sortDirection === "asc" 
                   ? (<span class="material-icons"> ⬆ </span> )             
@@ -243,14 +243,14 @@ class PullsPage extends Component {
                   ) : null}
                   </div>
                   </th> 
-                  <th scope="col" onClick={()=>this.handleSort("updated_at")} >Date
+                  <th scope="col" style={{"cursor": "pointer"}} onClick={()=>this.handleSort("updated_at")} >Date
                   {this.state.columnToSort === "updated_at" ? (
                   this.state.sortDirection === "asc" 
                   ? (<span class="material-icons"> ⬆ </span> )             
                   : (<span class="material-icons"> ⬇</span>)
                   ) : null}
                   </th>
-                  <th scope="col"><div onClick={()=>this.handleSort("nbOfVotes")} >Likes
+                  <th scope="col"><div style={{"cursor": "pointer"}} onClick={()=>this.handleSort("nbOfVotes")} >Likes
                   {this.state.columnToSort === "nbOfVotes" ? (
                   this.state.sortDirection === "asc" 
                   ? (<span class="material-icons"> ⬆ </span> )             
