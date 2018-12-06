@@ -71,7 +71,7 @@ body {
 .PullsPage {
   height: calc(100vh - 56px);
   width: 150%;
-  background: #5cdb95;
+  background: #FFFBF3;
   overflow-y: scroll; }
 
 input:focus {
@@ -149,3 +149,15 @@ input:focus {
 
 .table {
   background: white; }
+
+.Profile {
+  background: #FFFBF3; }
+
+.profile-container {
+  width: 70%;
+  margin: 0 auto; }
+
+.profile-header {
+  display: flex;
+  width: 70%;
+  margin: 0 auto; }

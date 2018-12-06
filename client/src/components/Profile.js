@@ -37,42 +37,51 @@ class Profile extends Component {
   render() {
     return (
       <div className="Profile">
-      <br></br>
+        <div className="profile-header">
+      <img src={this.props.user.githubImageUrl} alt="profile_picture"></img>
+      <div>
       {this.state.userPulls &&
       <div>
       <h2>Hello, {this.props.user.githubName}</h2>
       <h3>@{this.props.user.githubUsername}</h3>
       <div>Likes: {this.state.totalLikes}</div>
-      <img src={this.props.user.githubImageUrl} alt="profile_picture"></img>
       </div>
       }
+
+        </div>
+
+      </div>
+  
      
 
       <br></br>
 
       <h3>My Pulls: </h3>
-      <Table>
-          <thead>
-            <tr>
-              <th>Pull</th>
-              <th>Repo</th>
-              <th>Likes</th>
-              <th>Date</th>
+      <div className="profile-container">
+        <Table>
+            <thead>
+              <tr>
+                <th>Pull</th>
+                <th>Repo</th>
+                <th>Likes</th>
+                <th>Date</th>
 
-            </tr>
-          </thead>
-          <tbody>  
-            {!this.state.userPulls && <div>Loading...</div>}
-              {this.state.userPulls && this.state.userPulls.map((pull, index) => {
-                return <tr className="Pull">
-                <td>{pull.title}</td>
-                <td>{pull.repoName}</td>
-                <td>{pull.nbOfVotes}</td>
-                <td>{new Date(pull.updated_at).toUTCString()}</td>
               </tr>
-              })}
-            </tbody>
-        </Table>
+            </thead>
+            <tbody>  
+              {!this.state.userPulls && <div>Loading...</div>}
+                {this.state.userPulls && this.state.userPulls.map((pull, index) => {
+                  return <tr className="Pull">
+                  <td>{pull.title}</td>
+                  <td>{pull.repoName}</td>
+                  <td>{pull.nbOfVotes}</td>
+                  <td>{new Date(pull.updated_at).toUTCString()}</td>
+                </tr>
+                })}
+              </tbody>
+          </Table>
+
+      </div>
 
       </div>
     )
