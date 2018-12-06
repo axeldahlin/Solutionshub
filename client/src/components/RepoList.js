@@ -53,6 +53,7 @@ class RepoList extends Component {
             
             <Input style={{boxShadow: 'none'}} 
             className="search-input"
+            placeholder="Filter repos..."
             name="searchValue" onChange={e => this.handleChange(e)}
              value={this.state.searchValue} />
             <img className="input-img"src="zoom-tool.png" alt="search"/>

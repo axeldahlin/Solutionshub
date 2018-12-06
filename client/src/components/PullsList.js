@@ -224,6 +224,7 @@ class PullsPage extends Component {
             <Input style={{boxShadow: 'none'}} 
             className="search-input"
             name="searchValue" onChange={e => this.handleChange(e)}
+            placeholder="Filter solutions..."
              value={this.state.searchValue} />
             <img className="input-img"src="zoom-tool.png" alt="search"/>
           </InputGroup>

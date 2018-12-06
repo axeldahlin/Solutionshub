@@ -61,11 +61,14 @@ class CommentsContainer extends Component {
           {this.props.comments && this.props.comments.map((comment, index) => {
             return (
                   <div className="comment" key={index}>  
+                  
                       <div className="comment-header">
                       <img src={comment.imgUrl} alt="user"/>
                         <p className="comment-name">{comment.githubName}</p>
                         <p className="comment-date">{comment.date}</p>
-                        {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
+                   
+                      {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
+
                       </div>
                       
                   
