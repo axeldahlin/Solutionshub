@@ -214,14 +214,20 @@ class PullsPage extends Component {
     } else {
         return (
           <div className="PullsPage">
-            <h1>{this.state.repo.name}</h1>
-            <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
+            <div className="pullspage-header">
+             <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
+              <h1 className="pull-list-header">{this.state.repo.name}</h1>
+      
+            </div>
           <div className="pull-table">
-            <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Search</InputGroupText>
-            </InputGroupAddon>
-            <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
+            <img className="octo-pulls" src="Octocat-low.png" alt="octo"/>
+            <InputGroup className="pull-input">
+            
+            <Input style={{boxShadow: 'none'}} 
+            className="search-input"
+            name="searchValue" onChange={e => this.handleChange(e)}
+             value={this.state.searchValue} />
+            <img className="input-img"src="zoom-tool.png" alt="search"/>
           </InputGroup>
 
             <Table hover>
