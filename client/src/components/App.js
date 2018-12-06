@@ -9,7 +9,6 @@ import Home from './Home'
 import Profile from './Profile'
 import PullDetail from './PullDetail'
 import SignIn from './SignIn'
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 
 
@@ -67,9 +66,9 @@ class App extends Component {
           {/* <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
 
           <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />
+          <Route path="/sign-in" component={SignIn}/>
           <Route path="/:repo/:pull" render={props => <PullDetail {...props} user={this.state.user}/>}/>    
-          <Route path="/home"  render={props => <Home {...props} user={this.state.user}/>} />
-          <Route path="/" component={SignIn}/>
+          <Route path="/"  render={props => <Home {...props} user={this.state.user}/>} />
 
 
 

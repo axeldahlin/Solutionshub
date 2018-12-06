@@ -74,15 +74,15 @@ app.get('/api/auth/github',
 
 app.get('/api/auth/github/callback', 
   passport.authenticate('github', { 
-    failureRedirect: 'https://solutionshub.herokuapp.com',
-    successRedirect: 'https://solutionshub.herokuapp.com'
+    failureRedirect: 'http://localhost:3000',
+    successRedirect: 'http://localhost:3000'
   }),(req, res,next) => {
     console.log("/auth/github/callback has been called")
     console.log("req.query", req.query)
     console.log("Successful login!!!", req.user)
     console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // Successful authentication, redirect home.
-    res.redirect('https://solutionshub.herokuapp.com');
+    res.redirect('http://localhost:3000/');
   });
 
 
