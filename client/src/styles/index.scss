@@ -334,8 +334,8 @@ input:focus {
   width: 350px;
   background: white;
   height: 300px;
-  border-top: 20px solid black;
 }
+
 
 .github-login-link {
   text-decoration: none;
@@ -354,7 +354,7 @@ input:focus {
 }
 
 .comment {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .comments-container {
@@ -379,7 +379,7 @@ input:focus {
 
 .delete-comment {
   font-size: 10px !important;
-  margin-left: 50px;
+  margin-left: 10px;
   cursor: pointer;
 }
 
