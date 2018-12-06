@@ -6,6 +6,7 @@ const pullRequestSchema = new mongoose.Schema({
   },
   _githubUsername: String,
   pullRequestID: Number,
+  number: Number,
   url: {
     type: String,
     required: true,
@@ -14,6 +15,7 @@ const pullRequestSchema = new mongoose.Schema({
   // votes: Number,
   _githubRepo: Number,
   repoName: String,
+  repoUrl: String,
   nbOfVotes:  { type: Number, default: 0 },
   updated_at: Date,
   likedByUser: Boolean

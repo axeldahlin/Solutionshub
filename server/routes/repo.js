@@ -97,6 +97,8 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
         pullRequestID: githubPulls.id,
         title: githubPulls.title,
         url: githubPulls.html_url,
+        number: githubPulls.number,
+        repoUrl: githubPulls.head.repo.html_url,
         _githubRepo: githubPulls.base.repo.id,
         _githubUsername: githubPulls.user.login,
         repoName: githubPulls.base.repo.name,

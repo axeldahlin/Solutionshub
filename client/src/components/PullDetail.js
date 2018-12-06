@@ -46,10 +46,10 @@ class PullDetail extends Component {
               <div className="terminal">
                 <div className="bar-terminal"></div>
                 <div className="text-terminal">
-                    <p>$ git clone &lt;the repo link&gt;</p>
-                    <p>$ cd &lt;the project&gt;</p>
-                    <p>$ git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
-                    <p>$ git checkout pr/999</p>
+                    <p>git clone {this.state.pull.repoUrl}</p>
+                    <p>cd {this.state.pull.repoName}</p>
+                    <p>git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
+                    <p>git checkout pr/{this.state.pull.number}</p>
                 </div>
               </div>
               <div className="detail-details">
