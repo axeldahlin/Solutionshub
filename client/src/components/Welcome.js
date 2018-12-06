@@ -19,9 +19,26 @@ class Welcome extends Component {
   render() {
     return (
       <div className="Welcome">
-        <h1>This is the Welcome component</h1>
-        <img className="speech-bubble" src="speechbubble.svg"></img>
-        <img className="octocat" src="Octocat.png"></img>
+        <h1>Welcome to Solutions Hub</h1>
+        <p>Select an Ironhack lab on the left to get started.</p>
+        {/* <img className="speech-bubble" src="speechbubble.svg"></img>
+        <img className="octocat" src="Octocat.png"></img> */}
+            <div className="Img-container">
+         <div>
+            <img src="Octocat-low.png" alt="cat"/>
+         </div>
+         <div>
+          <img src="ironhack.png" alt="iron"/>
+         </div>
+         <div>
+            <img src="idea.png" alt="idea"/>
+         </div>
+       </div>
+       <div className="main-text">
+       <h2>What is Solutions Hub?</h2>
+       <p>Solutions Hub is a tool for Ironhackers–students and teachers–to have access to good quality solutions to the Ironhack labs.  </p>
+       </div>
+      
       </div>
     );
   }

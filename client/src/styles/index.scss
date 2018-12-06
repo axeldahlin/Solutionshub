@@ -284,9 +284,24 @@ input:focus {
   width: 350px;
   background: white;
   height: 300px;
-
+  border-top: 20px solid black;
 }
 
+.github-login-link {
+  text-decoration: none;
+  color: inherit
+  // color: black;
+}
+
+.Welcome {
+  margin-top: 70px;
+  padding-left: 50px;
+}
+
+
+.main-text {
+  width: 50%;
+}
 
 .comments-container {
   overflow-y: scroll;
@@ -305,11 +320,13 @@ input:focus {
 
 .search-input {
   border: none !important;
-  boxShadow: 'none'
+  box-shadow: 'none'
 } 
 
 
-
+.comments-container h5 {
+  text-align: left;
+}
 
 .comment img{
   object-fit: cover;

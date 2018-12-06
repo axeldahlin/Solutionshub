@@ -59,20 +59,17 @@ class RepoList extends Component {
           </InputGroup>
 
 
-         <Table>
+         <Table hover>
         <thead>
           <tr>
             <th>Repos</th>
           </tr>
-          </thead>
-          <tbody>
-
-      
-        {!this.state.repos && <div>Loading...</div>}
-
-        {filteredRepos && filteredRepos.map((repo, index) => {
-          return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
-        })}
+        </thead>
+        <tbody>      
+           {!this.state.repos && <div>Loading...</div>}
+           {filteredRepos && filteredRepos.map((repo, index) => {
+              return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
+            })}
 
 
         </tbody>
