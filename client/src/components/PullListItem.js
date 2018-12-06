@@ -38,19 +38,30 @@ class Pull extends Component {
     return ''
   }
 
+  getDate(date) {
+    let formatedDate = new Date(date)
+    let day = formatedDate.getDate();
+    let month = formatedDate.getMonth();
+    
+    let year = formatedDate.getFullYear();
+    if (month < 10) month = '0' + month
+    if (day < 10) day = '0' + day
+    formatedDate = `${day}-${month}-${year}`
+    return formatedDate
+  }
+
   render() {
     let buttonImage = "light_off.svg"
     if (this.props.pull.likedByUser) buttonImage = "light_on.svg"
     let flagPNG = this.getFlagPNG()
     return (
       <tr className="Pull">
-        <td>{flagPNG && <img src={require(`../flags/${flagPNG}.png`)} width="60" height="50" alt="flag"></img>}</td>
-        <td>  <Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
-        <td>{this.props.pull._githubUsername}</td>
-        <td>{new Date(this.props.pull.updated_at).toUTCString()}</td>
-        <td>{this.props.pull.nbOfVotes}</td>
-        <td><img onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
-      
+        <td className="pull-table-cell">{flagPNG && <img src={`flags/${flagPNG}.png`} width="40" height="30" alt="flag"></img>}</td>
+        <td className="table-title pull-table-cell"><Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
+        <td className="table-name pull-table-cell">{this.props.pull._githubUsername}</td>
+        <td className="pull-table-cell">{this.getDate(this.props.pull.updated_at)}</td>
+        <td className="pull-table-cell table-img">{this.props.pull.nbOfVotes} <img className="table-bulb" onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
+        
         {/* <td><button onClick={() => this.handleClick()}>Details</button></td> */}
       </tr>
     )

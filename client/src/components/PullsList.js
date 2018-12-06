@@ -15,6 +15,7 @@ class PullsPage extends Component {
       columnToSort: "",
       sortDirection: "desc",
       // dropDownActive: false
+      
     }
   }
 
@@ -223,7 +224,7 @@ class PullsPage extends Component {
             <Input name="searchValue" onChange={e => this.handleChange(e)} value={this.state.searchValue} />
           </InputGroup>
 
-            <Table>
+            <Table hover>
               <thead>
                   <th scope="col">Campus</th>
                   <th scope="col">Pull Request</th>
@@ -250,7 +251,7 @@ class PullsPage extends Component {
                   : (<span class="material-icons"> ⬇</span>)
                   ) : null}
                   </div></th>
-                  <th scope="col"> Liked</th>
+        
               </thead>
               <tbody>  
                 {!this.state.pulls && <div>Loading...</div>}

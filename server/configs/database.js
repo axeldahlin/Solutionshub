@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Don't forget to set "MONGODB_URI" in ~/server/.env
-const uri = "mongodb://localhost/ironhack-project-3";
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, { useNewUrlParser: true })

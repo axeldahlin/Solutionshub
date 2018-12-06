@@ -66,18 +66,52 @@ body {
 .RepoList {
   width: 500px;
   height: calc(100vh - 56px);
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  margin-top: 100px;
+  border: solid grey 1px;
+  border-radius: 3px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 300px; }
+
+.repo-cell {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 25px; }
 
 .pull-table {
   width: 60%;
   margin: 0 auto;
-  margin-top: 40px; }
+  margin-top: 40px;
+  border: solid grey 1px;
+  min-width: 610px;
+  border-radius: 3px; }
+
+.table-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 30px; }
+
+.table-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 25px; }
+
+.table-bulb {
+  width: 40px;
+  margin-top: 5px; }
 
 .PullsPage {
   height: calc(100vh - 56px);
   width: 150%;
-  background: #FFFBF3;
+  background: #FAFAFA;
   overflow-y: scroll; }
+
+.table-img {
+  padding: 0 !important; }
 
 input:focus {
   outline: none; }
