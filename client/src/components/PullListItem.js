@@ -51,13 +51,8 @@ class Pull extends Component {
   }
 
   render() {
-    let buttonText = "Like"
     let buttonImage = "light_off.svg"
-    if (this.props.pull.likedByUser) {
-      buttonText = "Unlike"
-      buttonImage = "light_on.svg"
-    }
-
+    if (this.props.pull.likedByUser) buttonImage = "light_on.svg"
     let flagPNG = this.getFlagPNG()
     return (
       <tr className="Pull">

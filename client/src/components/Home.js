@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PullDetail from './PullDetail'
 import RepoList from './RepoList'
+import Welcome from './Welcome'
 import PullsList from './PullsList';
 import { Route, Switch } from 'react-router-dom';
 import api from '../api'
@@ -58,7 +59,8 @@ class Home extends Component {
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
         
         <Switch>
-          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>      
+          <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>  
+          <Route path="/" render={props => <Welcome {...props} user={this.state.user}/>}/>      
 
 
 

@@ -16,7 +16,6 @@ class Repo extends Component {
   render() {
     return (
       <tr className="Repo">
-
             {/* <td><button onClick={() => this.handleClick(this.props.repo)}>See Pulls</button></td> */}
             <td className="repo-cell"><Link to={"/" + this.props.repo.name} > {this.props.repo.name} </Link> </td>
         {/* <p>{this.props.url}</p> */}
