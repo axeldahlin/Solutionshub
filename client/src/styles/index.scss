@@ -529,9 +529,17 @@ input:focus {
 }
 
 .bar-terminal {
-  background: grey;
+  background: #ecf0f1;
   border-radius: 15px 15px 0 0;
-  height: 20px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.bar-terminal span {
+  font-size: 14px;
+
 }
 
 .text-terminal {
@@ -545,6 +553,7 @@ input:focus {
   text-align: left;
   margin: 0;
   margin-left: 10px;
+  font-size: 15px;
 }
 
 .detail-container {
@@ -636,4 +645,20 @@ input:focus {
 
 .detail-link:hover {
   background: lightgrey;
+}
+
+
+
+.detail-arrow {
+  font-weight: bold;
+  color: #2ecc71;
+  font-size: 20px;
+
+}
+
+.detail-folder {
+  color:#3498db;
+  font-size: 13px;
+  font-weight: bold;
+  
 }
