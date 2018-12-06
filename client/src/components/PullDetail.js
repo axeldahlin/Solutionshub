@@ -7,7 +7,8 @@ class PullDetail extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pull: null
+      pull: null,
+      repo: null
     }
   }
 
@@ -23,13 +24,23 @@ class PullDetail extends Component {
         console.log("Error at apiGetPull",err)
       })
 
+      this.getRepo()
+
+
+  }
+
+  getRepo() {
+    api.fetchRepoInfo(this.props.match.params.repo)
+      .then(repo => {
+        this.setState({repo: repo[0]})
+      })
 
   }
 
 
 
   render() {
-    if(this.state.pull) {
+    if(this.state.pull && this.state.repo) {
       return (
         <div id="test" className="PullDetail" >
           <img className="octo-detail" src="../Octocat-low.png" alt="cat"/>
@@ -47,10 +58,12 @@ class PullDetail extends Component {
               <div className="terminal">
                 <div className="bar-terminal"></div>
                 <div className="text-terminal">
-                    <p>git clone {this.state.pull.repoUrl}</p>
+                    <p>git clone {this.state.repo.url}</p>
                     <p>cd {this.state.pull.repoName}</p>
                     <p>git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
                     <p>git checkout pr/{this.state.pull.number}</p>
+
+                
                 </div>
               </div>
               <div className="detail-details">
