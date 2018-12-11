@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
-import api from '../api';
+import { Link } from 'react-router-dom';
 
 
 
 
 
 class Pull extends Component {
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   likedByUser: false,
-    //   numberVotes: 0
-    // }
-  }
-
-
+  
   handleClick = () => {
     this.props.click(this.props.pull)
   }
@@ -63,6 +54,5 @@ class Pull extends Component {
     )
   }
 }
-
 
 export default Pull;

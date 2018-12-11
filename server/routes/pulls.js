@@ -1,55 +1,35 @@
 //Routes for the pull requests
 
 const express = require('express');
-const Repo = require('../models/Repo')
 const Vote = require('../models/Votes')
 const PullRequest = require('../models/PullRequest')
-const axios = require('axios');
 const router = express.Router();
 
 
-let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+process.env.GITHUB_CLIENT_SECRET
 
 
+// //Fetches all pull requests for given repo and returns JSON
+// // :repo is Github Repo name
+// router.get('/:repo/:repo_id', (req,res,next)=> {
+//   let pullsPromise = PullRequest.find({repoName: req.params.repo})
+//   let votesPromise = Vote.find({_repo: req.params.repo_id})
+//   Promise.all([pullsPromise,votesPromise])
+//   .then(results => {
+//     let [pulls,votes] = results
+//     let pullsWithVotes = pulls.map(pull=>{
+//       let likedByUser = votes.filter(vote=>{
+//         return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
+//       }).length === 1; 
+//       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
+//       pull.nbOfVotes = nbOfVotes
+//       pull.likedByUser = likedByUser
+//       return pull
+//     })
+//     res.json(pullsWithVotes)
+//   })
+//   .catch(next)
+// })
 
-
-
-//Check for all votes (expects an array of pulls)
-router.post('/getvotes',(req,res,next)=>{
-  Vote.find({$and: [{_user: req.body._user},{_repo:req.body._repo}]})
-  .then(votesFromUser => {
-    res.json(votesFromUser)
-  })
-  .catch(err=>{
-    console.log("Error at /getVotes",err)
-  })
-})
-
-
-//Count votes for specific pull
-router.post('/countvotes',(req,res,next)=>{
-  Vote.find({_pull: req.body._pull})
-  .then(votes => {
-    res.json(votes.length)
-  })
-  .catch(err=>{
-    console.log("Error at /countVotes",err)
-  })
-})
-
-
-
-//Check for single vote
-router.post('/getvote', (req,res,next)=>{
-  Vote.find({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
-  .then(vote=>{
-    if(vote.length) res.json({state: true})
-    else res.json({state:false})
-  })
-  .catch(err=>{
-    console.log("Error at /getvote", err)
-  })
-})
 
 
 //Vote for a user
@@ -69,37 +49,16 @@ router.post('/vote', (req, res, next) => {
   })
 })
 
-
 //Unvote for a user
 router.post('/unvote', (req,res,next)=>{
   Vote.findOneAndDelete({$and: [{_user: req.body._user},{_pull:req.body._pull}]})
   .then(deletedVote => {
-    console.log("vote deleted", deletedVote)
     res.json({deletedVote, message: "vote deleted"})
   })
   .catch(err=> {
     console.log("Error at UNVOTE", err)
   })
 })
-
-
-router.post('/inc-pull-votes/', (req, res, next) => {
-
-
-
-  console.log('DEBUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-
-  let {pullRequestID, increment} = req.body;
-
-  let inc = -1;
-  if (increment) {
-    inc = 1
-  }
-  PullRequest.findOneAndUpdate({pullRequestID: pullRequestID},{ $inc: { nbOfLikes: inc} })
-})
-
-
-
 
 // //Get one pull request
 router.get('/pull-detail/:pullId', (req,res,next)=> {
@@ -110,7 +69,5 @@ router.get('/pull-detail/:pullId', (req,res,next)=> {
   })
   .catch(next)
 })
-
-
 
 module.exports = router;

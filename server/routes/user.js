@@ -1,16 +1,7 @@
 const express = require('express');
-const User = require('../models/User')
 const PullRequest = require('../models/PullRequest')
 const Vote = require('../models/Votes')
-
 const router = express.Router();
-
-
-router.use((req, res, next) => {
-  console.log('DEBUG routes/countries');
-  next()
-})
-
 
 
 router.get('/userpulls/:username', (req,res,next)=>{
@@ -45,7 +36,6 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
       let likedByUser = votes.filter(vote=>{
         return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
       }).length === 1; 
-      // console.log("likedByUser", likedByUser)
       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
       pull.nbOfVotes = nbOfVotes
       pull.likedByUser = likedByUser
@@ -56,35 +46,5 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
   .catch(next)
 })
 
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////SAMPLE ONLY BELOW
-// Route to get all countries
-router.get('/', (req, res, next) => {
-  Country.find()
-    .then(countries => {
-      res.json(countries);
-    })
-    .catch(err => next(err))
-});
-
-// Route to add a country
-router.post('/', (req, res, next) => {
-  let { name, capitals, area, description } = req.body
-  Country.create({ name, capitals, area, description })
-    .then(country => {
-      res.json({
-        success: true,
-        country
-      });
-    })
-    .catch(err => next(err))
-});
 
 module.exports = router;

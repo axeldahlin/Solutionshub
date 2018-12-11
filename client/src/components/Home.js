@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PullDetail from './PullDetail'
 import RepoList from './RepoList'
 import Welcome from './Welcome'
 import PullsList from './PullsList';
@@ -16,13 +15,10 @@ class Home extends Component {
   }
 
   handleClickRepo = (repo) => {
-    console.log('DEBUG repo pull:', repo)
     this.setState({clickedRepo: repo})
   }
 
-
   handleClickPull = (id) => {
-    console.log('DEBUG id pull:', id)
     api.getPull(id)
       .then(pull => {
         this.setState({
@@ -44,28 +40,14 @@ class Home extends Component {
     })
   }
 
-
-
   render() {
     return (
       <div className="Home">
-
-        {/* <RepoList click={(name) => this.handleClickRepo(name)}/>
-
-        <div style={{width: '100%'}}>
-         {this.state.clickedRepo && <PullsPage click={(id)=> this.handleClickPull(id)} user={this.state.user} repoName={this.state.clickedRepo}/>}
-          {this.state.clickedPull &&  <PullDetail user={this.state.user} pull={this.state.clickedPull}/>} */}
-
         <RepoList click={(repo) => this.handleClickRepo(repo)}/>
-        
         <Switch>
           <Route path="/:repo" render={props => <PullsList {...props} user={this.state.user}/>}/>  
           <Route path="/" render={props => <Welcome {...props} user={this.state.user}/>}/>      
-
-
-
         </Switch>
-
       </div>
     );
   }

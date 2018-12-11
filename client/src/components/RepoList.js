@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api';
 import Repo from './Repo'
-import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-
+import { Table, InputGroup, Input } from 'reactstrap';
 
 class RepoList extends Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class RepoList extends Component {
       }
     
       componentDidMount() {
-        // console.log("component did Mount")
         api.getRepos()
           .then(repos => {
             this.setState({
@@ -32,13 +30,9 @@ class RepoList extends Component {
           })
       }
 
-
       handleClick = (repo) => {
         this.props.click(repo)
-
-        // console.log(name)
       }
-
 
   render() {
     let filteredRepos;
@@ -50,29 +44,25 @@ class RepoList extends Component {
     return (
       <div className="RepoList">
       <InputGroup className="pull-input">
-            
-            <Input style={{boxShadow: 'none'}} 
-            className="search-input"
-            placeholder="Filter repos..."
-            name="searchValue" onChange={e => this.handleChange(e)}
-             value={this.state.searchValue} />
-            <img className="input-img"src="zoom-tool.png" alt="search"/>
-          </InputGroup>
-
-
-         <Table hover>
+        <Input 
+          style={{boxShadow: 'none'}} 
+          className="search-input"
+          placeholder="Filter repos..."
+          name="searchValue" onChange={e => this.handleChange(e)}
+          value={this.state.searchValue} />
+        <img className="input-img"src="zoom-tool.png" alt="search"/>
+      </InputGroup>
+      <Table hover>
         <thead>
           <tr>
             <th>Ironhack Repos</th>
           </tr>
         </thead>
         <tbody>      
-           {!this.state.repos && <div>Loading...</div>}
-           {filteredRepos && filteredRepos.map((repo, index) => {
-              return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
-            })}
-
-
+          {!this.state.repos && <div>Loading...</div>}
+          {filteredRepos && filteredRepos.map((repo, index) => {
+            return <Repo key={index} repo={repo} click={(repo) => this.handleClick(repo)}/>
+          })}
         </tbody>
         </Table>
       </div>

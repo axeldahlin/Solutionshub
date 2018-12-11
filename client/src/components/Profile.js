@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Table } from 'reactstrap';
 import api from '../api';
-
-
 
 class Profile extends Component {
   constructor(props) {
@@ -42,19 +40,16 @@ class Profile extends Component {
             <img className="profile-pic" src={this.props.user.githubImageUrl} alt="profile_picture"></img>
             <div className="profile-info">
               {this.state.userPulls &&
-              <div >
-              <h2>Hello, {this.props.user.githubName}</h2>
-              <h3>@{this.props.user.githubUsername}</h3>
-              <div className="likes-container"><img className="profile-lightbulb" src={lightBulb} alt="bulb" />  <span className="profile-likes">: {this.state.totalLikes}</span></div>
-              </div>
+                <div >
+                <h2>Hello, {this.props.user.githubName}</h2>
+                <h3>@{this.props.user.githubUsername}</h3>
+                <div className="likes-container"><img className="profile-lightbulb" src={lightBulb} alt="bulb" />  <span className="profile-likes">: {this.state.totalLikes}</span></div>
+                </div>
               }
         </div>
-
       </div>
   
-     
-
-      <br></br>
+      <br/>
 
       <h3>My Pulls: </h3>
       <div className="profile-container">
@@ -70,7 +65,7 @@ class Profile extends Component {
             <tbody>  
               {!this.state.userPulls && <div>Loading...</div>}
                 {this.state.userPulls && this.state.userPulls.map((pull, index) => {
-                  return <tr className="Pull">
+                  return <tr key={index} className="Pull">
                   <td>{pull.title}</td>
                   <td>{pull.repoName}</td>
                   <td>{pull.nbOfVotes}</td>
@@ -85,7 +80,4 @@ class Profile extends Component {
   }
 }
 
-
 export default Profile;
-
-

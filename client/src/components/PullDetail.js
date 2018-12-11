@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api';
 
-
-
 class PullDetail extends Component {
   constructor(props) {
     super(props)
@@ -15,7 +13,6 @@ class PullDetail extends Component {
   componentDidMount() {
     api.getPull(this.props.match.params.pull)
       .then(pull => {
-        console.log("pull",pull)
         this.setState({
           pull
         })
@@ -23,10 +20,7 @@ class PullDetail extends Component {
       .catch(err => {
         console.log("Error at apiGetPull",err)
       })
-
       this.getRepo()
-
-
   }
 
   getRepo() {
@@ -35,7 +29,6 @@ class PullDetail extends Component {
         this.setState({repo: repo[0]})
       })
   }
-
 
 
   render() {
@@ -51,46 +44,38 @@ class PullDetail extends Component {
               <p>{this.state.pull.repoName}</p>
             </div>
             </div>
-
             <div className="detail-body">
               <div className="terminal">
                 <div className="bar-terminal">
                   <span>ironhackstudent@coolcoder</span>
                 </div>
                 <div className="text-terminal">
-                    <p><span className="detail-arrow">&rarr;</span> <span className="detail-folder">ironhack-lab-folder</span> git clone {this.state.repo.url}</p>
+                    <p>
+                      <span className="detail-arrow">&rarr;</span> 
+                      <span className="detail-folder">ironhack-lab-folder</span> 
+                      git clone {this.state.repo.url}
+                    </p>
                     <p>cd {this.state.pull.repoName}</p>
                     <p>git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'</p>
-                    <p>git checkout pr/{this.state.pull.number}</p>
-
-                
+                    <p>git checkout pr/{this.state.pull.number}</p>                
                 </div>
               </div>
               <div className="detail-details">
                 <p>Likes: {this.state.pull.nbOfVotes}</p>
-                <a className="detail-link" target="_blank" href={this.state.pull.url}>See on Github <i className="far fa-angle-right"></i></a>
-
+                <a className="detail-link" target="_blank" href={this.state.pull.url}>See on Github 
+                  <i className="far fa-angle-right"></i>
+                </a>
               </div>
-
             </div>
-
             <h2>Play with the code!</h2>
             <p>Write the commands above in your terminal to clone this solution to your own computer.</p>
-          
-
-                    {/* <pre>{JSON.stringify(this.state.pull)}</pre> */}
-
           </div>
         </div>
       )
     } else {
       return <h1>Loading...</h1>
     }
-
-    
-
   }
 }
-
 
 export default PullDetail;

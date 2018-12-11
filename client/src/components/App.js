@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
-
-// import LoginPage from './LoginPage';
-
+import { Route, Switch } from 'react-router-dom';
 import api from '../api';
 import Navbar from './Navbar'
 import Home from './Home'
 import Profile from './Profile'
 import PullDetail from './PullDetail'
-import SignIn from './SignIn'
-
-
-
-
-
 
 
 class App extends Component {
@@ -22,10 +13,9 @@ class App extends Component {
     this.state = {
       user: api.syncLoadUser(),
     }
-    // api.loadUser();
   }
 
-  handleLogout = (e) => {
+  handleLogout = () => {
     api.newLogout()
     this.setState({
       user: null
@@ -48,46 +38,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar user={this.state.user} onLogout={this.handleLogout} /> 
-
         <Switch>
-
-
-
-
-
-{/*     
-          <Route path="/signed-out" component={SignedOutPage}>} />
-          <Route path="/repos" exact component={ReposPage} />
-          <Route path="/pulls/:name" exact component={PullsPage} />
-          <Route path="/user/signin/callback" exact component={PullsPage} />
-          <Button color="primary">primary</Button>{' '}
-          <Button color="primary">primary</Button>{' '} */}
-
-          {/* <Route path="/home" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
-          {/* {!api.isLoggedIn() && <Route path="/" render={()=>(
-            <Redirect to="/sign-in"></Redirect>
-          )}/>} */}
           {api.isLoggedIn() && <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} />}
-          {/* <Route path="/user" exact render={props => <Profile {...props} user={this.state.user}/>} /> */}
-          <Route path="/sign-in" component={SignIn}/>
           <Route path="/:repo/:pull" render={props => <PullDetail {...props} user={this.state.user}/>}/>    
-          <Route path="/"  render={props => <Home {...props} user={this.state.user}/>} />
-
-
-
-
-
-          {/* <Route path="/" exact render={props => <Home {...props} user={this.state.user}/>} /> */}
-
-
-
-       
-        
-
-          {/* <Route path="/" exact component={Home}  /> */}
-
-
-          
+          <Route path="/"  render={props => <Home {...props} user={this.state.user}/>} />          
         </Switch>
       </div>
     );
@@ -95,18 +49,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
-
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">MERN Boilerplate</h1>
-          <NavLink to="/" exact>Home</NavLink>
-          <NavLink to="/countries">Countries</NavLink>
-          <NavLink to="/add-country">Add country</NavLink>
-          {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          <NavLink to="/secret">Secret</NavLink>
-        </header> */}

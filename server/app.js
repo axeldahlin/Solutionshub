@@ -10,7 +10,6 @@ const path = require('path')
 const nocache = require('nocache')
 const session = require("express-session")
 const MongoStore = require('connect-mongo')(session)
-const passport = require('passport')
 
 require('./configs/database')
 
@@ -48,45 +47,10 @@ app.use(session({
 }))
 require('./passport')(app)
 
-// app.get('/auth/github',
-//   passport.authenticate('github'));
- 
-// app.get('/auth/github/callback', 
-//   passport.authenticate('github', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
-
-
-
-app.use('/api', require('./routes/index'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/repo', require('./routes/repo'))
 app.use('/api/pulls', require('./routes/pulls'))
 app.use('/api/user', require('./routes/user'))
-
-
-
-// TODO: put it in a routes file
-app.get('/api/auth/github',
-  passport.authenticate('github'));
-
-app.get('/api/auth/github/callback', 
-  passport.authenticate('github', { 
-    failureRedirect: process.env.FRONTEND_URI,
-    successRedirect: process.env.FRONTEND_URI
-  }),(req, res,next) => {
-    console.log("/auth/github/callback has been called")
-    console.log("req.query", req.query)
-    console.log("Successful login!!!", req.user)
-    console.log('/auth/github/callback !!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    // Successful authentication, redirect home.
-    res.redirect(process.env.FRONTEND_URI);
-  });
-
-
-
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {

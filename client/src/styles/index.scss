@@ -1,7 +1,3 @@
-// --------------------
-// Definition of variables
-$primary: #2c3336;
-
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
 * {
@@ -16,19 +12,6 @@ textarea:focus,
 button:focus {
     outline: none !important;
 }
-
-
-
-
-
-
-// ----------------------------------------
-// To install Boostrap:
-// 1) Run in the client folder: $ npm i bootstrap
-// 2) Import bootstrap with the following line
-// @import 'bootstrap/scss/bootstrap';
-// ----------------------------------------
-
 
 // --------------------
 // Style reusable for all components
@@ -51,6 +34,12 @@ body {
   background-color: #e73f3f;
 }
 
+.Navbar {
+  height: 80px;
+  background: blue;
+  color: white;
+  text-align: center;
+}
 // --------------------
 // Style for App component
 .App {
@@ -105,25 +94,9 @@ body {
   }
 }
 
+
 // --------------------
-
-// $primary-color: #673AB7;
-
-
-
-
-
-
-// ------------------
-
-
-.Navbar {
-  height: 80px;
-  background: blue;
-  color: white;
-  text-align: center;
-}
-
+// Welcome page
 
 .Welcome-Container-Grid {
   display: grid;
@@ -183,38 +156,23 @@ body {
   width: 50%;
 }
 
-
-
+// --------------------
+// Pull Component
 
 .Pull {
-  // background-color: #5776e9;
-  // color: white;
-  // height: 100px;
     width: 100%;
     background: white;
-  // margin: 20px auto;
-  // border-radius: 15px;
-
 }
 
-
-.speech-bubble {
-  width: 800px;
-  height: 450px
-}
+// --------------------
+// RepoList Component
 
 .RepoList {
   width: 500px;
   height: calc(100vh - 56px);
   overflow-y: scroll;
-  // background: #8ee4af;
-
- 
-
   border: solid grey 1px;
   border-radius: 3px;
-
-
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 300px;
@@ -228,6 +186,9 @@ body {
 
 }
 
+// --------------------
+// PullList 
+
 .pull-table {
   width: 60%;
   margin: 0 auto;
@@ -236,7 +197,6 @@ body {
   min-width: 610px;
   border-radius: 3px;
   position: relative;
-
   background: white;
 }
 
@@ -266,66 +226,11 @@ body {
   background: #FAFAFA;
   overflow-y: scroll;
   z-index: 1;
-
-
 }
 
-.PullDetail {
-  position: relative;
-}
 
-.table-img {
-  padding: 0 !important;
-}
-
-.pull-input {
-  border: solid black 1px;
-  border-radius: 3px;
-}
-
-.input-img {
-  width: 24px;
-  height: 24px;
-  margin: 6px 5px;
-}
-
-.pullspage-header {
-  display: flex;
-  width: 60%;
-  margin: 0 auto;
-
-  min-width: 610px;
-
-  height: 500px;
-  margin-top: 70px;
-
-
-}
-
-.octo-pulls {
-  width: 400px;
-  position: absolute;
-  z-index: -999;
-  right: -10px;
-  top: -155px;
-}
-  
-  
-  .pull-list-header {
-    margin: 40px 0;
-    padding: 0 20px;
-
-  }
-
-  .speech-pull-img {
-    position: absolute;
-    right: 0;
-  }
-
-
-
-
-// ******************** Comment Container
+// --------------------
+// Comment Container 
 
 input:focus {
   outline:none;
@@ -348,18 +253,10 @@ input:focus {
   height: 300px;
 }
 
-
 .github-login-link {
   text-decoration: none;
   color: inherit
-  // color: black;
 }
-
-.Welcome {
-  // margin-top: 70px;
-  // padding-left: 50px;
-}
-
 
 .main-text {
   width: 50%;
@@ -372,8 +269,6 @@ input:focus {
 .comments-container {
   overflow-y: scroll;
   width: 350px;
-
-
   border-radius: 3px;
   padding: 5px 20px 5px 20px;
   border: solid black 1px;
@@ -381,7 +276,6 @@ input:focus {
   flex-shrink: 0;
   flex-basis: 300px;
   height: 280px;
-
 }
 
 .search-input {
@@ -413,7 +307,6 @@ input:focus {
 .comment-date {
   font-size: 10px !important;
   margin-left: 10px;
-  
 }
 
 .comment-header {
@@ -426,59 +319,15 @@ input:focus {
   margin: 0;
   width: 295px !important;
   overflow-wrap: break-word;
-
 }
 
 
-.signed-out-container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 100px 0;
-}
-
-.Img-container {
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-around;
-  height: 300px;
-}
-
-.Img-container div {
-  display: flex;
-  width: 300px;
-  justify-content: center;
-  align-items: center;
-}
-
-.Img-container div img {
-  width: 100%;
-}
-.logo-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.logo {
-  width: 300px;
-  height: 300px;
-}
-
-
-
-.signin-modal {
-  background: darkgrey;
-  width: 300px;
-  height: 200px;
-}
-
+// --------------------
+// Profile Page 
 
 .table {
   background:white;
 }
-
-
-
 
 .profile-container {
   width: 70%;
@@ -519,6 +368,10 @@ input:focus {
   align-items: center;
 }
 
+
+
+// --------------------
+// Terminal on Pull Details
 
 .terminal {
   width: 600px;
@@ -566,10 +419,73 @@ input:focus {
   margin-bottom: 70px;
 }
 
+// --------------------
+// To make Octocat appear behind the navbar
+
 .navbar {
   z-index: 100;
 }
 
+// --------------------
+// PullDetail 
+
+.PullDetail {
+  position: relative;
+}
+
+.table-img {
+  padding: 0 !important;
+}
+
+.pull-input {
+  border: solid black 1px;
+  border-radius: 3px;
+}
+
+.input-img {
+  width: 24px;
+  height: 24px;
+  margin: 6px 5px;
+}
+
+.pullspage-header {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  min-width: 610px;
+  height: 500px;
+  margin-top: 70px;
+}
+
+.octo-pulls {
+  width: 400px;
+  position: absolute;
+  z-index: -999;
+  right: -10px;
+  top: -155px;
+}
+
+
+.pull-list-header {
+  margin: 40px 0;
+  padding: 0 20px;
+}
+
+.detail-link:hover {
+  background: lightgrey;
+}
+
+.detail-arrow {
+  font-weight: bold;
+  color: #2ecc71;
+  font-size: 20px;
+}
+
+.detail-folder {
+  color:#3498db;
+  font-size: 13px;
+  font-weight: bold;
+}
 
 .octo-detail {
   position: absolute;
@@ -580,7 +496,6 @@ input:focus {
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   width: 246px;
-
 }
 
 .detail-header {
@@ -620,16 +535,12 @@ input:focus {
   display: flex;
   margin-top: 70px;
   padding: 0 10px;
-
 }
         
-
-
 .detail-details {
   min-width: 110px;
   flex-grow: 2;
   padding-top: 20px;
-        
 }
 
 .detail-details p {
@@ -641,24 +552,4 @@ input:focus {
   border: solid black 1px;
   border-radius: 3px;
 
-}
-
-.detail-link:hover {
-  background: lightgrey;
-}
-
-
-
-.detail-arrow {
-  font-weight: bold;
-  color: #2ecc71;
-  font-size: 20px;
-
-}
-
-.detail-folder {
-  color:#3498db;
-  font-size: 13px;
-  font-weight: bold;
-  
 }

@@ -4,17 +4,9 @@ const PullRequest = require('../models/PullRequest')
 const Vote = require('../models/Votes')
 const axios = require('axios');
 const RepoComment = require('../models/RepoComment')
-
 const router = express.Router();
 
-
-
-let authPath = '?client_id=' + process.env.GITHUB_CLIENT_ID + '&client_secret='+process.env.GITHUB_CLIENT_SECRET
-
-
-
-
-
+let authPath = `?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
 
 // Fetches all repos from database and returns JSON
 router.get('/', (req, res, next) => {
@@ -25,8 +17,6 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
-
-
 router.get('/onerepo/:reponame',(req,res,next)=>{
   Repo.find({name: req.params.reponame})
     .then(repo=>{
@@ -34,10 +24,6 @@ router.get('/onerepo/:reponame',(req,res,next)=>{
     })
     .catch(next)
 });
-
-
-
-
 
 //Fetches all pull requests for given repo and returns JSON
 // :repo is Github Repo name
@@ -51,7 +37,6 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
       let likedByUser = votes.filter(vote=>{
         return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
       }).length === 1; 
-      // console.log("likedByUser", likedByUser)
       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
       pull.nbOfVotes = nbOfVotes
       pull.likedByUser = likedByUser
@@ -60,16 +45,12 @@ router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
     res.json(pullsWithVotes)
   })
   .catch(next)
-})
-
-
+});
 
 // Fetches all repos with github api and updates database
 router.get('/repos', (req,res,next)=> {
-  console.log("GET /repos called")
   axios.get(`https://api.github.com/orgs/ironhack-labs/repos` + authPath + '&per_page=100')
   .then(response => {
-    console.log("response from Axios", response)
     response.data.forEach(githubRepo => {
       Repo.findOneAndUpdate({githubID: githubRepo.id}, {
         name: githubRepo.name,
@@ -79,17 +60,16 @@ router.get('/repos', (req,res,next)=> {
         upsert: true,
         new: true
       })
-      // .then(repo => console.log('DEBUG SUCCES :) repo:', repo))
+      // .then(repo => res.json({message: "success"}))
       .catch(err => console.log('DEBUG findOneAndUpdate err:', err))
     })
   })
   .catch(err=>console.log("error at /repos:", err))
-})
+});
 
 
 // Fetches all Pull Requests for given :repo with github api and updates database
 router.get('/update-pulls/:repo', (req,res,next)=>{
-  console.log("update pulls called for repo: ", req.params.repo)
   axios.get('https://api.github.com/repos/ironhack-labs/'+req.params.repo+'/pulls' + authPath + '&per_page=100')
   .then(response => {
     response.data.forEach(githubPulls => {
@@ -114,8 +94,6 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
 })
 
 
-
-
 // Post a repoComments
 router.post('/repo-comment', (req, res, next) => {
   const {_user, comment, _repo, githubName, date, imgUrl} = req.body;
@@ -126,7 +104,6 @@ router.post('/repo-comment', (req, res, next) => {
     })
     .catch(next)
 });
-
 
 
 // Get all repoComments
@@ -147,8 +124,6 @@ router.delete('/repo-comment/:id', (req,res,next)=> {
   })
   .catch(next)
 })
-
-
 
 
 module.exports = router;

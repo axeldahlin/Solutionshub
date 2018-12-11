@@ -11,8 +11,6 @@ const pullRequestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // comments: [String],
-  // votes: Number,
   _githubRepo: Number,
   repoName: String,
   repoUrl: String,

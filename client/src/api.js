@@ -6,9 +6,6 @@ const service = axios.create({
   withCredentials: true
 })
 
-
-
-
 const errHandler = err => {
   console.error(err)
   if (err.response && err.response.data) {
@@ -37,7 +34,7 @@ export default {
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         localStorage.setItem('user', JSON.stringify(res.data))
-        res.data
+        // res.data
       })
       .catch(errHandler)
   },
@@ -63,12 +60,6 @@ export default {
       .get('/logout')
   },
 
-  getCountries() {
-    return service
-      .get('/countries')
-      .then(res => res.data)
-      .catch(errHandler)
-  },
 
   getUserPulls(username) {
     return service
@@ -107,20 +98,6 @@ export default {
       .catch(errHandler)
   },
 
-  postCountries(data) {
-    return service
-      .post('/countries', data)
-      .then(res => res.data)
-      .catch(errHandler)
-  },
-
-  getSecret() {
-    return service
-      .get('/secret')
-      .then(res => res.data)
-      .catch(errHandler)
-  },
-
   getRepos() {
     return service
       .get('/repo')
@@ -131,19 +108,6 @@ export default {
   getPull(id) {
     return service
       .get('/pulls/pull-detail/'+id)
-      .then(res => res.data)
-      .catch(errHandler)
-  },
-
-  addPicture(file) {
-    const formData = new FormData()
-    formData.append("picture", file)
-    return service
-      .post('/endpoint/to/add/a/picture', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
       .then(res => res.data)
       .catch(errHandler)
   },
@@ -161,7 +125,6 @@ export default {
       .then(res=>res.data)
       .catch(errHandler)
   },
-
 
 
   postRepoComment(data){
@@ -224,9 +187,8 @@ export default {
 
 
   getPulls(repo,id) {
-    console.log("METHOD:", '/repo/pulls/'+repo+'/'+id)
     return service
-      .get('/repo/pulls/'+repo+'/'+id)
+      .get('repo/pulls/'+repo+'/'+id)
       .then(res =>res.data)
       .catch(errHandler)
   },
@@ -238,7 +200,4 @@ export default {
       .then(res => res)
       .catch(errHandler)
   },
-
-
-
 }

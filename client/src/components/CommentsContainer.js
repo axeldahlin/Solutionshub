@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import api from '../api'
 
-
-
 class CommentsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       comment: ''
-  
     }
   }
 
@@ -19,14 +16,12 @@ class CommentsContainer extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let date = new Date()
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
+    let [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
     date = `${day}-${month}-${year}`
     
     let data = {
       comment: this.state.comment,
-      date,
+      date: date,
       _repo: this.props.repo._id,
       githubName: this.props.user.githubName,
       _user: this.props.user._id,
@@ -34,13 +29,11 @@ class CommentsContainer extends Component {
     }
 
     api.postRepoComment(data)
-    .then(res => {
+    .then(_ => {
       this.props.getComments()
     })
     .catch(err => console.log(err))
     this.setState({comment: ''})
-
-
   }
 
   handleDeleteComment = (id) => {
@@ -60,30 +53,21 @@ class CommentsContainer extends Component {
         <h5>Comments</h5>
           {this.props.comments && this.props.comments.map((comment, index) => {
             return (
-                  <div className="comment" key={index}>  
-                  
-                      <div className="comment-header">
-                      <img src={comment.imgUrl} alt="user"/>
-                        <p className="comment-name">{comment.githubName}</p>
-                        <p className="comment-date">{comment.date}</p>
-                   
-                      {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
-
-                      </div>
-                      
-                  
-                      <p className="comment-text">{comment.comment}</p>
+              <div className="comment" key={index}>  
+                  <div className="comment-header">
+                  <img src={comment.imgUrl} alt="user"/>
+                    <p className="comment-name">{comment.githubName}</p>
+                    <p className="comment-date">{comment.date}</p>
+                  {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
                   </div>
+                  <p className="comment-text">{comment.comment}</p>
+              </div>
             )
           })}
         </div>
-
-  
-        
         <form className="comment-form" onSubmit={(e) => this.handleSubmit(e)}>
             <input placeholder="Leave a comment... [ENTER]" className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
         </form>
-        
       </div>
     );
   }

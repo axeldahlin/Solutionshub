@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import api from '../api';
-import Pull from './PullListItem'
+import Pull from './Pull'
 import CommentsContainer from './CommentsContainer'
-import { Table, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Table, InputGroup, Input } from 'reactstrap';
 
 class PullsPage extends Component {
   constructor(props) {
@@ -14,25 +14,17 @@ class PullsPage extends Component {
       searchValue: "",
       columnToSort: "",
       sortDirection: "desc",
-      // dropDownActive: false
-      
     }
   }
 
-
-
   componentDidMount() {
     this.fetchRepoInfo()
-    console.log(this.state.repo)
-    
-  
   }
 
   fetchRepoInfo() {
     let repoName = this.props.match.params.repo
     api.fetchRepoInfo(repoName)
     .then(repo=>{
-      console.log("fetched Repo:",repo)
       this.setState({
         repo:repo[0]
       })
@@ -49,10 +41,8 @@ class PullsPage extends Component {
     })
   }
 
-
   updatePulls() {
-    // const repoName = this.props.repo.name //OLD
-    const repoName = this.state.repo.name //NEW
+    const repoName = this.state.repo.name
     const repoId = this.state.repo.githubID
       this.setState({
         pulls: null
@@ -61,42 +51,16 @@ class PullsPage extends Component {
     api.getPulls(repoName,repoId)
       .then(pulls => {
         this.setState({ pulls })
-        // this.checkVotes()
         return api.updatePulls(repoName)
       })
-      // .then(res => {
-      //   return api.getPulls(repoName,repoId)
-      // })
-      // .then(pulls => {
-      //   this.setState({ pulls })
-      // })
-      // .then(_ => {
-      //   console.log("check votes called in updatePulls()")
-      //   this.checkVotes()
-      // })
       .catch(err => console.log(err))
   }
 
   componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
     if (this.props.match.params.repo !== prevProps.match.params.repo ) {
       this.fetchRepoInfo()
-      // this.updatePulls()
-      // this.getComments()
-    }
-
- 
+    } 
   }
-
-  handleClick = (value) => {
-    this.props.click(value)
-  }
-
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({[name]: value});
-  }
-
 
   getComments() {
     api.getRepoComments(this.state.repo._id)
@@ -104,45 +68,6 @@ class PullsPage extends Component {
         this.setState({comments})
       })
   }
-
-  // checkVotes() {
-  //   console.log("check votes method called in PullsList")
-  //   let data = {
-  //     // pulls: this.state.pulls,
-  //     _user: this.props.user._github,
-  //     _repo: this.props.repo.githubID
-  //   }
-  //   api.checkVotes(data)
-  //   .then(votes => {
-  //     let pulls = [...this.state.pulls]
-  //     let pullIds = votes.map(vote => vote._pull)
-  //     let newPullsState = pulls.map(pull => {
-  //       if (pullIds.includes(pull.pullRequestID)) pull.likedByUser = true
-  //       return pull
-  //     })
-  //     this.setState({
-  //       pulls: newPullsState
-  //     })
-  //   })
-  //   .catch(err=> {
-  //     console.log("Error at checkVotes PullList",err)
-  //   })
-  // }
-
-
-  // componentDidMount() {
-  //   console.log("PullListItem component did Mount")
-
-  //   api.checkVote(data)
-  //   .then(result => {
-  //     this.setState({
-  //       likedByUser: result.state
-  //     })
-  //   })
-  //   .catch(err=> {
-  //     console.log("error at PullListItem", err)
-  //   })
-  // }
 
   toggleLike(clickedPull) {
     let allPulls = [...this.state.pulls]
@@ -171,7 +96,15 @@ class PullsPage extends Component {
     } 
   }
 
- 
+
+  handleClick = (value) => {
+    this.props.click(value)
+  }
+
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({[name]: value});
+  }
 
   handleSort = (columnName) => {
     const invertDirection = {
@@ -187,7 +120,6 @@ class PullsPage extends Component {
     })
   }
 
-
   sortAscending = (a,b) =>{
     return b[this.state.columnToSort] < a[this.state.columnToSort] ? 1 : -1
   }
@@ -199,6 +131,7 @@ class PullsPage extends Component {
 
   render() {   
     let filteredPulls;
+    //Sorts and filters before the render
     if (this.state.pulls) {
       filteredPulls = this.state.pulls.filter(pull=>{
         return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase()) || pull._githubUsername.toUpperCase().includes(this.state.searchValue.toUpperCase())
@@ -215,12 +148,10 @@ class PullsPage extends Component {
             <div className="pullspage-header">
              <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
               <h1 className="pull-list-header">{this.state.repo.name}</h1>
-      
             </div>
           <div className="pull-table">
             <img className="octo-pulls" src="Octocat-low.png" alt="octo"/>
             <InputGroup className="pull-input">
-            
             <Input style={{boxShadow: 'none'}} 
             className="search-input"
             name="searchValue" onChange={e => this.handleChange(e)}
@@ -228,9 +159,9 @@ class PullsPage extends Component {
              value={this.state.searchValue} />
             <img className="input-img"src="zoom-tool.png" alt="search"/>
           </InputGroup>
-
             <Table hover>
               <thead>
+                <tr>
                   <th scope="col">Campus</th>
                   <th scope="col">Pull Request</th>
                   <th scope="col">
@@ -256,7 +187,7 @@ class PullsPage extends Component {
                   : (<span class="material-icons"> ⬇</span>)
                   ) : null}
                   </div></th>
-        
+                  </tr>
               </thead>
               <tbody>  
                 {!this.state.pulls && <div>Loading...</div>}
@@ -264,9 +195,7 @@ class PullsPage extends Component {
                     return <Pull
                       repo={this.state.repo}
                       key={index} 
-                      repo={this.state.repo}
                       user={this.props.user}
-                      // likedByUser={likedByUser}
                       pull={pull}
                       click={(value)=> this.handleClick(value)}
                       handleLike={()=>this.toggleLike(pull.pullRequestID)}
@@ -274,13 +203,10 @@ class PullsPage extends Component {
                   })}
                 </tbody>
             </Table>
-
           </div>
           </div>
         );
     }
-    
-   
   }
 }
 
