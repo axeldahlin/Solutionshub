@@ -7,11 +7,9 @@ At Ironhack students submit their exricises by doing a pull request of the start
 
 To play with the site go to: https://solutionshub.herokuapp.com/
 
-![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot1.png "Solutionshub")
-
-
 ![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot3.png "Solutionshub")
 
+![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot1.png "Solutionshub")
 
 ![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot2.png "Solutionshub")
 ## Setup
