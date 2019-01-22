@@ -7,12 +7,13 @@ At Ironhack students submit their exricises by doing a pull request of the start
 
 To play with the site go to: https://solutionshub.herokuapp.com/
 
-![alt text](https://raw.githubusercontent.com/aioimo/ironhackproject2/master/public/images/Screenshot%20from%202019-01-13%2016-57-24.png "Ironhabit")
+![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot1.png "Solutionshub")
 
-![alt text](https://raw.githubusercontent.com/aioimo/ironhackproject2/master/public/images/Screenshot%20from%202019-01-13%2016-59-40.png "Ironhabit")
 
-![alt text](https://raw.githubusercontent.com/aioimo/ironhackproject2/master/public/images/Screenshot%20from%202019-01-13%2016-59-23.png "Ironhabit")
+![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot3.png "Solutionshub")
 
+
+![alt text](https://raw.githubusercontent.com/axeldahlin/Solutionshub/master/client/public/screenshot2.png "Solutionshub")
 ## Setup
 
 If you’d like to view my project in your browser:
