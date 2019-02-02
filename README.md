@@ -3,7 +3,7 @@
 ## Introduction 
 
 A website where Ironhack students can browse, upvote and serach through solutions to exercises given during the bootcamp. 
-At Ironhack students submit their exricises by doing a pull request of the starter code of that exercise. All solutions is there for on GitHub, but it is hard to find the best one. This website solves that problem. 
+At the Ironhack bootcamp students submit their exricises by doing a pull request of the starter code of that exercise. All solutions is there for on GitHub, but it is hard to find the best one. This website solves that problem. 
 
 To play with the site go to: https://solutionshub.herokuapp.com/
 
@@ -16,8 +16,8 @@ To play with the site go to: https://solutionshub.herokuapp.com/
 
 If you’d like to view my project in your browser:
 ```
-$ git clone https://github.com/aioimo/ironhackproject2.git
-$ cd 2-backend-project
+$ git clone https://github.com/axeldahlin/Solutionshub.git
+$ cd Solutionshub/server
 $ npm i
 $ touch .env
 
@@ -26,22 +26,34 @@ $ touch .env
 Now you have to add the following in the .env file:
 
 ```
-PORT=3005
-ENV=development
-MONGODB_URI=mongodb://localhost/goals-project
-```
-At this point everything except the image upload works. It is not necessary for playing with the app but if you want to upload a profile picture you can create a cloudinary account and add your credentials like this in the .env file: 
-
-```
-CLOUDINARY_NAME=your-name
-CLOUDINARY_SECRET=your-secret
-CLOUDINARY_KEY=your-key
-
+PORT=5000
+MONGODB_URI=mongodb://localhost/Solutionshub
+SESSION_SECRET=anyValue
+GITHUB_CLIENT_ID=your-client-id
+GITHUB_CLIENT_SECRET=your-client-secret
+FRONTEND_URI=http://localhost:3000
 ```
 
 Now run:
 
-``` $ npm run dev ```
+``` 
+$ npm run dev
+$ cd ..
+$ cd client
+$ npm i
+$ npm start
+
+```
+
+## Technologies Used
+- Node
+- MongoDB
+- Mongoose
+- Express
+- React
+- Reactstrap
+- Passport-github
+- GitHub API
 
 ## Team Members
 
