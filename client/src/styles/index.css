@@ -26,13 +26,18 @@ body {
 .info.info-danger {
   background-color: #e73f3f; }
 
+.Navbar {
+  height: 80px;
+  background: blue;
+  color: white;
+  text-align: center; }
+
 .App {
   text-align: center; }
   .App .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px; }
   .App .App-header {
-    background-color: #2c3336;
     padding: 20px;
     color: white; }
     .App .App-header a {
@@ -56,12 +61,6 @@ body {
   display: flex; }
   .Home p {
     font-size: 1.2em; }
-
-.Navbar {
-  height: 80px;
-  background: blue;
-  color: white;
-  text-align: center; }
 
 .Welcome-Container-Grid {
   display: grid;
@@ -116,10 +115,6 @@ body {
   width: 100%;
   background: white; }
 
-.speech-bubble {
-  width: 800px;
-  height: 450px; }
-
 .RepoList {
   width: 500px;
   height: calc(100vh - 56px);
@@ -168,44 +163,6 @@ body {
   background: #FAFAFA;
   overflow-y: scroll;
   z-index: 1; }
-
-.PullDetail {
-  position: relative; }
-
-.table-img {
-  padding: 0 !important; }
-
-.pull-input {
-  border: solid black 1px;
-  border-radius: 3px; }
-
-.input-img {
-  width: 24px;
-  height: 24px;
-  margin: 6px 5px; }
-
-.pullspage-header {
-  display: flex;
-  width: 60%;
-  margin: 0 auto;
-  min-width: 610px;
-  height: 500px;
-  margin-top: 70px; }
-
-.octo-pulls {
-  width: 400px;
-  position: absolute;
-  z-index: -999;
-  right: -10px;
-  top: -155px; }
-
-.pull-list-header {
-  margin: 40px 0;
-  padding: 0 20px; }
-
-.speech-pull-img {
-  position: absolute;
-  right: 0; }
 
 input:focus {
   outline: none; }
@@ -280,40 +237,6 @@ input:focus {
   margin: 0;
   width: 295px !important;
   overflow-wrap: break-word; }
-
-.signed-out-container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 100px 0; }
-
-.Img-container {
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-around;
-  height: 300px; }
-
-.Img-container div {
-  display: flex;
-  width: 300px;
-  justify-content: center;
-  align-items: center; }
-
-.Img-container div img {
-  width: 100%; }
-
-.logo-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center; }
-
-.logo {
-  width: 300px;
-  height: 300px; }
-
-.signin-modal {
-  background: darkgrey;
-  width: 300px;
-  height: 200px; }
 
 .table {
   background: white; }
@@ -391,6 +314,53 @@ input:focus {
 .navbar {
   z-index: 100; }
 
+.PullDetail {
+  position: relative; }
+
+.table-img {
+  padding: 0 !important; }
+
+.pull-input {
+  border: solid black 1px;
+  border-radius: 3px; }
+
+.input-img {
+  width: 24px;
+  height: 24px;
+  margin: 6px 5px; }
+
+.pullspage-header {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  min-width: 610px;
+  height: 500px;
+  margin-top: 70px; }
+
+.octo-pulls {
+  width: 400px;
+  position: absolute;
+  z-index: -999;
+  right: -10px;
+  top: -155px; }
+
+.pull-list-header {
+  margin: 40px 0;
+  padding: 0 20px; }
+
+.detail-link:hover {
+  background: lightgrey; }
+
+.detail-arrow {
+  font-weight: bold;
+  color: #2ecc71;
+  font-size: 20px; }
+
+.detail-folder {
+  color: #3498db;
+  font-size: 13px;
+  font-weight: bold; }
+
 .octo-detail {
   position: absolute;
   top: -211px !important;
@@ -444,16 +414,3 @@ input:focus {
   padding: 20px 5px;
   border: solid black 1px;
   border-radius: 3px; }
-
-.detail-link:hover {
-  background: lightgrey; }
-
-.detail-arrow {
-  font-weight: bold;
-  color: #2ecc71;
-  font-size: 20px; }
-
-.detail-folder {
-  color: #3498db;
-  font-size: 13px;
-  font-weight: bold; }
