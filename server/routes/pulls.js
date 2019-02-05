@@ -1,7 +1,7 @@
 //Routes for the pull requests
 
 const express = require('express');
-const Vote = require('../models/Votes')
+const Vote = require('../models/Vote')
 const PullRequest = require('../models/PullRequest')
 const router = express.Router();
 
@@ -36,7 +36,7 @@ const router = express.Router();
 router.post('/vote', (req, res, next) => {
   // console.log("Vote route called!", req.body)
   const newVote = new Vote({
-    _user: req.body._user,
+    _user: req.user._github,
     _pull: req.body._pull,
     _repo: req.body._repo
   })
@@ -46,6 +46,7 @@ router.post('/vote', (req, res, next) => {
   })
   .catch(err=>{
     console.log("ERROR at Vote:", err)
+    next(err)
   })
 })
 

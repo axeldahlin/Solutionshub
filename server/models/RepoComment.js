@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const repoCommentSchema = new mongoose.Schema({
-  _repo: mongoose.Schema.Types.ObjectId,
-  _user: mongoose.Schema.Types.ObjectId,
+  _repo: {type: mongoose.Schema.Types.ObjectId, ref: "Repo"},
+  _user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
   comment: String,
-  githubName: String,
+  // githubName: String,
   date: String,
-  imgUrl: String
+  // imgUrl: String
 });
 
 const RepoComment = mongoose.model('RepoComment', repoCommentSchema);

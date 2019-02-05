@@ -58,16 +58,18 @@ class CommentsContainer extends Component {
                   <img src={comment.imgUrl} alt="user"/>
                     <p className="comment-name">{comment.githubName}</p>
                     <p className="comment-date">{comment.date}</p>
-                  {this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
+                  {this.props.user && this.props.user._id === comment._user && <span className="delete-comment" onClick={() => this.handleDeleteComment(comment._id)}>[delete]</span>}
                   </div>
                   <p className="comment-text">{comment.comment}</p>
               </div>
             )
           })}
         </div>
-        <form className="comment-form" onSubmit={(e) => this.handleSubmit(e)}>
+        {api.isLoggedIn() && (
+          <form className="comment-form" onSubmit={(e) => this.handleSubmit(e)}>
             <input placeholder="Leave a comment... [ENTER]" className="comment-input" type="text" value={this.state.comment}name="comment" onChange={(e) => this.handleChange(e)}/>
-        </form>
+          </form>
+        )}
       </div>
     );
   }

@@ -1,3 +1,7 @@
+$primary: #32c3ff;
+
+@import 'bootstrap/scss/bootstrap';
+
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
 * {
@@ -220,7 +224,7 @@ body {
 }
 
 
-.PullsPage {
+.PullsList {
   height: calc(100vh - 56px);
   width: 150%;
   background: #FAFAFA;
@@ -448,7 +452,7 @@ input:focus {
   margin: 6px 5px;
 }
 
-.pullspage-header {
+.PullsList-header {
   display: flex;
   width: 60%;
   margin: 0 auto;

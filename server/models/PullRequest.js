@@ -14,9 +14,9 @@ const pullRequestSchema = new mongoose.Schema({
   _githubRepo: Number,
   repoName: String,
   repoUrl: String,
-  nbOfVotes:  { type: Number, default: 0 },
+  // nbOfVotes:  { type: Number, default: 0 },
   updated_at: Date,
-  likedByUser: Boolean
+  // likedByUser: Boolean
 });
 
 const PullRequest = mongoose.model('PullRequest', pullRequestSchema);

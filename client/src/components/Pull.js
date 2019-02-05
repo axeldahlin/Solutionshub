@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 class Pull extends Component {
   
   handleClick = () => {
-    this.props.click(this.props.pull)
+    this.props.onClick(this.props.pull)
   }
 
   getFlagPNG = () => {
@@ -49,7 +49,7 @@ class Pull extends Component {
         <td className="table-title pull-table-cell"><Link to={"/" + this.props.repo.name + "/" + this.props.pull.pullRequestID}>{this.props.pull.title}</Link></td>
         <td className="table-name pull-table-cell">{this.props.pull._githubUsername}</td>
         <td className="pull-table-cell">{this.getDate(this.props.pull.updated_at)}</td>
-        <td className="pull-table-cell table-img">{this.props.pull.nbOfVotes} <img className="table-bulb" onClick={()=>this.props.handleLike()}src={buttonImage} alt="bulb"></img></td> 
+        <td className="pull-table-cell table-img">{this.props.pull.nbOfVotes} <img className="table-bulb" onClick={()=>this.props.onLike()}src={buttonImage} alt="bulb"></img></td> 
       </tr>
     )
   }

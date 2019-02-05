@@ -1,7 +1,7 @@
 const express = require('express');
 const Repo = require('../models/Repo')
 const PullRequest = require('../models/PullRequest')
-const Vote = require('../models/Votes')
+const Vote = require('../models/Vote')
 const axios = require('axios');
 const RepoComment = require('../models/RepoComment')
 const router = express.Router();
@@ -28,14 +28,13 @@ router.get('/onerepo/:reponame',(req,res,next)=>{
 //Fetches all pull requests for given repo and returns JSON
 // :repo is Github Repo name
 router.get('/pulls/:repo/:repo_id', (req,res,next)=> {
-  let pullsPromise = PullRequest.find({repoName: req.params.repo})
+  let pullsPromise = PullRequest.find({repoName: req.params.repo}).lean() // The .lean() is used to send plain objects instead of rigid documents
   let votesPromise = Vote.find({_repo: req.params.repo_id})
   Promise.all([pullsPromise,votesPromise])
-  .then(results => {
-    let [pulls,votes] = results
+  .then(([pulls,votes]) => {
     let pullsWithVotes = pulls.map(pull=>{
       let likedByUser = votes.filter(vote=>{
-        return Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
+        return req.user && Number(vote._user) === Number(req.user._github) && Number(vote._pull) === Number(pull.pullRequestID)
       }).length === 1; 
       let nbOfVotes = votes.filter(vote=>vote._pull === pull.pullRequestID).length
       pull.nbOfVotes = nbOfVotes

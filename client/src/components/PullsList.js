@@ -4,7 +4,7 @@ import Pull from './Pull'
 import CommentsContainer from './CommentsContainer'
 import { Table, InputGroup, Input } from 'reactstrap';
 
-class PullsPage extends Component {
+class PullsList extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,31 +24,31 @@ class PullsPage extends Component {
   fetchRepoInfo() {
     let repoName = this.props.match.params.repo
     api.fetchRepoInfo(repoName)
-    .then(repo=>{
-      this.setState({
-        repo:repo[0]
+      .then(repo => {
+        this.setState({
+          repo: repo[0]
+        })
+        return
       })
-      return
-    })
-    .then(_=>{
-      return this.updatePulls() 
-    })
-    .then(_=>{
-      return this.getComments()
-    })
-    .catch(err=>{
-      console.log("error at fetchRepoInfo",err)
-    })
+      .then(_ => {
+        return this.updatePulls()
+      })
+      .then(_ => {
+        return this.getComments()
+      })
+      .catch(err => {
+        console.log("error at fetchRepoInfo", err)
+      })
   }
 
   updatePulls() {
     const repoName = this.state.repo.name
     const repoId = this.state.repo.githubID
-      this.setState({
-        pulls: null
-      })
+    this.setState({
+      pulls: null
+    })
 
-    api.getPulls(repoName,repoId)
+    api.getPulls(repoName, repoId)
       .then(pulls => {
         this.setState({ pulls })
         return api.updatePulls(repoName)
@@ -57,43 +57,49 @@ class PullsPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.repo !== prevProps.match.params.repo ) {
+    if (this.props.match.params.repo !== prevProps.match.params.repo) {
       this.fetchRepoInfo()
-    } 
+    }
   }
 
   getComments() {
     api.getRepoComments(this.state.repo._id)
       .then(comments => {
-        this.setState({comments})
+        this.setState({ comments })
       })
   }
 
   toggleLike(clickedPull) {
+    console.log("toggleLike", clickedPull);
+
     let allPulls = [...this.state.pulls]
     let data = {
       _user: this.props.user._github,
       _pull: clickedPull,
       _repo: this.state.repo.githubID
     }
-    let [match] = allPulls.filter(pulls => {
+    let match = allPulls.find(pulls => {
       return pulls.pullRequestID === clickedPull
     })
     if (!match.likedByUser) {
       match.likedByUser = true
       match.nbOfVotes++;
       api.castVote(data)
-      .then(this.setState({
-        pulls: allPulls
-      }))
+        .then(() => {
+          this.setState({
+            pulls: allPulls
+          })
+        })
     } else {
       match.likedByUser = false
       match.nbOfVotes--;
       api.removeVote(data)
-      .then(this.setState({
-        pulls: allPulls
-      }))
-    } 
+        .then(() => {
+          this.setState({
+            pulls: allPulls
+          })
+        })
+    }
   }
 
 
@@ -103,7 +109,7 @@ class PullsPage extends Component {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({[name]: value});
+    this.setState({ [name]: value });
   }
 
   handleSort = (columnName) => {
@@ -113,27 +119,27 @@ class PullsPage extends Component {
     }
     this.setState({
       columnToSort: columnName,
-      sortDirection: 
-        this.state.columnToSort === columnName 
-        ? invertDirection[this.state.sortDirection] 
-        : "asc"
+      sortDirection:
+        this.state.columnToSort === columnName
+          ? invertDirection[this.state.sortDirection]
+          : "asc"
     })
   }
 
-  sortAscending = (a,b) =>{
+  sortAscending = (a, b) => {
     return b[this.state.columnToSort] < a[this.state.columnToSort] ? 1 : -1
   }
 
-  sortDescending = (a,b) =>{
+  sortDescending = (a, b) => {
     return b[this.state.columnToSort] > a[this.state.columnToSort] ? 1 : -1
   }
 
 
-  render() {   
+  render() {
     let filteredPulls;
     //Sorts and filters before the render
     if (this.state.pulls) {
-      filteredPulls = this.state.pulls.filter(pull=>{
+      filteredPulls = this.state.pulls.filter(pull => {
         return pull.title.toUpperCase().includes(this.state.searchValue.toUpperCase()) || pull._githubUsername.toUpperCase().includes(this.state.searchValue.toUpperCase())
       })
       if (this.state.sortDirection === "asc") filteredPulls.sort(this.sortAscending)
@@ -143,71 +149,71 @@ class PullsPage extends Component {
     if (!this.state.repo) {
       return <h1>Loading....</h1>
     } else {
-        return (
-          <div className="PullsPage">
-            <div className="pullspage-header">
-             <CommentsContainer getComments={()=>this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user}/>
-              <h1 className="pull-list-header">{this.state.repo.name}</h1>
-            </div>
+      return (
+        <div className="PullsList">
+          <div className="PullsList-header">
+            <CommentsContainer getComments={() => this.getComments()} comments={this.state.comments} repo={this.state.repo} user={this.props.user} />
+            <h1 className="pull-list-header">{this.state.repo.name}</h1>
+          </div>
           <div className="pull-table">
-            <img className="octo-pulls" src="Octocat-low.png" alt="octo"/>
+            <img className="octo-pulls" src="Octocat-low.png" alt="octo" />
             <InputGroup className="pull-input">
-            <Input style={{boxShadow: 'none'}} 
-            className="search-input"
-            name="searchValue" onChange={e => this.handleChange(e)}
-            placeholder="Filter solutions..."
-             value={this.state.searchValue} />
-            <img className="input-img"src="zoom-tool.png" alt="search"/>
-          </InputGroup>
+              <Input style={{ boxShadow: 'none' }}
+                className="search-input"
+                name="searchValue" onChange={e => this.handleChange(e)}
+                placeholder="Filter solutions..."
+                value={this.state.searchValue} />
+              <img className="input-img" src="zoom-tool.png" alt="search" />
+            </InputGroup>
             <Table hover>
               <thead>
                 <tr>
                   <th scope="col">Campus</th>
                   <th scope="col">Pull Request</th>
                   <th scope="col">
-                  <div style={{"cursor": "pointer"}} onClick={()=>this.handleSort("_githubUsername")}>User 
+                    <div style={{ "cursor": "pointer" }} onClick={() => this.handleSort("_githubUsername")}>User
                   {this.state.columnToSort === "_githubUsername" ? (
-                  this.state.sortDirection === "asc" 
-                  ? (<span class="material-icons"> ⬆ </span> )             
-                  : (<span class="material-icons"> ⬇</span>)
-                  ) : null}
-                  </div>
-                  </th> 
-                  <th scope="col" style={{"cursor": "pointer"}} onClick={()=>this.handleSort("updated_at")} >Date
-                  {this.state.columnToSort === "updated_at" ? (
-                  this.state.sortDirection === "asc" 
-                  ? (<span class="material-icons"> ⬆ </span> )             
-                  : (<span class="material-icons"> ⬇</span>)
-                  ) : null}
+                        this.state.sortDirection === "asc"
+                          ? (<span class="material-icons"> ⬆ </span>)
+                          : (<span class="material-icons"> ⬇</span>)
+                      ) : null}
+                    </div>
                   </th>
-                  <th scope="col"><div style={{"cursor": "pointer"}} onClick={()=>this.handleSort("nbOfVotes")} >Likes
+                  <th scope="col" style={{ "cursor": "pointer" }} onClick={() => this.handleSort("updated_at")} >Date
+                  {this.state.columnToSort === "updated_at" ? (
+                      this.state.sortDirection === "asc"
+                        ? (<span class="material-icons"> ⬆ </span>)
+                        : (<span class="material-icons"> ⬇</span>)
+                    ) : null}
+                  </th>
+                  <th scope="col"><div style={{ "cursor": "pointer" }} onClick={() => this.handleSort("nbOfVotes")} >Likes
                   {this.state.columnToSort === "nbOfVotes" ? (
-                  this.state.sortDirection === "asc" 
-                  ? (<span class="material-icons"> ⬆ </span> )             
-                  : (<span class="material-icons"> ⬇</span>)
-                  ) : null}
+                      this.state.sortDirection === "asc"
+                        ? (<span class="material-icons"> ⬆ </span>)
+                        : (<span class="material-icons"> ⬇</span>)
+                    ) : null}
                   </div></th>
-                  </tr>
+                </tr>
               </thead>
-              <tbody>  
+              <tbody>
                 {!this.state.pulls && <div>Loading...</div>}
-                  {filteredPulls && filteredPulls.map((pull, index) => {
-                    return <Pull
-                      repo={this.state.repo}
-                      key={index} 
-                      user={this.props.user}
-                      pull={pull}
-                      click={(value)=> this.handleClick(value)}
-                      handleLike={()=>this.toggleLike(pull.pullRequestID)}
-                      />
-                  })}
-                </tbody>
+                {filteredPulls && filteredPulls.map((pull, index) => {
+                  return <Pull
+                    repo={this.state.repo}
+                    key={index}
+                    user={this.props.user}
+                    pull={pull}
+                    onClick={(value) => this.handleClick(value)}
+                    onLike={() => api.isLoggedIn() && this.toggleLike(pull.pullRequestID)}
+                  />
+                })}
+              </tbody>
             </Table>
           </div>
-          </div>
-        );
+        </div>
+      );
     }
   }
 }
 
-export default PullsPage;
+export default PullsList;
