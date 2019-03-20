@@ -2,8 +2,6 @@ const express = require("express")
 const passport = require('passport')
 const router = express.Router()
 
-
-// TODO: put it in a routes file
 router.get('/github',
   passport.authenticate('github'));
 

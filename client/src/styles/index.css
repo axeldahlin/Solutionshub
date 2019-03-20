@@ -6352,7 +6352,6 @@ body {
     animation: App-logo-spin infinite 20s linear;
     height: 80px; }
   .App .App-header {
-    background-color: #32c3ff;
     padding: 20px;
     color: white; }
     .App .App-header a {
@@ -6644,7 +6643,7 @@ input:focus {
   height: 24px;
   margin: 6px 5px; }
 
-.pullspage-header {
+.PullsList-header {
   display: flex;
   width: 60%;
   margin: 0 auto;

@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
-
-
-
-class Pull extends Component {
-  
+class Pull extends Component {  
   handleClick = () => {
     this.props.onClick(this.props.pull)
   }
-
   getFlagPNG = () => {
     let title = this.props.pull.title
-   
     if (title.match(/BCN/gm) || title.match(/barcelona/gmi)) return 'esp'  
     if (title.match(/MIA/gm) || title.match(/miami/gmi)) return 'usa'  
     if (title.match(/AMS/gm) || title.match(/amsterdam/gmi)) return 'ams'  

@@ -102,7 +102,6 @@ class PullsList extends Component {
     }
   }
 
-
   handleClick = (value) => {
     this.props.click(value)
   }
@@ -133,7 +132,6 @@ class PullsList extends Component {
   sortDescending = (a, b) => {
     return b[this.state.columnToSort] > a[this.state.columnToSort] ? 1 : -1
   }
-
 
   render() {
     let filteredPulls;

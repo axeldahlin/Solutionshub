@@ -30,7 +30,6 @@ class PullDetail extends Component {
       })
   }
 
-
   render() {
     if(this.state.pull && this.state.repo) {
       return (

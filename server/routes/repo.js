@@ -66,7 +66,6 @@ router.get('/repos', (req,res,next)=> {
   .catch(err=>console.log("error at /repos:", err))
 });
 
-
 // Fetches all Pull Requests for given :repo with github api and updates database
 router.get('/update-pulls/:repo', (req,res,next)=>{
   axios.get('https://api.github.com/repos/ironhack-labs/'+req.params.repo+'/pulls' + authPath + '&per_page=100')
@@ -92,7 +91,6 @@ router.get('/update-pulls/:repo', (req,res,next)=>{
   .catch(err=>console.log("Error at /update-pulls/:repo", err))
 })
 
-
 // Post a repoComments
 router.post('/repo-comment', (req, res, next) => {
   const {_user, comment, _repo, githubName, date, imgUrl} = req.body;
@@ -104,7 +102,6 @@ router.post('/repo-comment', (req, res, next) => {
     .catch(next)
 });
 
-
 // Get all repoComments
 router.get('/repo-comment/:id', (req,res,next)=> {
   RepoComment.find({_repo: req.params.id})
@@ -114,7 +111,6 @@ router.get('/repo-comment/:id', (req,res,next)=> {
   .catch(next)
 })
 
-
 // Delete one repoComment
 router.delete('/repo-comment/:id', (req,res,next)=> {  
   RepoComment.findByIdAndRemove(req.params.id)
@@ -123,6 +119,5 @@ router.delete('/repo-comment/:id', (req,res,next)=> {
   })
   .catch(next)
 })
-
 
 module.exports = router;

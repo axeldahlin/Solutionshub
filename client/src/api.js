@@ -169,7 +169,7 @@ export default {
     return service
       .get('/auth/loggedin')
       .then(res => {
-        let user = res.data
+        let user =  res.data
         localStorage.setItem("user", JSON.stringify(user))
         return user
       })
